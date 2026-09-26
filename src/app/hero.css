@@ -1,0 +1,79 @@
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: rotate(2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-6px);
+  }
+}
+
+@keyframes hero-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.marquee-track {
+  animation: hero-marquee 180s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-scroll {
+    animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+}
+
+.hero-grid {
+  background-image: linear-gradient(
+      color-mix(in oklab, var(--color-fd-border) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-fd-border) 55%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 25%, transparent 80%);
+}
+
+.hero-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-fd-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+  }
+}

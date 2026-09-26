@@ -16,6 +16,8 @@ import {
   Waypoints,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { GithubIcon } from "@/components/github-icon";
+import { GITHUB_URL } from "@/lib/layout.shared";
 import PixelCard from "@/components/pixel-card";
 
 const menus = [
@@ -58,9 +60,9 @@ const menus = [
 export function SiteHeader() {
   return (
     <header className="border-b border-fd-border">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4">
-        <Link href="/" aria-label="Home" className="mr-4">
-          <Logo className="text-xl" />
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-4">
+        <Link href="/" aria-label="Home" className="mr-1 sm:mr-4">
+          <Logo className="text-lg sm:text-xl" />
         </Link>
 
         <NavigationMenu.Root className="hidden md:block">
@@ -141,8 +143,17 @@ export function SiteHeader() {
           </NavigationMenu.Portal>
         </NavigationMenu.Root>
 
-        <div className="ml-auto flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-4">
           <FullSearchTrigger />
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub repository"
+            className="flex size-9 items-center justify-center rounded-full text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+          >
+            <GithubIcon className="size-4" />
+          </a>
           <ThemeSwitch />
         </div>
       </div>
