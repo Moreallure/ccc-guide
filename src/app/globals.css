@@ -1,26 +1,16 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --color-fd-info: oklch(0.58 0.1 250);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-fd-background);
 }
