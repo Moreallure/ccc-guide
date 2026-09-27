@@ -28,14 +28,14 @@ const menus = [
       title: "New to competitive programming? Start here.",
       cta: "Getting Started",
       ctaDesc: "Build your first CCC solution",
-      href: "/craft/orientation/getting-started",
+      href: "/junior",
       variant: "blue",
     },
     links: [
-      { title: "Basics & I/O", href: "/craft/orientation/intro-ccc", description: "Input, output, and simple variables", icon: Terminal },
-      { title: "Loops & Conditionals", href: "/craft/orientation/intro-ccc", description: "Repetition and decision making", icon: Repeat },
-      { title: "Strings", href: "/craft/orientation/intro-ccc", description: "Text processing and manipulation", icon: LetterText },
-      { title: "Simple Math", href: "/craft/orientation/intro-ccc", description: "Arithmetic, modulos, and number tricks", icon: Calculator },
+      { title: "Basics & I/O", href: "/essentials/introduction/intro-ccc", description: "Input, output, and simple variables", icon: Terminal },
+      { title: "Loops & Conditionals", href: "/essentials/introduction/intro-ccc", description: "Repetition and decision making", icon: Repeat },
+      { title: "Strings", href: "/essentials/introduction/intro-ccc", description: "Text processing and manipulation", icon: LetterText },
+      { title: "Simple Math", href: "/essentials/introduction/intro-ccc", description: "Arithmetic, modulos, and number tricks", icon: Calculator },
     ],
   },
   {
@@ -45,14 +45,14 @@ const menus = [
       title: "Ready to compete at the Senior level?",
       cta: "Explore Senior Topics",
       ctaDesc: "From data structures to graph theory",
-      href: "/craft/orientation/intro-ccc",
+      href: "/senior-core",
       variant: "pink",
     },
     links: [
-      { title: "Data Structures", href: "/craft/orientation/intro-ccc", description: "Arrays, sets, maps, and queues", icon: Database },
-      { title: "Algorithms", href: "/craft/orientation/intro-ccc", description: "Sorting, searching, and greedy ideas", icon: Braces },
-      { title: "Dynamic Programming", href: "/craft/orientation/intro-ccc", description: "Breaking problems into overlapping subproblems", icon: Layers },
-      { title: "Graph Theory", href: "/craft/orientation/intro-ccc", description: "BFS, DFS, and shortest paths", icon: Waypoints },
+      { title: "Data Structures", href: "/essentials/introduction/intro-ccc", description: "Arrays, sets, maps, and queues", icon: Database },
+      { title: "Algorithms", href: "/essentials/introduction/intro-ccc", description: "Sorting, searching, and greedy ideas", icon: Braces },
+      { title: "Dynamic Programming", href: "/essentials/introduction/intro-ccc", description: "Breaking problems into overlapping subproblems", icon: Layers },
+      { title: "Graph Theory", href: "/essentials/introduction/intro-ccc", description: "BFS, DFS, and shortest paths", icon: Waypoints },
     ],
   },
 ];
@@ -62,7 +62,7 @@ export function SiteHeader() {
     <header className="border-b border-fd-border">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-4">
         <Link href="/" aria-label="Home" className="mr-1 sm:mr-4">
-          <Logo className="text-lg sm:text-xl" />
+          <Logo className="text-2xl" />
         </Link>
 
         <NavigationMenu.Root className="hidden md:block">

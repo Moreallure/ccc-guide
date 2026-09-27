@@ -1,0 +1,74 @@
+---
+title: Choosing a Language
+description: 'Comparing CCC languages and how to choose one.'
+---
+
+# Choosing a Language
+
+The CCC accepts **C, C++, Java, Python 2, and Python 3**. You can choose a different language for each problem, so you are not locked into one choice for the entire contest.
+
+For most people, the best language is the one they are already comfortable with. Language choice only becomes important when performance starts becoming a problem.
+
+> It may not always be possible to achieve a perfect score with a particular language choice (for example, Python or Java)… **However, there is always at least one choice of programming language for which it is possible to achieve a perfect score.**
+>
+> <cite>— CEMC, CCC details</cite>
+
+In practice, this means every problem is designed to have a solution in at least one supported language. Some languages may require more optimisation than others, especially on larger inputs.
+
+## Contest environment
+
+All submissions run with the same general limits:
+
+- **3 seconds** time limit
+- **512 MB** memory limit
+- exact `stdin → stdout` judging (no prompts or extra output)
+- up to **50 submissions per problem** (maximum one submission per minute)
+
+Because the CCC keeps your highest score for each problem, testing different approaches or languages is not a major risk.
+
+## Language comparison
+
+| Language | Summary |
+|---|---|
+| **C** | Fast and supported, but lacks many modern conveniences. You will spend more time implementing data structures and managing memory yourself. |
+| **C++** | The standard competitive programming language. The STL (`vector`, `set`, `map`, `priority_queue`, etc.) provides most tools you need, and it is required for the CCO. |
+| **Java** | A good choice if you already know it. It is usually fast enough, but slower input/output can matter on large problems. |
+| **Python 3** | Very quick to write and easy to learn. It has built-in big integers, but usually runs slower than compiled languages. |
+| **Python 2** | Mainly kept for compatibility. New solutions should use Python 3. |
+
+## What the judge runs
+
+The official sample solutions show the compiler and interpreter versions used for CCC solutions:
+
+- **C**: GCC 11.4.0, compiled with `-O2 -lm -static`
+- **C++**: GCC 11.4.0, compiled with `-O2 -std=c++17 -static`
+- **Java**: OpenJDK javac 17.0.10
+- **Python 2**: PyPy 7.3.9 (Python 2.7.18)
+- **Python 3**: PyPy3 7.3.9 (Python 3.8.13)
+
+## How to choose
+
+### If you already know a language
+Use it. Switching languages usually creates more problems than it solves.
+
+### If you are starting from scratch
+Python 3 is usually the easiest starting point. It is enough for J1–J4 and many Senior problems. You can learn C++ later when you need more speed or advanced algorithms.
+
+### If you already use Java
+Java is completely fine for CCC. Just pay attention to input speed and problems with very large constraints.
+
+### If your goal is CCO
+Learn C++. The CCO requires C++, so learning it early avoids switching later.
+
+Remember that your choice is not permanent. Many competitors start with Python and move to C++ later as they work on harder problems.
+
+## References
+
+1. **CEMC — CCC details.** Accepted languages and language limitations.
+https://cemc.uwaterloo.ca/contests/computing/details.html
+
+2. **CCC Rules (PDF).** Contest limits, submissions, and scoring rules.
+https://cccgrader.com/rules.pdf
+
+3. **CCC sample solutions (PDF).** Compiler versions and judge environment.
+https://cccgrader.com/sample_soln.pdf

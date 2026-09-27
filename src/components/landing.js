@@ -107,7 +107,7 @@ const divisions = [
     topics: ["Basics & I/O", "Loops & Conditionals", "Strings", "Simple Math"],
     icon: Terminal,
     inverted: false,
-    href: "/craft/orientation/intro-ccc",
+    href: "/junior",
   },
   {
     id: "02",
@@ -117,7 +117,7 @@ const divisions = [
     topics: ["Data Structures", "Algorithms", "Dynamic Programming", "Graph Theory"],
     icon: Trophy,
     inverted: true,
-    href: "/craft/orientation/intro-ccc",
+    href: "/senior-core",
   },
 ];
 
@@ -148,7 +148,7 @@ function Footer() {
       <div className="mx-auto w-full max-w-6xl px-4 py-12">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div>
-            <Logo className="text-lg" />
+            <Logo className="text-xl" />
             <p className="mt-3 font-mono text-xs text-fd-muted-foreground">
               © 2026 Moreallure. All rights reserved.
             </p>
@@ -159,8 +159,8 @@ function Footer() {
                 Guide
               </p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0 text-sm">
-                <li><Link href="/craft/orientation/intro-ccc" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Documentation</Link></li>
-                <li><Link href="/craft/orientation/getting-started" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
+                <li><Link href="/essentials/introduction/using-this-guide" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Documentation</Link></li>
+                <li><Link href="/essentials/introduction/intro-ccc" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
               </ul>
             </div>
             <div>
@@ -223,7 +223,7 @@ export function Landing() {
             </p>
             <div className="reveal mt-8 flex flex-wrap items-center gap-3 [animation-delay:300ms]">
               <Link
-                href="/craft/orientation/getting-started"
+                href="/essentials/introduction/using-this-guide"
                 className={buttonVariants({
                   variant: "primary",
                   className: "group px-6 py-3 text-base",
@@ -233,7 +233,7 @@ export function Landing() {
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/craft/orientation/intro-ccc"
+                href="/junior"
                 className={buttonVariants({
                   variant: "outline",
                   className: "px-6 py-3 text-base",
@@ -451,7 +451,7 @@ export function Landing() {
               every step sits in order. Take the first one.
             </p>
             <Link
-              href="/craft/orientation/getting-started"
+              href="/essentials/introduction/using-this-guide"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-fd-primary-foreground px-6 py-3 text-base font-medium text-fd-primary no-underline transition-opacity hover:opacity-90"
             >
               Start Learning

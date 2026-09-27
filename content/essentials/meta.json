@@ -1,6 +1,6 @@
 {
-  "title": "CCC Craft",
+  "title": "CCC Essentials",
   "description": "How the contest works — judging, I/O, subtasks",
   "root": true,
-  "pages": ["orientation"]
+  "pages": ["introduction"]
 }

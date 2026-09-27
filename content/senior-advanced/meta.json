@@ -1,6 +1,6 @@
 {
   "title": "Senior Advanced",
-  "description": "The S4–S5 toolkit · C++",
+  "description": "The S4–S5 toolkit",
   "root": true,
   "pages": ["graph-algorithms"]
 }
