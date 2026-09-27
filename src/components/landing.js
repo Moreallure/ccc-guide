@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -13,7 +13,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Logo } from "@/components/logo";
 import { GithubIcon } from "@/components/github-icon";
 import { GITHUB_URL } from "@/lib/layout.shared";
-import "./hero.css";
+import "@/app/hero.css";
 
 const code = [
   [["# CCC Senior · Grid Escape", "italic text-fd-muted-foreground/70"]],
@@ -107,7 +107,7 @@ const divisions = [
     topics: ["Basics & I/O", "Loops & Conditionals", "Strings", "Simple Math"],
     icon: Terminal,
     inverted: false,
-    href: "/docs",
+    href: "/craft/orientation/intro-ccc",
   },
   {
     id: "02",
@@ -117,7 +117,7 @@ const divisions = [
     topics: ["Data Structures", "Algorithms", "Dynamic Programming", "Graph Theory"],
     icon: Trophy,
     inverted: true,
-    href: "/docs",
+    href: "/craft/orientation/intro-ccc",
   },
 ];
 
@@ -159,8 +159,8 @@ function Footer() {
                 Guide
               </p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0 text-sm">
-                <li><Link href="/docs" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Documentation</Link></li>
-                <li><Link href="/docs/craft/orientation/getting-started" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
+                <li><Link href="/craft/orientation/intro-ccc" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Documentation</Link></li>
+                <li><Link href="/craft/orientation/getting-started" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
               </ul>
             </div>
             <div>
@@ -194,7 +194,7 @@ function Footer() {
   );
 }
 
-export default function Home() {
+export function Landing() {
   return (
     <div className="flex min-h-dvh flex-col">
       <SiteHeader />
@@ -223,7 +223,7 @@ export default function Home() {
             </p>
             <div className="reveal mt-8 flex flex-wrap items-center gap-3 [animation-delay:300ms]">
               <Link
-                href="/docs/craft/orientation/getting-started"
+                href="/craft/orientation/getting-started"
                 className={buttonVariants({
                   variant: "primary",
                   className: "group px-6 py-3 text-base",
@@ -233,7 +233,7 @@ export default function Home() {
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/docs"
+                href="/craft/orientation/intro-ccc"
                 className={buttonVariants({
                   variant: "outline",
                   className: "px-6 py-3 text-base",
@@ -451,7 +451,7 @@ export default function Home() {
               every step sits in order. Take the first one.
             </p>
             <Link
-              href="/docs/craft/orientation/getting-started"
+              href="/craft/orientation/getting-started"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-fd-primary-foreground px-6 py-3 text-base font-medium text-fd-primary no-underline transition-opacity hover:opacity-90"
             >
               Start Learning

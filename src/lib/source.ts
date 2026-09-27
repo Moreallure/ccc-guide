@@ -4,6 +4,6 @@ const docs = defineDocs({
   dir: 'content',
 });
 export const source = loader({
-  baseUrl: '/docs',
+  baseUrl: '/',
   source: docs.toFumadocsSource(),
 });
