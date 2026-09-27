@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
@@ -28,7 +28,7 @@ const menus = [
       title: "New to competitive programming? Start here.",
       cta: "Getting Started",
       ctaDesc: "Build your first CCC solution",
-      href: "/docs/getting-started",
+      href: "/docs/craft/orientation/getting-started",
       variant: "blue",
     },
     links: [

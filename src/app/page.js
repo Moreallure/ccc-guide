@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -160,7 +160,7 @@ function Footer() {
               </p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0 text-sm">
                 <li><Link href="/docs" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Documentation</Link></li>
-                <li><Link href="/docs/getting-started" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
+                <li><Link href="/docs/craft/orientation/getting-started" className="text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">Getting Started</Link></li>
               </ul>
             </div>
             <div>
@@ -223,7 +223,7 @@ export default function Home() {
             </p>
             <div className="reveal mt-8 flex flex-wrap items-center gap-3 [animation-delay:300ms]">
               <Link
-                href="/docs/getting-started"
+                href="/docs/craft/orientation/getting-started"
                 className={buttonVariants({
                   variant: "primary",
                   className: "group px-6 py-3 text-base",
@@ -451,7 +451,7 @@ export default function Home() {
               every step sits in order. Take the first one.
             </p>
             <Link
-              href="/docs/getting-started"
+              href="/docs/craft/orientation/getting-started"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-fd-primary-foreground px-6 py-3 text-base font-medium text-fd-primary no-underline transition-opacity hover:opacity-90"
             >
               Start Learning

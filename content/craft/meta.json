@@ -1,0 +1,6 @@
+{
+  "title": "CCC Craft",
+  "description": "How the contest works — judging, I/O, subtasks",
+  "root": true,
+  "pages": ["orientation"]
+}

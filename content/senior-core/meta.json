@@ -1,0 +1,6 @@
+{
+  "title": "Senior Core",
+  "description": "Foundations for S1–S3 · Python + C++ track",
+  "root": true,
+  "pages": ["s1-toolkit"]
+}

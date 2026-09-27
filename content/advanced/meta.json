@@ -1,0 +1,6 @@
+{
+  "title": "Beyond CCC",
+  "description": "CCO and IOI preparation · C++",
+  "root": true,
+  "pages": ["segtree-lazy"]
+}

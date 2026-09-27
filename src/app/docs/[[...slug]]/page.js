@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { DocsBody, DocsPage } from 'fumadocs-ui/layouts/docs/page';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -10,6 +10,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  if (!slug?.length) redirect('/docs/craft/orientation/intro-ccc');
   const page = source.getPage(slug);
   if (!page) notFound();
   return { title: page.data.title, description: page.data.description };
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { slug } = await params;
+  if (!slug?.length) redirect('/docs/craft/orientation/intro-ccc');
   const page = source.getPage(slug);
   if (!page) notFound();
 
