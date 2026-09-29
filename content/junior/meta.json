@@ -2,5 +2,14 @@
   "title": "Junior",
   "description": "Earn J1–J5 marks",
   "root": true,
-  "pages": ["warm-ups"]
+  "pages": [
+    "warm-ups",
+    "string-handling",
+    "simulation-grids",
+    "sorting-greedy",
+    "counting-casework",
+    "graphs-search",
+    "prefix-sums-dp",
+    "contest-craft"
+  ]
 }
