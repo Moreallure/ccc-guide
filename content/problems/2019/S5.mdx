@@ -1,0 +1,44 @@
+---
+title: "Triangle: The Data Structure"
+problem: "S5"
+year: 2019
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2019/2019CCCSrProblemSet.html"
+---
+## Problem S5: Triangle: The Data Structure
+
+### Problem Description
+
+In a parallel universe, the most important data structure in computer science is the _triangle_. A triangle of size \\(M\\) consists of \\(M\\) rows, with the \\(i\\)\-th row containing \\(i\\) elements. Furthermore, these rows must be arranged to form the shape of an equilateral triangular. That is, each row is centered around a vertical line of symmetry through the middle of the triangle. For example, the diagram below shows a triangle of size 4:
+
+![Ten regular hexagons are arranged into rows to form an equilateral triangle. The bottom row has four hexagons, and the next rows up have three, then two, then one at the top. Each hexagon contains a number. The bottom row of numbers is 6, 1, 4, 2; the next row is 4, 2, 1; the next row is 1, 2; and the top is 3.](assets/S5-0.png)
+
+A triangle contains sub-triangles. For example, the triangle above contains ten sub-triangles of size 1, six sub-triangles of size 2 (two of which are the triangle containing \\((3,1,2)\\) and the triangle containing \\((4,6,1)\\)), three sub-triangles of size 3 (one of which contains \\((2,2,1,1,4,2)\\)). Note that every triangle is a sub-triangle of itself.
+
+You are given a triangle of size \\(N\\) and must find the sum of the maximum elements of every sub-triangle of size \\(K\\).
+
+### Input Specification
+
+The first line contains two space-separated integers \\(N\\) and \\(K\\) \\((1\\le K\\le N\\le 3000)\\).
+
+Following this are \\(N\\) lines describing the triangle. The \\(i\\)\-th of these lines contains \\(i\\) space-separated integers \\(a_{i,j}\\) \\((0\\le a_{i,j}\\le 10^9)\\), representing the \\(i\\)\-th row of the triangle.
+
+For 4 of the 15 available marks, \\(N\\le 1000\\).
+
+### Output Specification
+
+Output the integer sum of the maximum elements of every sub-triangle of size \\(K\\).
+
+### Sample Input
+
+```
+4 2
+3
+1 2
+4 2 1
+6 1 4 2
+```
+
+#### Output for Sample Input
+
+`23`

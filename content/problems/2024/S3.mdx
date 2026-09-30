@@ -1,0 +1,93 @@
+---
+title: "Swipe"
+problem: "S3"
+year: 2024
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2024/2024CCCSrProblems.html"
+---
+## Problem S3: Swipe
+
+### Problem Description
+
+Swipe is a new mobile game that has recently exploded in popularity. In each level of Swipe, you are given \\(2\\) rows of integers that can be represented as arrays \\(A\\) and \\(B\\) of size \\(N\\). The objective of Swipe is to beat each level by turning array \\(A\\) into array \\(B\\).
+
+There are two swipe operations you can perform on array \\(A\\).
+
+-   Swipe right: Select the subarray \\([\\ell,r]\\) and set \\(A_i = A_\\ell\\) for all \\(\\ell \\le i \\le r\\).
+    
+-   Swipe left: Select the subarray \\([\\ell,r]\\) and set \\(A_i = A_r\\) for all \\(\\ell \\le i \\le r\\).
+    
+
+For example, starting with array \\(A = [0,1,2,3,4,5]\\), if we swipe right on \\([2,4]\\), we would obtain the array \\([0,1,2,2,2,5]\\). If instead, we started with the same array \\(A\\), and swiped left on \\([3,5]\\), we would obtain the array \\([0,1,2,5,5,5]\\). Note that these arrays are \\(0\\)\-indexed.
+
+Unfortunately, the game is bugged and contains levels that are impossible to beat. Determine if it is possible to transform array \\(A\\) into array \\(B\\). If it is possible, determine a sequence of swipe operations that transforms array \\(A\\) into array \\(B\\).
+
+### Input Specification
+
+The first line of input will consist of one positive integer \\(N\\), representing the length of each of the two arrays of integers.
+
+The second line of input contains \\(N\\) space separated integers contained in array \\(A\\).
+
+The third line of input contains \\(N\\) space separated integers contained in array \\(B\\).
+
+The following table shows how the available \\(15\\) marks are distributed:
+
+| Marks | Bounds on \\(N\\) | Bounds on \\(A_i\\) and \\(B_i\\) |
+| --- | --- | --- |
+| \\(2\\) | \\(N=2\\) | \\(1 \\le A_i,B_i \\leq 3\\) |
+| \\(4\\) | \\(1 \\le N \\le 8\\) | \\(1 \\le A_i,B_i \\leq 8\\) |
+| \\(4\\) | \\(1 \\le N \\le 500\\) | \\(1 \\le A_i,B_i \\leq 3000\\) |
+| \\(5\\) | \\(1 \\le N \\le 300\\,000\\) | \\(1 \\le A_i,B_i \\leq 300\\,000\\) |
+
+Note that for a subtask worth \\(M\\) marks, you will receive \\(\\left\\lfloor \\frac{M}{2} \\right\\rfloor\\) marks for a solution that only correctly outputs the first line of output.
+
+### Output Specification
+
+The first line of output will contain `YES` if there is a sequence of swipes that can transform array \\(A\\) into array \\(B\\); otherwise, the first line of output will contain `NO`.
+
+If the first line of output is `YES`, the next line contains a non-negative integer \\(K\\) (\\(K \\leq N\\)), indicating the number of swipes.
+
+Each of the next \\(K\\) lines contain three space-separated values: \\(D_j\\), \\(\\ell_j\\), and \\(r_j\\). The value \\(D_j\\) will be either `R` or `L`, indicating that the \\(j\\)th swipe is either a right or left swipe, respectively. The values \\(\\ell_j\\) and \\(r_j\\) indicate the left-end and right-end of the swipe where \\(0 \\le \\ell_j \\le r_j < N\\).
+
+### Sample Input 1
+
+```
+3
+3 1 2
+3 1 1
+```
+
+#### Output for Sample Input 1
+
+```
+YES
+1
+R 1 2
+```
+
+### Sample Input 2
+
+```
+4
+1 2 4 3
+1 4 2 3 
+```
+
+#### Output for Sample Input 2
+
+`NO`
+
+### Sample Input 3
+
+```
+4
+2 1 4 3
+2 1 4 3 
+```
+
+#### Output for Sample Input 3
+
+```
+YES
+0
+```

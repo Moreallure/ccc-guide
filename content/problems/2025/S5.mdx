@@ -1,0 +1,112 @@
+---
+title: "To-Do List"
+problem: "S5"
+year: 2025
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2025CCCSrProblems.html"
+---
+## Problem S5: To-Do List
+
+### Problem Description
+
+Wow, your to-do list is empty...but not for long! Over the next few seconds, you'll have to handle \\(Q\\) updates to your to-do list.
+
+For the first type of update, you will have to add a new homework assignment to your to-do list. This assignment will be released at the beginning of second \\(s\\), and will take \\(t\\) seconds to complete \\((1 \\le s, t \\le 10^6)\\). For the second type of update, you will have to remove the \\(i\\)\-th homework assignment that was added to your to-do list.
+
+After each update, you wonder: what's the earliest time you can finish all of the homework assignments in your to-do list? You can only work on one assignment at a time, and you must finish a homework assignment once you start it without switching to another assignment.
+
+### Input Specification
+
+The first line of input contains an integer \\(Q\\).
+
+The next \\(Q\\) lines each contain a line starting with a character `A` or `D`. A line starting with `A` represents the first type of update and ends with two space-separated **encrypted**\* integers \\(s'\\) and \\(t'\\). A line starting with `D` represents the second type of update and ends with an encrypted integer \\(i'\\). It is guaranteed that there have been at least \\(i\\) assignments added and that the \\(i\\)\-th assignment to be added has not been removed yet.
+
+It is guaranteed that there is at least one homework assignment on your to-do list after every update.
+
+The following table shows how the available \\(15\\) marks are distributed:
+
+| Marks | Bounds on \\(Q\\) | Additional constraints |
+| --- | --- | --- |
+| \\(2\\) | \\(1 \\le Q \\le 3 \\, 000\\) | None |
+| \\(6\\) | \\(1 \\le Q \\le 10^6\\) | Only updates of the first type |
+| \\(7\\) | \\(1 \\le Q \\le 10^6\\) | None |
+
+\*Note that the input for this problem is encrypted. To decrypt and obtain the actual values of \\(s, t,\\) and \\(i\\), you may use the following formulas: \\[ \\begin{align\*} s & = (s' + \\text{ans}) \\bmod (10^6+3)\\\\ t & = (t' + \\text{ans}) \\bmod (10^6+3)\\\\ i & = (i' + \\text{ans}) \\bmod (10^6+3) \\end{align\*} \\] Here, \\(\\text{ans}\\) represents the answer after the previous update and is initially \\(0\\) before any updates. It may also be useful to note that mod corresponds to the `%` operator in most programming languages, indicating the remainder after division. For example, \\(5\\bmod 3 = 2\\) and \\(17\\bmod 4 = 1\\).
+
+### Output Specification
+
+Output \\(Q\\) lines, where the \\(i\\)-th line contains the earliest time (in seconds) you can finish all of the homework assignments in your to-do list after the \\(i\\)-th update.
+
+### Sample Input 1
+
+```
+6
+A 3 3
+A 2 0
+A 999996 999995
+D 999991
+A 1000000 999994
+D 999992
+```
+
+#### Sample Input 1 (Unencrypted)
+
+```
+6
+A 3 3
+A 7 5
+A 4 3
+D 1
+A 8 2
+D 2
+```
+
+#### Output for Sample Input 1
+
+```
+5
+11
+13
+11
+13
+9
+```
+
+#### Explanation of Output for Sample Input 1
+
+The unencrypted sample input is provided for ease of reference.
+
+After the first update, we can start the first assignment at the beginning of second \\(3\\) and finish at the end of second \\(5\\) (interval \\([3, 5]\\)).
+
+After the second update, we can do the first assignment over the interval \\([3, 5]\\) and the second assignment over the interval \\([7, 11]\\).
+
+After the third update, we can do the first assignment over the interval \\([3, 5]\\), the third assignment over the interval \\([6, 8]\\), and then the second assignment over the interval \\([9, 13]\\).
+
+After the fourth update, we can do the third assignment over the interval \\([4, 6]\\) and the second assignment over the interval \\([7, 11]\\).
+
+After the fifth update, we can do the third assignment over the interval \\([4, 6]\\), the second assignment over the interval \\([7, 11]\\), and the fourth assignment over the interval \\([12, 13]\\).
+
+After the sixth update, we can do the third assignment over the interval \\([4, 6]\\) and the fourth assignment over the interval \\([8, 9]\\).
+
+### Sample Input 2
+
+```
+2
+A 1000000 1000000
+A 4 4
+```
+
+#### Sample Input 2 (Unencrypted)
+
+```
+2
+A 1000000 1000000
+A 1000000 1000000
+```
+
+#### Output for Sample Input 2
+
+```
+1999999
+2999999
+```

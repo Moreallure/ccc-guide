@@ -1,0 +1,129 @@
+---
+title: "Baby Hop, Giant Hop"
+problem: "S1"
+year: 2026
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2026/2026CCCSrProblems.html"
+---
+## Problem S1: Baby Hop, Giant Hop
+
+### Problem Description
+
+Samantha the Frog is hopping between lily pads arranged in a straight line, evenly spaced. There are an infinite number of lily pads. The lily pads are numbered, in order, using integers. For every integer, there is also a lily pad.
+
+Samantha starts on a lily pad numbered \\(A\\) and would like to hop onto a lily pad numbered \\(B\\). She can take a giant hop of length \\(K\\), or a baby hop of length \\(1\\). Each hop can be either forwards or backwards.
+
+Samantha would like to know the fewest number of hops needed to get from \\(A\\) to \\(B\\). But sometimes, she would like to know the second fewest number of hops needed.
+
+### Input Specification
+
+The first line of input contains a single integer, \\(A\\), the starting lily pad \\((-10^{18} \\leq A \\leq 10^{18})\\).
+
+The second line of input contains a single integer, \\(B\\), the ending lily pad \\((-10^{18} \\leq B \\leq 10^{18})\\).
+
+The third line of input contains a single integer, \\(K\\), the distance of a giant hop \\((2 \\leq K \\leq 10^{18})\\).
+
+The fourth line of input contains the integer, \\(T\\), which is either \\(1\\) or \\(2\\), indicating if the fewest (when \\(T=1\\)) or second fewest (when \\(T=2\\)) number of steps should be found.
+
+The following table shows how the \\(15\\) available marks are distributed:
+
+| Marks | Bounds  
+on \\(A\\), \\(B\\) | Bounds  
+on \\(K\\) | Bounds  
+on \\(T\\) | Additional  
+Restrictions |
+| --- | --- | --- | --- | --- |
+| \\(5\\) | \\(0 \\le A, B \\le 10\\) | \\(K=2\\) | \\(T=1\\) | Only hops in the positive direction needed |
+| \\(6\\) | \\(-10^{18} \\leq A, B \\leq 10^{18}\\) | \\(2 \\leq K \\leq 10^{18}\\) | \\(T=1\\) | None |
+| \\(2\\) | \\(0 \\le A, B\\le 100\\) | \\(2 \\le K\\leq4\\) | \\(T=1\\) or \\(T=2\\) | None |
+| \\(2\\) | \\(-10^{18} \\leq A, B \\leq 10^{18}\\) | \\(2 \\leq K\\leq 10^{18}\\) | \\(T=1\\) or \\(T=2\\) | None |
+
+Note that for full marks, solutions will need to handle 64-bit integers. For example:
+
+-   in C/C++, the type `long long` should be used;
+    
+-   in Java, the type `long` should be used.
+    
+
+### Output Specification
+
+On a single line, output:
+
+-   the fewest number of hops, if \\(T=1\\)
+    
+-   the second fewest number of hops, if \\(T=2\\)
+    
+
+required to move from lily pad \\(A\\) to lily pad \\(B\\).
+
+### Sample Input 1
+
+```
+0
+10
+3
+1
+```
+
+#### Output for Sample Input 1
+
+```
+4
+```
+
+#### Explanation of Output for Sample Input 1
+
+Samantha hops to lily pads labeled \\(3\\), \\(6\\), and \\(9\\), with three giant hops, and then hops to the lily pad labeled \\(10\\) with one baby hop.
+
+### Sample Input 2
+
+```
+0
+11
+4
+1
+```
+
+#### Output for Sample Input 2
+
+```
+4
+```
+
+#### Explanation of Output for Sample Input 2
+
+Samantha hops to lily pads labeled \\(4\\), \\(8\\), and \\(12\\), with three giant hops, and then hops to the lily pad labeled \\(11\\) with one (backwards) baby hop.
+
+### Sample Input 3
+
+```
+0
+11
+4
+2
+```
+
+#### Output for Sample Input 3
+
+```
+5
+```
+
+#### Explanation of Output for Sample Input 3
+
+The fewest number of hops needed \\((4)\\) was found in Sample 2. In this input, the second fewest number of steps is to be found, since \\(T=2\\). Samantha hops to lily pads labeled \\(4\\) and \\(8\\) with two giant hops, and then hops to the lily pad labeled \\(11\\) with three baby hops.
+
+### Sample Input 4
+
+```
+0
+0
+3
+1
+```
+
+#### Output for Sample Input 4
+
+```
+0
+```

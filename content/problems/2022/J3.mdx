@@ -1,0 +1,68 @@
+---
+title: "Harp Tuning"
+problem: "J3"
+year: 2022
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2022CCCJrProblemSet.html"
+---
+## Problem J3: Harp Tuning
+
+### Problem Description
+
+The CCC harp is a stringed instrument with strings labelled A,B,...,T. Like other instruments, it can be out of tune.
+
+![](assets/J3-0.png)
+
+A musically inclined computer science student has written a clever computer program to help tune the harp. The program analyzes the sounds produced by the harp and provides instructions to fix each string that is out of tune. Each instruction includes a group of strings, whether they should be tightened or loosened, and by how many turns.
+
+Unfortunately, the output of the program is not very user friendly. It outputs all the tuning instructions on a single line. For example, the single line `AFB+8HC-4` actually contains two tuning instructions: `AFB+8` and `HC-4`. The first instruction indicates that harp strings A, F, and B should be tightened 8 turns, and the second instruction indicates that harp strings H and C should be loosened 4 turns.
+
+Your job is to take a single line of tuning instructions and make them easier to read.
+
+### Input Specification
+
+There will be one line of input which is a sequence of tuning instructions. Each tuning instruction will be a sequence of uppercase letters, followed by a plus sign (`+`) or minus sign (`-`), followed by a positive integer. There will be at least one instruction and at least one letter per instruction. Also, each uppercase letter will appear at most once.
+
+The following table shows how the available 15 marks are distributed.
+
+<table><colgroup><col> </colgroup><colgroup span="3"></colgroup><colgroup><col></colgroup><tbody><tr><th rowspan="2" scope="col">Marks Awarded</th><th colspan="3" scope="colgroup">Maximum Input Values</th><th rowspan="2" scope="col">Example Input</th></tr><tr><th scope="col">Number of Instructions</th><th scope="col">Number of Letters in an Instruction</th><th scope="col">Number of Turns</th></tr><tr class="odd"><td style="text-align: center;">5 marks</td><td style="text-align: center;">1</td><td style="text-align: center;">20</td><td style="text-align: center;">9</td><td style="text-align: center;"><code>AFB+8</code></td></tr><tr class="even"><td style="text-align: center;">5 marks</td><td style="text-align: center;">20</td><td style="text-align: center;">1</td><td style="text-align: center;">9</td><td style="text-align: center;"><code>A+8H-4</code></td></tr><tr class="odd"><td style="text-align: center;">3 marks</td><td style="text-align: center;">20</td><td style="text-align: center;">20</td><td style="text-align: center;">9</td><td style="text-align: center;"><code>AFB+8HC-4</code></td></tr><tr class="even"><td style="text-align: center;">2 marks</td><td style="text-align: center;">20</td><td style="text-align: center;">20</td><td style="text-align: center;">999 999</td><td style="text-align: center;"><code>AFB+88HC-444</code></td></tr></tbody></table>
+
+### Output Specification
+
+There will be one line of output for each tuning instruction. Each line of output will consist of three parts, each separated by a single space: the uppercase letters referring to the strings, `tighten` if the instruction contained a plus sign or `loosen` if the instruction contained a minus sign, and the number of turns.
+
+### Sample Input 1
+
+```
+AFB+8HC-4
+```
+
+#### Output for Sample Input 1
+
+```
+AFB tighten 
+8 HC loosen 4
+```
+
+#### Explanation of Output for Sample Input 1
+
+The input contains two tuning instructions: `AFB+8` and `HC-4`.
+
+### Sample Input 2
+
+```
+AFB+8SC-4H-2GDPE+9
+```
+
+#### Output for Sample Input 2
+
+```
+AFB tighten 8 
+SC loosen 4 
+H loosen 2 
+GDPE tighten 9
+```
+
+#### Explanation of Output for Sample Input 2
+
+The input contains four tuning instructions: `AFB+8`, `SC-4`, `H-2`, and `GDPE+9`.

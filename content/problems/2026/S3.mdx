@@ -1,0 +1,109 @@
+---
+title: "Common Card Choice"
+problem: "S3"
+year: 2026
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2026/2026CCCSrProblems.html"
+---
+## Problem S3: Common Card Choice
+
+### Problem Description
+
+There are \\(N\\) cards with positive integers written on them. Alice takes some of the cards, then Bob takes some of the remaining cards. Both need to take at least one card; Alice is not allowed to take all of the cards. Then Alice and Bob compute the sum of numbers on the cards that they have taken. If these sums have a common divisor greater than one, Alice and Bob get a bag of sweets; otherwise they don’t. Given the cards on the table, determine if it is possible for Alice and Bob to get the sweets, and if so, how.
+
+To make it even more challenging, in some cases, neither Alice nor Bob knows any of the values on the cards.
+
+Note that an integer \\(d\\) is a _divisor_ of an integer \\(q\\) if there is no remainder when \\(q\\) is divided by \\(d\\). An integer \\(z\\) is a _common divisor_ of integers \\(x\\) and \\(y\\) if \\(z\\) is a divisor of both \\(x\\) and \\(y\\).
+
+### Input Specification
+
+The first line of input contains \\(N~(2 \\le N \\le 10^{5})\\).
+
+The second line contains \\(N\\) integers, \\(c_i~(1 \\le c_i \\le 10^{12})\\).
+
+The following table shows how the \\(15\\) available marks are distributed:
+
+| Marks | Bounds on \\(N\\) | Bounds on \\(c_i\\) |
+| --- | --- | --- |
+| \\(2\\) | \\(2 \\le N \\le 3\\) | \\(1 \\le c_i \\le 100\\) |
+| \\(1\\) | \\(2 \\le N \\le 10\\) | \\(1 \\le c_i \\le 100\\) |
+| 1 | \\(2 \\leq N \\le 10^5\\) | \\(1 \\le c_i \\le 2\\) |
+| 2 | \\(2 \\leq N \\le 10^5\\) | \\(1 \\le c_i \\le 10^5\\) |
+| 2 | \\(2 \\leq N \\le 10^{5}\\) | \\(1 \\le c_i \\le 10^{12}\\) |
+| 7 | \\(N = 10^5\\) | \\(c_i=-1\\) and see Note below |
+
+**Note:** For the last subtask, you will be given \\(N\\), but all \\(N\\) card values will be labelled with `-1`, indicating that those card values are unknown to you. In this last subtask, there will always be a selection of cards that Alice and Bob can pick to obtain a bag of sweets.
+
+### Output Specification
+
+On the first line of output, print `YES` if it is possible to get the sweets, otherwise, print `NO`.
+
+If the answer is `YES`, on the second line of output, produce \\(A\\), the number of cards that Alice should take, followed by one space, followed by \\(B\\), the number of cards that Bob should take. On the third line of output, print out \\(A\\) space-separated numbers corresponding to the indices of the cards that Alice should take. On the fourth line of output, print out \\(B\\) space-separated numbers corresponding to the indices of the cards that Bob should take. If there are several ways to select cards, print any of them.
+
+If the input is for the last subtask, output an integer \\(K\\leq 100\\) on the first line, followed by \\(K\\) possible combinations of output as specified for all other subtasks. That is, each combination will be the same sequence of three lines as stated above: one line containing \\(A\\) and \\(B\\); one line containing \\(A\\) indices of cards; and one line containing \\(B\\) indices of cards. All guesses of indices of cards must be disjoint: that is, no card index can appear in more than one guess. Your output will be judged correct if any of the combinations would result in Alice and Bob obtaining a bag of sweets. Note that you will not receive any feedback between guesses.
+
+### Sample Input 1
+
+```
+7
+19 7 11 31 99 13 17
+```
+
+#### Output for Sample Input 1
+
+```
+YES
+3 3
+2 3 7
+4 6 1
+```
+
+#### Explanation of Output for Sample Input 1
+
+The sum of Alice’s cards is \\(7+11+17=35\\) and the sum of Bob’s cards is \\(31+13+19=63\\), and both \\(35\\) and \\(63\\) are divisible by \\(7\\).
+
+### Sample Input 2
+
+```
+3
+3 11 17
+```
+
+#### Output for Sample Input 2
+
+```
+NO
+```
+
+#### Explanation of Output for Sample Input 2
+
+Notice that \\(3\\), \\(11\\), and \\(17\\) have no common divisors, and all possible sums of two of these numbers (\\(14\\), \\(20\\), \\(28\\)) do not have a common factor with the remaining third number.
+
+### Sample Input 3
+
+```
+100000
+-1 -1 -1 ...
+```
+
+(The input has been truncated for space. There are a total of \\(10^5\\) `-1`s on the second line.)
+
+#### Output for Sample Input 3
+
+```
+2
+1 2
+1
+3 5
+3 2
+100 101 102
+201 200
+```
+
+#### Explanation of Output for Sample Input 3
+
+There are a total of two guesses. The first guess consists of indices \\(\\{1\\}\\) and \\(\\{3,5\\}\\). The second guess consists of indices \\(\\{100,101,102\\}\\) and \\(\\{201,200\\}\\).
+
+Note that all sets of indices are disjoint.
+
+Although the output is formatted correctly, the output will receive **Wrong answer** because the two guesses are not enough for Alice and Bob to obtain a bag of sweets.

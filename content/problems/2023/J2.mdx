@@ -1,0 +1,53 @@
+---
+title: "Chili Peppers"
+problem: "J2"
+year: 2023
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2023/2023CCCJrProblemSet.html"
+---
+## Problem J2: Chili Peppers
+
+### Problem Description
+
+Ron is cooking chili using an assortment of peppers.
+
+The spiciness of a pepper is measured in Scolville Heat Units (SHU). Ron’s chili is currently not spicy at all, but each time Ron adds a pepper, the total spiciness of the chili increases by the SHU value of that pepper.
+
+The SHU values of the peppers available to Ron are shown in the following table:
+
+| Pepper Name | Scolville Heat Units |
+| --- | --- |
+| Poblano | 1500 |
+| Mirasol | 6000 |
+| Serrano | 15500 |
+| Cayenne | 40000 |
+| Thai | 75000 |
+| Habanero | 125000 |
+
+Your job is to determine the total spiciness of Ron’s chili after he has finished adding peppers.
+
+### Input Specification
+
+The first line of input will contain a positive integer \\(N\\), representing the number of peppers Ron adds to his chili. The next \\(N\\) lines will each contain the name of a pepper Ron has added. Each pepper name will exactly match a name that appears in the table above. Note that more than one pepper of the same name can be added.
+
+### Output Specification
+
+The output will consist of a positive integer \\(T\\), representing the total spiciness of Ron’s chili.
+
+### Sample Input
+
+```
+4 
+Poblano 
+Cayenne 
+Thai 
+Poblano
+```
+
+#### Output for Sample Input
+
+`118000`
+
+#### Explanation of Output for Sample Input
+
+A Poblano pepper has an SHU value of \\(1500\\). A Cayenne pepper has an SHU value of \\(40000\\). A Thai pepper has an SHU value of \\(75000\\). The total spiciness of Ron’s chili is therefore \\(1500 + 40000 + 75000 + 1500 = 118000\\).

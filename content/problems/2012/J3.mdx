@@ -1,0 +1,50 @@
+---
+title: "Icon Scaling"
+problem: "J3"
+year: 2012
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2012/2012CCCJrProblems.html"
+---
+## Problem J3: Icon Scaling
+
+### Problem Description
+
+You have been asked to take a small icon that appears on the screen of a smart telephone and scale it up so it looks bigger on a regular computer screen.
+
+The icon will be encoded as characters (`x` and `*`) in a \\(3\\times 3\\) grid as follows:
+
+```
+*x*
+ xx
+* *
+```
+
+Write a program that accepts a positive integer scaling factor and outputs the scaled icon. A scaling factor of \\(k\\) means that each character is replaced by a \\(k\\times k\\) grid consisting only of that character.
+
+### Input Specification
+
+The input will be a positive integer \\(k\\) such that \\(k \\lt 25\\).
+
+### Output Specification
+
+The output will be \\(3k\\) lines, which represent each individual line scaled by a factor of \\(k\\) and repeated \\(k\\) times. A line is scaled by a factor of \\(k\\) by replacing each character in the line with \\(k\\) copies of the character.
+
+### Sample Input
+
+```
+3
+```
+
+#### Output for Sample Input
+
+```
+***xxx***
+***xxx***
+***xxx***
+   xxxxxx
+   xxxxxx
+   xxxxxx
+***   ***
+***   ***
+***   ***
+```

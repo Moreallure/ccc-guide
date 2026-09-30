@@ -1,0 +1,47 @@
+---
+title: "Tourism"
+problem: "S4"
+year: 2019
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2019/2019CCCSrProblemSet.html"
+---
+## Problem S4: Tourism
+
+### Problem Description
+
+You are planning a trip to visit \\(N\\) tourist attractions. The attractions are numbered from \\(1\\) to \\(N\\) and must be visited in this order. You can visit at most \\(K\\) attractions per day, and want to plan the trip to take the fewest number of days as possible.
+
+Under these constraints, you want to find a schedule that has a nice balance between the attractions visited each day. To be precise, we assign a score \\(a_i\\) to attraction \\(i\\). Given a schedule, each day is given a score equal to the maximum score of all attractions visited that day. Finally, the scores of each day are summed to give the total score of the schedule. What is the maximum possible total score of the schedule, using the fewest days possible?
+
+### Input Specification
+
+The first line contains two space-separated integers \\(N\\) and \\(K\\) \\((1\\le K\\le N\\le 10^6)\\).
+
+The next line contains \\(N\\) space separated integers \\(a_i\\) \\((1\\le a_i\\le 10^9)\\).
+
+For 3 of the 15 available marks, \\(2K\\ge N\\).
+
+For an additional 3 of the 15 available marks, \\(K\\le 100\\) and \\(N\\le 10^5\\).
+
+### Output Specification
+
+Output a single integer, the maximum possible total score.
+
+### Sample Input
+
+```
+5 3
+2 5 7 1 4
+```
+
+#### Output for Sample Input
+
+`12`
+
+#### Explanation of Output for Sample Input
+
+We need to have at least two days to visit all the attractions, since we cannot visit all attractions in one day.
+
+Visiting the first two attractions on day 1 will give a score of 5, and visiting the last three attractions on day 2 will give a score of 7, for a total score of 12.
+
+Visiting three attractions on day 1, and two attractions on day 2, which is the only possibility to visit in the fewest number of days possible, would yield a total score of \\(7+4=11\\).

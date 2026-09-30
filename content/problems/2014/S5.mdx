@@ -1,0 +1,68 @@
+---
+title: "Lazy Fox"
+problem: "S5"
+year: 2014
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2014/2014CCCSrProblems.html"
+---
+## Problem S5: Lazy Fox
+
+### Problem Description
+
+You have a pet Fox who loves treats. You have \\(N\\) neighbours at distinct locations (described as points on the Cartesian plane) which hand out treats to your pet Fox, and each neighbour has an unlimited number of treats to give out. The origin (which is where the Fox starts) will not be one of these \\(N\\) locations.
+
+What does the Fox say, in order to get these treats? That is a good question, but not our concern.
+
+The Fox moves from location to location to gather exactly one treat from each location on each visit. He can revisit any previous location, but cannot visit the same location on two _consecutive_ visits.
+
+Your Fox is very lazy. The distance your Fox is willing to travel after each treat will strictly decrease. Specifically, the distance from the origin to his first treat location must be larger than the distance from his first treat location to his second treat location, which in turn is larger than the distance between his second treat location and his third treat location, and so on.
+
+What is the largest number of treats your Fox gathers?
+
+### Input Specification
+
+The first line contains the integer \\(N~(1 \\leq N \\leq 2000)\\). The next \\(N\\) lines each contain \\(X_i\\), followed by a space, followed by \\(Y_i\\), for \\(i=1..N~(-10\\ 000 \\leq X_i, Y_i \\leq 10\\ 000)\\) representing the coordinates of the \\(i\\)th location. The following additional constraints will apply.
+
+-   At least 20% of the marks will be for test cases where \\(N \\leq 50\\);
+    
+-   at least 40% of the marks will be for test cases where \\(N \\leq 200\\);
+    
+-   the remaining marks will be for test cases where \\(N \\leq 2000\\).
+    
+
+### Output Specification
+
+The output is one integer, the largest number of treats your Fox can gather.
+
+### Sample Input
+
+```
+5
+5 8
+4 10
+3 1
+3 2
+3 3
+```
+
+#### Output for Sample Input
+
+```
+6
+```
+
+#### Explanation of Output for Sample Input
+
+The Fox performs the visits in the following order (with the indicated distances):
+
+-   \\((0,0)\\) to \\((4, 10)\\) with distance \\(\\sqrt{116}\\);
+    
+-   \\((4,10)\\) to \\((3,1)\\) with distance \\(\\sqrt{82}\\);
+    
+-   \\((3,1)\\) to \\((5,8)\\) with distance \\(\\sqrt{53}\\);
+    
+-   \\((5,8)\\) to \\((3,3)\\) with distance \\(\\sqrt{29}\\);
+    
+-   \\((3,3)\\) to \\((3,1)\\) with distance \\(2\\);
+    
+-   \\((3,1)\\) to \\((3,2)\\) with distance \\(1\\).

@@ -1,0 +1,81 @@
+---
+title: "Choose your own path"
+problem: "J5"
+year: 2018
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2018/2018CCCJrProblemSet.html"
+---
+## Problem J5: Choose your own path
+
+### Problem Description
+
+There is a genre of fiction called _choose your own adventure_ books. These books allow the reader to make choices for the characters which altersthe outcome of the story.
+
+For example, after reading the first page of a book, the reader may be asked a choice, such as “Do you pick up the rock?” If the reader answers “yes”, they are directed to continue reading on page 47, and if they choose “no”, they are directed to continue reading on page 18. On each of those pages, they have further choices, and so on, throughout the book. Some pages do not have any choices, and thus these are the “ending” pages of that version of the story. There may be many such ending pages in the book, some of which are good (e.g., the hero finds treasure) and others which are not (e.g., the hero finds a leftover sandwich from 2001).
+
+You are the editor of one of these books, and you must examine two features of the choose your own adventure book:
+
+1.  ensure that every page can be reached – otherwise, there is no reason to pay to print a page which no one can ever read;
+    
+2.  find the shortest path, so that readers will know what the shortest amount of time they need to finish one version of the story.
+    
+
+Given a description of the book, examine these two features.
+
+### Input Specification
+
+The first line of input contains \\(N\\) \\((1 \\leq N \\leq 10000)\\), the number of pages in the book. Each of the next \\(N\\) lines contain an integer \\(M_i\\) \\((1 \\leq i \\leq N; 0 \\leq M_i \\leq N)\\), which is the number of different options from page \\(i\\), followed by \\(M_i\\) space-separated integers in the range from \\(1\\) to \\(N\\), corresponding to each of the pages to go to next from page \\(i\\). It will also be the case \\(M_1 + M_2 + \\cdots + M_N\\) is at most 10000.
+
+If \\(M_i = 0\\), then page \\(i\\) is an ending page (i.e., there are no choices from that page). There will be at least one ending page in the book.
+
+Note that you always begin the book on page 1.
+
+For 4 of the available 15 marks, \\(N \\leq 100\\), \\(M_i \\leq 10\\) for \\(1 \\le i \\le N\\).
+
+For an additional 3 of the available 15 marks, the book is guaranteed to have no cycles.
+
+For an additional 4 of the available 15 marks, \\(N \\leq 1000\\), \\(M_i \\le 25\\) for \\(1 \\le i \\le N\\).
+
+### Output Specification
+
+The output will be two lines. The first line will contain `Y` if all pages are reachable, and `N` otherwise. The last line will contain a non-negative integer \\(K\\), which is the shortest path a reader can take while reading this book. There will always be a finite shortest path.
+
+### Sample Input 1
+
+```
+3
+2 2 3
+0
+0
+```
+
+#### Output for Sample Input 1
+
+```
+Y
+2
+```
+
+#### Explanation of Output for Sample Input 1
+
+Since we start on page 1, and can reach both page 2 and page 3, all pages are reachable. The only paths in the book are \\(1 \\rightarrow 2\\) and \\(1 \\rightarrow 3\\), each of which is 2 pages in length.
+
+### Sample Input 2
+
+```
+3
+2 2 3
+0
+1 1
+```
+
+#### Output for Sample Input 2
+
+```
+Y
+2
+```
+
+#### Explanation of Output for Sample Input 2
+
+Every page is reachable, since from page 1, we can reach pages 2 and 3. The shortest path is the path 1 \\(\\rightarrow\\) 2, which contains two pages.

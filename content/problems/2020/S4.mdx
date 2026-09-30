@@ -1,0 +1,38 @@
+---
+title: "Swapping Seats"
+problem: "S4"
+year: 2020
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2020/2020CCCSrProblemSet.html"
+---
+## Problem S4: Swapping Seats
+
+### Problem Description
+
+There are \\(N\\) people sitting at a circular table for a long session of negotiations. Each person belongs to one of the three groups: `A`, `B`, or `C`. A group is _happy_ if all of its members are sitting contiguously in a block of consecutive seats. You would like to make all groups happy by some sequence of _swap_ operations. In each swap operation, two people exchange seats with each other. What is the minimum number of swaps required to make all groups happy?
+
+### Input Specification
+
+The input consists of a single line containing \\(N\\) \\((1\\le N\\le 1\\:000\\:000)\\) characters, where each character is `A`, `B`, or `C`. The \\(i\\)\-th character denotes the group of the person initially sitting at the \\(i\\)\-th seat at the table, where seats are numbered in clockwise order.
+
+For 4 of the 15 available marks, the input has no `C` characters and \\(N\\le 5\\:000\\).
+
+For an additional 4 of the 15 available marks, the input has no `C` characters.
+
+For an additional 4 of the 15 available marks, \\(N\\le 5\\:000\\).
+
+### Output Specification
+
+Output a single integer, the minimum possible number of swaps.
+
+### Sample Input
+
+`BABCBCACCA`
+
+#### Output for Sample Input
+
+`2`
+
+#### Explanation of Output for Sample Input
+
+In one possible sequence, the first swap results in the seating layout `AABCBCBCCA`. After the second swap, the layout is `AABBBCCCCA`.

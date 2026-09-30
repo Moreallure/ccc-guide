@@ -1,0 +1,104 @@
+---
+title: "/S2: Group Work"
+problem: "S2"
+year: 2022
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2022/2022CCCSrProblemSet.html"
+---
+## Problem J4/S2: Group Work
+
+### Problem Description
+
+A class has been divided into groups of three. This division into groups might violate two types of constraints: some students must work together in the same group, and some students must work in separate groups.
+
+Your job is to determine how many of the constraints are violated.
+
+### Input Specification
+
+The first line will contain an integer \\(X\\) with \\(X \\geq 0\\). The next \\(X\\) lines will each consist of two different names, separated by a single space. These two students _must_ be in the same group.
+
+The next line will contain an integer \\(Y\\) with \\(Y \\geq 0\\). The next \\(Y\\) lines will each consist of two different names, separated by a single space. These two students _must not_ be in the same group.
+
+Among these \\(X+Y\\) lines representing constraints, each possible pair of students appears at most once.
+
+The next line will contain an integer \\(G\\) with \\(G \\geq 1\\). The last \\(G\\) lines will each consist of three different names, separated by single spaces. These three students have been placed in the same group.
+
+Each name will consist of between 1 and 10 uppercase letters. No two students will have the same name and each name appearing in a constraint will appear in exactly one of the \\(G\\) groups.
+
+The following table shows how the available 15 marks are distributed at the Junior level.
+
+| Marks Awarded | Number of Groups | Number of Constraints |
+| --- | --- | --- |
+| 4 marks | \\(G \\leq 50\\) | \\(X \\leq 50\\) and \\(Y = 0\\) |
+| 10 marks | \\(G \\leq 50\\) | \\(X \\leq 50\\) and \\(Y \\leq 50\\) |
+| 1 mark | \\(G \\leq 100\\,000\\) | \\(X \\leq 100\\,000\\) and \\(Y \\leq 100\\,000\\) |
+
+The following table shows how the available 15 marks are distributed at the Senior level.
+
+| Marks Awarded | Number of Groups | Number of Constraints |
+| --- | --- | --- |
+| 3 marks | \\(G \\leq 50\\) | \\(X \\leq 50\\) and \\(Y = 0\\) |
+| 5 marks | \\(G \\leq 50\\) | \\(X \\leq 50\\) and \\(Y \\leq 50\\) |
+| 7 marks | \\(G \\leq 100\\,000\\) | \\(X \\leq 100\\,000\\) and \\(Y \\leq 100\\,000\\) |
+
+### Output Specification
+
+Output an integer between \\(0\\) and \\(X+Y\\) which is the number of constraints that are violated.
+
+### Sample Input 1
+
+```
+1
+ELODIE CHI
+0
+2
+DWAYNE BEN ANJALI
+CHI FRANCOIS ELODIE
+```
+
+#### Output for Sample Input 1
+
+```
+0
+```
+
+#### Explanation of Output for Sample Input 1
+
+There is only one constraint and it is not violated: ELODIE and CHI are in the same group.
+
+### Sample Input 2
+
+```
+3
+A B
+G L
+J K
+2
+D F
+D G
+4
+A C G
+B D F
+E H I
+J K L
+```
+
+#### Output for Sample Input 2
+
+```
+3
+```
+
+#### Explanation of Output for Sample Input 2
+
+The first constraint is that A and B must be in the same group. This is violated.
+
+The second constraint is that G and L must be in the same group. This is violated.
+
+The third constraint is that J and K must be in the same group. This is _not_ violated.
+
+The fourth constraint is that D and F must not be in the same group. This is violated.
+
+The fifth constraint is that D and G must not be in the same group. This is _not_ violated.
+
+Of the five constraints, three are violated.

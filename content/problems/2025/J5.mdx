@@ -1,0 +1,55 @@
+---
+title: "Connecting Territories"
+problem: "J5"
+year: 2025
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2025CCCJrProblems.html"
+---
+## Problem J5: Connecting Territories
+
+### Problem Description
+
+Ava is playing a strategic game on a grid of tiles. Each tile has an associated cost. When the costs of the tiles are read from left to right, starting with the first row, a repeating pattern of the first \\(M\\) positive integers in increasing order is revealed: \\(1, 2, 3, \\ldots, M, 1, 2, 3, \\ldots, M, 1, 2, 3, \\ldots\\). In this pattern, \\(M\\) represents the maximum cost of a tile. In the grid of tiles shown, \\(M\\) is equal to \\(5\\).
+
+![A grid with 5 rows and 8 columns. From left to right, the entries in the eight squares in the first row are 1, 2, 3, 4, 5, 1, 2, 3. The entries in the second row continue with 4, 5, 1, 2, 3, and so on.](assets/J5-0.png)
+
+Ava needs to purchase one tile in each row in order to make a connecting path from the upper territory (above the first row of tiles) to the lower territory (below the last row of tiles). The first tile purchased must be in the first row. Each subsequently purchased tile must share either an edge or a corner with the tile purchased previously. In the grid of tiles shown, the cost of Ava’s connecting path is \\(9\\).
+
+![One square in each of the five rows in the grid is highlighted: 6th square in the 1st row, 5th square in the 2nd row, 5th square in the 3rd row, 4th square in the 4th row, and 4th square in the 5th row. From top to bottom, the entries in the highlighted squares are 1, 3, 1, 3, and 1.](assets/J5-1.png)
+
+Given a grid of tiles, your job is to determine the minimum cost of a connecting path between the upper and lower territories.
+
+### Input Specification
+
+The first line of input contains a positive integer, \\(R\\), representing the number of rows in the grid. The second line contains a positive integer, \\(C\\), representing the number of columns in the grid. The third line contains a positive integer, \\(M\\) where \\(M \\leq 100\\,000\\), representing the maximum cost of a tile.
+
+The following table shows how the available \\(15\\) marks are distributed:
+
+| Marks | Description | Bounds |
+| --- | --- | --- |
+| \\(3\\) | There are two rows and at most ten columns. | \\(R=2\\) and \\(C \\leq 10\\) |
+| \\(8\\) | There are at most ten rows and at most ten columns. | \\(R \\leq 10\\) and \\(C \\leq 10\\) |
+| \\(2\\) | There are at most \\(100\\) rows and at most \\(100\\) columns. | \\(R \\leq 100\\) and \\(C \\leq 100\\) |
+| \\(2\\) | The grid may be very large. | \\(R \\leq 20\\,000\\) and \\(C \\leq 20\\,000\\) |
+
+### Output Specification
+
+Output the positive integer, \\(P\\), which is the minimum cost of a connecting path between the upper and lower territories.
+
+### Sample Input
+
+```
+3
+5
+7
+```
+
+#### Output for Sample Input
+
+`6`
+
+#### Explanation of Output for Sample Input
+
+The cost of each tile is shown. The sequence of tiles that Ava should purchase to minimize the cost of a connecting path is highlighted in green.
+
+![A grid with 3 rows and 5 columns. A square in each row is highlighted: 3rd square in the 1st row, 4th square in the 2nd row, and 5th square in the 3rd row. From top to bottom, the entries in the highlighted squares are 3, 2, and 1.](assets/J5-2.png)

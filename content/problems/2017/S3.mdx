@@ -1,0 +1,63 @@
+---
+title: "Nailed It!"
+problem: "S3"
+year: 2017
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2017/2017CCCSrProblemSet.html"
+---
+## Problem S3: Nailed It!
+
+Time limit: 2 seconds
+
+### Problem Description
+
+Tudor is a contestant in the Canadian Carpentry Challenge (CCC). To win the CCC, Tudor must demonstrate his skill at nailing wood together to make the longest fence possible using boards. To accomplish this goal, he has \\(N\\) pieces of wood. The \\(i^{th}\\) piece of wood has integer length \\(L_i\\).
+
+A _board_ is made up of **exactly two** pieces of wood. The length of a board made of wood with lengths \\(L_i\\) and \\(L_j\\) is \\(L_i + L_j\\). A _fence_ consists of boards that are the same length. The _length of the fence_ is the number of boards used to make it, and the _height of the fence_ is the length of each board in the fence. In the example fence below, the length of the fence is 4; the height of the fence is 50; and, the length of each piece of wood is shown:
+
+![A larger rectangle divided into four vertical strips. Each vertical strip is divided into two pieces by a horizontal line. The first strip has top piece labelled 20 and bottom piece labelled 30. The second strip has 40 and 10, the third has 30 and 20, and the fourth has 15 and 35. The height of the larger rectangle is labelled height of fence and its length is labelled length of fence.](assets/S3-0.png)
+
+Tudor would like to make the longest fence possible. Please help him determine the maximum length of any fence he could make, and the number of different heights a fence of that maximum length could have.
+
+### Input Specification
+
+The first line will contain the integer \\(N\\) \\((2 \\le N \\le 1\\ 000\\ 000)\\).  
+The second line will contain \\(N\\) space-separated integers \\(L_1, L_2, \\ldots, L_N\\) \\((1 \\le L_i \\le 2\\,000)\\).
+
+For 5 of the 15 available marks, \\(N \\le 100\\).  
+For an additional 4 of the 15 available marks, \\(N \\le 1000\\).  
+For an additional 3 of the 15 available marks, \\(N \\le 100\\ 000\\).
+
+### Output Specification
+
+Output two integers on a single line separated by a single space: the length of the longest fence and the number of different heights a longest fence could have.
+
+### Sample Input 1
+
+```
+4
+1 2 3 4
+```
+
+#### Output for Sample Input 1
+
+`2 1`
+
+#### Explanation for Output for Sample Input 1
+
+Tudor first combines the pieces of wood with lengths \\(1\\) and \\(4\\) to form a board of length \\(5\\). Then he combines the pieces of wood with lengths \\(2\\) and \\(3\\) to form another board of length \\(5\\). Finally, he combines the boards to make a fence with length \\(2\\) and height \\(5\\).
+
+### Sample Input 2
+
+```
+5
+1 10 100 1000 2000
+```
+
+#### Output for Sample Input 2
+
+`1 10`
+
+#### Explanation for Output for Sample Input 2
+
+Tudor can’t make a fence longer than length \\(1\\), and there are \\(10\\) ways to make a fence with length \\(1\\) by choosing any two pieces of wood to nail together. Specifically, he may have a fence of height 11, 101, 1001, 2001, 110, 1010, 2010, 1100, 2100 and 3000.

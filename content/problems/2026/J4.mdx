@@ -1,0 +1,87 @@
+---
+title: "Snail Path"
+problem: "J4"
+year: 2026
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2026/2026CCCJrProblems.html"
+---
+## Problem J4: Snail Path
+
+### Problem Description
+
+A snail is crawling across an infinite grid of equally sized squares. It can crawl horizontally (east and west) or vertically (north and south), but it cannot crawl diagonally.
+
+As the snail crawls, it leaves a trail of slime which makes the squares of the grid it touches _slimy_.
+
+![](assets/J4-0.svg)
+
+For example, after the snail below crawls east \\(3\\) squares, there will be \\(4\\) _slimy_ squares as shown.
+
+![A snail in one square of a grid. This square is coloured green.](assets/J4-1.svg)
+
+![The snail moves 3 squares to the right in the grid. The starting square, the ending square, and the two squares in between are coloured green. ](assets/J4-2.svg)
+
+Given the movements taken by the snail, your job is to determine how many times the snail enters a _slimy_ square.
+
+### Input Specification
+
+The first line of input contains a positive integer, \\(M\\), representing the number of movements taken by the snail.
+
+The next \\(M\\) lines will specify the snail's movements, in order. Each movement will contain an uppercase directional letter (`N`, `E`, `S`, or `W`), followed by a positive integer less than or equal to 20 representing the number of squares the snail crawls in that direction.
+
+The following table shows how the \\(15\\) available marks are distributed:
+
+| Marks | Description | Bounds |
+| --- | --- | --- |
+| \\(4\\) | The snail will never crawl north or west of its initial position and will stay close to its initial position. | \\(M \\leq 20\\) |
+| \\(3\\) | The snail will stay close to its initial position. | \\(M \\leq 20\\) |
+| \\(6\\) | The snail may crawl quite far from its initial position. | \\(M \\leq 1200\\) |
+| \\(2\\) | The snail may crawl extremely far from its initial position. | \\(M \\leq 200\\,000\\) |
+
+### Output Specification
+
+Output the non-negative integer, \\(T\\), which is the number of times the snail enters a _slimy_ square.
+
+### Sample Input 1
+
+```
+3
+S2
+N2
+S3
+```
+
+#### Output for Sample Input 1
+
+`4`
+
+#### Explanation of Output for Sample Input 1
+
+The diagram shows the snail's path. Whenever the snail enters a _slimy_ square, a numbered circle is placed along the path.
+
+Notice that a single _slimy_ square can be entered multiple times.
+
+![Four adjacent squares in one column are coloured green. A path begins in the top (1st) square and moves down through the 2nd square to the 3rd square. From here, the path moves back up through the 2nd square, marked with a 1, then back up to the 1st square, marked with a 2, then back down through the 2nd and 3rd squares, marked with a 3 and a 4, respectively, and ends in the bottom square.](assets/J4-3.svg)
+
+### Sample Input 2
+
+```
+3
+S2
+W15
+N20
+```
+
+#### Output for Sample Input 2
+
+`0`
+
+#### Explanation of Output for Sample Input 2
+
+The snail's path will consist of \\(38\\) _slimy_ squares. However, the snail never returns to a square after leaving it, so the snail never enters a _slimy_ square.
+
+### Technical Notes
+
+You might receive an unpredictable error message if your program uses too much memory.
+
+Python 3 submissions for this problem will be evaluated using the standard interpreter `python3` (Version 3.10.12) instead of `pypy3 7.3.9` (Version 3.8.13).

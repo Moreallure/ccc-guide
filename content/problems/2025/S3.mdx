@@ -1,0 +1,116 @@
+---
+title: "Pretty Pens"
+problem: "S3"
+year: 2025
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2025CCCSrProblems.html"
+---
+## Problem S3: Pretty Pens
+
+### Problem Description
+
+You are taking an art class, and your current art assignment is very algorithmic.
+
+You have \\(N\\) pens, each of which has a single colour, represented by an integer from \\(1\\) to \\(M\\). Initially, the colour of the \\(i\\)\-th pen is given by \\(C_i\\). In addition, your pens are pretty, with the \\(i\\)\-th pen having a prettiness of \\(P_i\\).
+
+For your assignment, you need to create a picture using \\(M\\) strokes, each from a pen of a different colour. The prettiness of your picture is the sum of the prettiness of the pens used to create the picture.
+
+Your teacher has given you some room for artistic expression: before you create this pretty picture, you are allowed to change at most one pen to any other colour. After this picture is drawn, the pen will revert back to its original colour.
+
+Your teacher will give you \\(\\frac{1}{3}\\) of the marks (\\(5\\) of \\(15\\) total marks) for the art assignment based on creating the prettiest picture you can.
+
+To push your creative limits, your teacher also has \\(Q\\) more pictures for you to create, which compose the remaining \\(\\frac{2}{3}\\) of the marks (\\(10\\) of \\(15\\) total marks) for your art assignment. Before each picture, there will be one of two possible changes to the set of pens available:
+
+-   `1 i c` indicates that the colour of the \\(i\\)\-th pen changes to \\(c\\).
+    
+-   `2 i p` indicates that the prettiness of the \\(i\\)\-th pen changes to \\(p\\).
+    
+
+The changes are executed sequentially (so the first change modifies the initial setup, the second change modifies the result of applying the first change, and so on).
+
+As in the first picture you created, you are allowed to change the colour of at most one pen before the picture is created. Note that if you do change the colour of one pen, it affects only the next picture you draw, and the pen will revert to its previous colour before the next change is applied (if any).
+
+What is the prettiness of the prettiest \\(Q+1\\) pictures you can create?
+
+### Input Specification
+
+The first line of input contains three space-separated integers \\(N\\), \\(M\\), \\(Q\\) \\((1 \\leq M \\leq N \\leq 200\\ 000\\), \\(0 \\leq Q \\leq 200\\ 000)\\).
+
+The next \\(N\\) lines each contain two space-separated integers, \\(C_i\\) and \\(P_i\\) \\((1 \\le C_i \\le M, 1 \\le P_i \\le 10^9)\\), indicating the colour and prettiness of the \\(i\\)\-th pen.
+
+The next \\(Q\\) lines each contain three space-separated integers, beginning with \\(1\\) or \\(2\\). If the first integer is \\(1\\), it is followed by two integers \\(i_j\\) and \\(c_j\\) \\((1 \\le i_j \\le N, 1 \\le c_j \\le M)\\), representing a change of the colour of the \\(i_j\\)-th pen to \\(c_j\\). If the first integer is \\(2\\), it is followed by two integers \\(i_j\\) and \\(p_j\\) \\((1 \\le i_j \\le N, 1 \\le p_j \\le 10^9)\\), representing a change of the prettiness of the \\(i_j\\)-th pen to \\(p_j\\).
+
+It is guaranteed that initially and after each change, there is at least one pen with each of the \\(M\\) colours.
+
+The following table shows how the available \\(15\\) marks are distributed:
+
+| Marks | Bounds on \\(N\\) and \\(M\\) | Bounds on \\(Q\\) | Additional constraints |
+| --- | --- | --- | --- |
+| \\(5\\) | \\(1 \\le M \\le N \\le 200\\ 000\\) | \\(Q = 0\\) | None |
+| \\(2\\) | \\(M=1\\); \\(1 \\le N \\le 200\\ 000\\) | \\(0 \\le Q \\le 200\\ 000\\) | None |
+| \\(2\\) | \\(M=2\\); \\(2 \\le N \\le 200\\ 000\\) | \\(0 \\le Q \\le 200\\ 000\\) | None |
+| \\(2\\) | \\(M \\le 10\\); \\(1 \\le M \\le N \\le 200\\ 000\\) | \\(0 \\le Q \\le 200\\ 000\\) | None |
+| \\(2\\) | \\(1 \\le M \\le N \\le 200\\ 000\\) | \\(0 \\le Q \\le 200\\ 000\\) | All prettiness values are distinct |
+| \\(2\\) | \\(1 \\le M \\le N \\le 200\\ 000\\) | \\(0 \\le Q \\le 200\\ 000\\) | None |
+
+### Output Specification
+
+The output is \\(Q+1\\) lines, with the \\(j\\)\-th line containing one integer, the largest possible prettiness value obtainable after the first \\(j-1\\) changes have been performed.
+
+### Sample Input 1
+
+```
+6 3 0
+1 6
+2 9
+3 4
+2 7
+3 9
+1 3
+```
+
+#### Output for Sample Input 1
+
+`25`
+
+#### Explanation of Output for Sample Input 1
+
+There are six pens available in three different colours. The set of pens is:
+
+-   two pens of colour \\(1\\), with prettiness \\(6\\) and \\(3\\),
+    
+-   two pens of colour \\(2\\), with prettiness \\(9\\) and \\(7\\),
+    
+-   two pens of colour \\(3\\), with prettiness \\(4\\) and \\(9\\).
+    
+
+If we do not change the colour of any pens, the prettiest picture has prettiness \\(6+9+9=24\\). However, if we change the colour of pen \\(4\\) from colour \\(2\\) to colour \\(1\\), we can create a picture with prettiness \\(7+9+9=25\\), which is the prettiest picture that can be created.
+
+### Sample Input 2
+
+```
+3 2 2
+1 20
+2 30
+1 10
+1 3 2
+2 3 25
+```
+
+#### Output for Sample Input 2
+
+```
+50
+50
+55
+```
+
+#### Explanation of Output for Sample Input 2
+
+There are three pens with two different colours available.
+
+Before the first change, using pen \\(1\\) and pen \\(2\\), with colours \\(1\\) and \\(2\\), respectively, achieves a prettiness of \\(20+30=50\\).
+
+After the first change, pen \\(3\\) has colour \\(2\\). There is no alteration in the maximum prettiness, even if we could switch one pen: picking pens \\(1\\) and \\(2\\) will yield the maximum prettiness.
+
+After the second change, pen \\(3\\) will have colour \\(2\\) and prettiness \\(25\\). Before the final picture is created, we can change the colour of pen \\(2\\) to colour \\(1\\), and use pens \\(2\\) and \\(3\\) to achieve the maximum prettiness of \\(30+25=55\\).

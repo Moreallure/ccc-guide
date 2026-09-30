@@ -1,0 +1,50 @@
+---
+title: "Josh’s Double Bacon Deluxe"
+problem: "S5"
+year: 2020
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2020/2020CCCSrProblemSet.html"
+---
+## Problem S5: Josh’s Double Bacon Deluxe
+
+### Problem Description
+
+On their way to the contest grounds, Josh, his coach, and his \\(N-2\\) teammates decide to stop at a burger joint that offers \\(M\\) distinct burger menu items. After ordering their favourite burgers, the team members line up, with the coach in the first position and Josh last, to pick up their burgers. Unfortunately, the coach forgot what he ordered. He picks a burger at random and walks away. The other team members, in sequence, pick up their favourite burger if available, or a random remaining burger if there are no more of their favourite burger. What is the probability that Josh, being last in line, will get to eat his favourite burger?
+
+### Input Specification
+
+The first line contains the number \\(N\\) \\((3\\leq N\\leq 1~000~000)\\), the total number of people and burgers. The next line contains \\(N\\) numbers, the \\(i\\)\-th being \\(b_i\\) \\((1\\leq b_i\\leq M\\leq 500~000)\\), denoting the item number of the \\(i\\)\-th person’s favourite burger. The first person in line is the coach, and the \\(N\\)\-th person is Josh.
+
+For 4 of the 15 available marks, \\(N\\leq 100~000\\) and \\(M\\leq 1000\\).
+
+For an additional 5 of the 15 available marks, \\(M\\leq 5000\\).
+
+### Output Specification
+
+Output a single number \\(P\\), the probability that Josh will get to eat his favourite burger, \\(b_N\\). If the correct answer is \\(C\\), the grader will view \\(P\\) correct if \\(|P-C|<10^{-6}\\).
+
+### Sample Input 1
+
+```
+3
+1 2 3
+```
+
+#### Output for Sample Input 1
+
+`0.5`
+
+#### Explanation of Output for Sample Input
+
+The coach randomly chooses between the three burgers. With probability \\(1/3\\), he chooses his favourite burger (burger 1), and Josh gets to eat his favourite burger (burger 3). With probability \\(1/3\\), he chooses Josh’s favourite burger, and Josh fails to eat his favourite burger. With probability \\(1/3\\), he chooses the second person’s burger, there is a \\(1/2\\) chance that the second person chooses Josh’s burger, denying Josh the pleasure of eating his favourite burger.
+
+### Sample Input 2
+
+```
+7
+1 2 3 1 1 2 3
+```
+
+#### Output for Sample Input 2
+
+`0.57142857`

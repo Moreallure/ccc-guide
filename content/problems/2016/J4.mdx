@@ -1,0 +1,60 @@
+---
+title: "Arrival Time"
+problem: "J4"
+year: 2016
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2016/2016CCCJrProblems.html"
+---
+## Problem J4: Arrival Time
+
+### Problem Description
+
+Fiona commutes to work each day. If there is no rush-hour traffic, her commute time is 2 hours. However, there is often rush-hour traffic. Specifically, rush-hour traffic occurs from 07:00 (7am) until 10:00 (10am) in the morning and 15:00 (3pm) until 19:00 (7pm) in the afternoon. During rush-hour traffic, her speed is reduced by half.
+
+She leaves either on the hour (at XX:00), 20 minutes past the hour (at XX:20), or 40 minutes past the hour (at XX:40).
+
+Given Fiona’s departure time, at what time does she arrive at work?
+
+### Input Specification
+
+The input will be one line, which contains an expression of the form `HH:MM`, where `HH` is one of the 24 starting hours (00, 01, \\(\\ldots\\), 23) and `MM` is one of the three possible departure minute times (00, 20, 40).
+
+### Output Specification
+
+Output the time of Fiona’s arrival, in the form `HH:MM`.
+
+### Sample Input 1
+
+`05:00`
+
+#### Output for Sample Input 1
+
+`07:00`
+
+#### Explanation for Output for Sample Input 1
+
+Fiona does not encounter any rush-hour traffic, and leaving at 5am, she arrives at exactly 7am.
+
+### Sample Input 2
+
+`07:00`
+
+#### Output for Sample Input 2
+
+`10:30`
+
+#### Explanation for Output for Sample Input 2
+
+Fiona drives for 3 hours in rush-hour traffic, but only travels as far as she normally would after driving for 1.5 hours. During the final 30 minutes (0.5 hours) she is driving in non-rush-hour traffic.
+
+### Sample Input 3
+
+`23:20`
+
+#### Output for Sample Input 3
+
+`01:20`
+
+#### Explanation for Output for Sample Input 3
+
+Fiona leaves at 11:20pm, and with non-rush-hour traffic, it takes two hours to travel, so she arrives at 1:20am the next day.

@@ -1,0 +1,109 @@
+---
+title: "RMT"
+problem: "S5"
+year: 2017
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2017/2017CCCSrProblemSet.html"
+---
+## Problem S5: RMT
+
+Time limit: 5 seconds
+
+### Problem Description
+
+The Rail Metro Transit (RMT) operates a very unusual subway system. There are \\(N\\) subway stations numbered from 1 to \\(N\\). There are \\(M\\) subway lines numbered from 1 to \\(M\\), with each station belonging to exactly one line and at least one station per line. The subway lines are circular. That is, if a station is numbered \\(S\\), the next station after \\(S\\) is the station on the same line with the next largest number, unless \\(S\\) is the greatest number of a station in the line, in which case the next station after \\(S\\) is the station on the same line with the least number.
+
+RMT is conducting a load test of their system using volunteer passengers to ride the subway trains. The test begins with one subway train in each station and for every \\(i\\), there are \\(A_i\\) passengers in the train at station \\(i\\). The volunteers do not leave their assigned trains throughout the entire duration of the load test.
+
+Throughout the test, RMT will perform \\(Q\\) actions. Each of the \\(Q\\) actions is one of two types: either they will survey the total number of passengers in the trains at the stations numbered from \\(\\ell\\) to \\(r\\); or they will operate all the trains on some line \\(x\\). When a train on line \\(x\\) is operated, it goes to the next station in that line.
+
+You are RMT’s biggest fan, so you have generously volunteered to keep track of RMT’s actions and report the answers to their surveys.
+
+### Input Specification
+
+The first line will contain three space-separated integers \\(N\\), \\(M\\), and \\(Q\\) \\((1 \\le M \\le N \\le 150\\,000; 1 \\le Q \\le 150\\,000)\\). The second line will contain the subway line numbers that each station from \\(1\\) to \\(N\\) belongs to: \\(L_1, L_2, \\ldots, L_N\\). The third line will contain \\(N\\) integers \\(A_1, A_2, \\ldots, A_N\\) \\((1 \\le A_i \\le 7\\,000)\\) representing the initial number of passengers at each station from \\(1\\) to \\(N\\).
+
+The next \\(Q\\) lines will each have one of the following forms:
+
+-   `1` \\(\ell\\) `r`, which represents a survey (\\(1 \\le \\ell \\le r \\le N\\)).
+
+-   `2` \\(x\\), which represents RMT operating line \\(x\\) (\\(1 \\le x \\le M\\)).
+
+
+For 2 of the 15 available marks, \\(N \\le 1\\,000\\) and \\(Q \\le 1\\,000\\).
+For an additional 2 of the 15 available marks, \\(L_i \\le L_{i+1}\\) \\((1 \\le i < N)\\).
+For an additional 3 of the 15 available marks, \\(M \\le 200\\).
+For an additional 3 of the 15 available marks, there will be no more than \\(200\\) trains on any single line.
+
+### Output Specification
+
+For every survey, output the answer to the survey on a separate line.
+
+### Sample Input 1
+
+```
+5 2 5
+1 2 1 2 2
+1 2 3 4 5
+1 1 5
+2 1
+1 3 5
+2 2
+1 1 3
+```
+
+#### Output for Sample Input 1
+
+```
+15
+10
+9
+```
+
+#### Explanation for Output for Sample Input 1
+
+The subway system is illustrated below, with the stations numbered from 1 to 5 and the lines connecting stations marked as either being line 1 or line 2:
+
+![An arrow labelled 1 goes from Station 1 to Station 3 and also from Station 3 to Station 1. An arrow labelled 2 goes from Station 2 to Station 4, and also from Station 4 to Station 5, and from Station 5 to Station 2.](assets/S5-0.png)
+
+Initially, the number of passengers at each station is \\(\\{1, 2, 3, 4, 5\\}\\).
+The answer to the first survey is \\(1+2+3+4+5=15\\).
+After line \\(1\\) is operated, the number of passengers at each station is \\(\\{3, 2, 1, 4, 5\\}\\).
+The answer to the second survey is \\(1+4+5=10\\).
+After line \\(2\\) is operated, the number of passengers at each station is \\(\\{3, 5, 1, 2, 4\\}\\).
+The answer to the third survey is \\(3+5+1=9\\).
+
+### Sample Input 2
+
+```
+3 1 7
+1 1 1
+114 101 109
+1 1 1
+2 1
+1 1 1
+2 1
+1 1 1
+2 1
+1 1 1
+```
+
+#### Output for Sample Input 2
+
+```
+114
+109
+101
+114
+```
+
+#### Explanation for Output for Sample Input 2
+
+The subway system is illustrated below, with the stations numbered from 1 to 3 and the lines connecting stations marked as all being line 1:
+
+![Arrows labelled 1 go from Station 1 to Station 2, from Station 2 to Station 3, and from Station 3 to Station 1.](assets/S5-1.png)
+
+Just before the first survey, the number of passengers at each station is \\(\\{114, 101, 109\\}\\).
+Just before the second survey, the number of passengers at each station is \\(\\{109, 114, 101\\}\\).
+Just before the third survey, the number of passengers at each station is \\(\\{101, 109, 114\\}\\).
+Just before the fourth survey, the number of passengers at each station is \\(\\{114, 101, 109\\}\\).

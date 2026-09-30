@@ -1,0 +1,50 @@
+---
+title: "Balanced Trees"
+problem: "S4"
+year: 2018
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2018/2018CCCSrProblemSet.html"
+---
+## Problem S4: Balanced Trees
+
+Trees have many fascinating properties. While this is primarily true for trees in nature, the concept of trees in math and computer science is also interesting. A particular kind of tree, a _perfectly balanced tree_, is defined as follows.
+
+Every perfectly balanced tree has a positive integer _weight_. A perfectly balanced tree of weight \\(1\\) always consists of a single node. Otherwise, if the weight of a perfectly balanced tree is \\(w\\) and \\(w\\ge 2\\), then the tree consists of a root node with branches to \\(k\\) subtrees, such that \\(2\\le k \\le w\\). In this case, all \\(k\\) subtrees must be completely identical, and be perfectly balanced themselves.
+
+In particular, all \\(k\\) subtrees must have the same weight. This common weight must be the maximum integer value such that the sum of the weights of all \\(k\\) subtrees does not exceed \\(w\\), the weight of the overall tree. For example, if a perfectly balanced tree of weight \\(8\\) has \\(3\\) subtrees, then each subtree would have weight \\(2\\), since \\(2+2+2=6 \\le 8\\).
+
+Given \\(N\\), find the number of perfectly balanced trees with weight \\(N\\).
+
+### Input Specification
+
+The input will be a single line containing the integer \\(N\\) \\((1\\le N\\le 10^9)\\).
+
+For \\(5\\) of the \\(15\\) marks available, \\(N\\le 1000\\).
+
+For an additional \\(2\\) of the \\(15\\) marks available, \\(N\\le 50000\\).
+
+For an additional \\(2\\) of the \\(15\\) marks available, \\(N\\le 10^6\\).
+
+### Output Specification
+
+Output a single integer, the number of perfectly balanced trees with weight \\(N\\).
+
+#### Sample Input 1
+
+`4`
+
+#### Output for Sample Input 1
+
+`3`
+
+#### Explanation for Output for Sample Input 1
+
+One tree has a root with four subtrees of weight 1; a second tree has a root with two subtrees of weight 2; the third tree has a root with three subtrees of weight 1.
+
+#### Sample Input 2
+
+`10`
+
+#### Output for Sample Input 2
+
+`13`

@@ -1,0 +1,64 @@
+---
+title: "Palindromic Poster"
+problem: "S3"
+year: 2023
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2023/2023CCCSrProblemSet.html"
+---
+## Problem S3: Palindromic Poster
+
+### Problem Description
+
+Ryo and Kita are designing a new poster for Kessoku Band. After some furious brainstorming, they came to the conclusion that the poster should come in the form of a 2-D grid of lowercase English letters (i.e. `a` to `z`), with \\(N\\) rows and \\(M\\) columns.
+
+Furthermore, it is known that Ryo and Kita both have peculiar tastes in palindromes. Ryo will only be satisfied with the poster if exactly \\(R\\) of its rows are palindromes, and Kita will only be satisfied with the poster if exactly \\(C\\) of its columns are palindromes. Can you design a poster that will satisfy both Ryo and Kita, or determine that it is impossible to do so?
+
+**Note:** A string is considered a _palindrome_ if it is the same when read forwards and backwards. For example, `kayak` and `bb` are palindromes, whereas `guitar` and `live` are not.
+
+### Input Specification
+
+The first and only line of input consists of \\(4\\) space-separated integers \\(N\\), \\(M\\), \\(R\\), and \\(C\\).
+
+The following table shows how the available 15 marks are distributed:
+
+| Marks | Bounds on \\(N\\) | Bounds on \\(M\\) | Bounds on \\(R\\) | Bounds on \\(C\\) |
+| --- | --- | --- | --- | --- |
+| 2 marks | \\(2 \\le N \\le 2\\,000\\) | \\(2 \\le M \\le 2\\,000\\) | \\(R = 1\\) | \\(C = 1\\) |
+| 2 marks | \\(N = 2\\) | \\(M = 2\\) | \\(0 \\le R \\le N\\) | \\(0 \\le C \\le M\\) |
+| 4 marks | \\(N = 2\\) | \\(2 \\le M \\le 2\\,000\\) | \\(0 \\le R \\le N\\) | \\(0 \\le C \\le M\\) |
+| 7 marks | \\(2 \\le N \\le 2\\,000\\) | \\(2 \\le M \\le 2\\,000\\) | \\(0 \\le R \\le N\\) | \\(0 \\le C \\le M\\) |
+
+### Output Specification
+
+If it is impossible to design a poster that will satisfy both Ryo and Kita, output `IMPOSSIBLE` on a single line.
+
+Otherwise, your output should contain \\(N\\) lines, each consisting of \\(M\\) lowercase English letters, representing your poster design. If there are multiple possible designs, output any of them.
+
+### Sample Input 1
+
+`4 5 1 2`
+
+#### Output for Sample Input 1
+
+```
+union
+radar
+badge
+anime
+```
+
+#### Explanation of Output for Sample Input 1
+
+In the given design, only the second row (namely `radar`) and the second and third columns (namely `naan` and `iddi`) are palindromes. Since exactly \\(R = 1\\) of the rows and \\(C = 2\\) of the columns are palindromes, this is an acceptable design.
+
+### Sample Input 2
+
+`2 2 2 1`
+
+#### Output for Sample Input 2
+
+`IMPOSSIBLE`
+
+#### Explanation of Output for Sample Input 2
+
+In this case, it can be proven that it is impossible to satisfy both Ryo and Kita.

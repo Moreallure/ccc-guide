@@ -1,0 +1,56 @@
+---
+title: "Concert Tickets"
+problem: "J1"
+year: 2026
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2026/2026CCCJrProblems.html"
+---
+## Problem J1: Concert Tickets
+
+### Problem Description
+
+Besa wants to buy tickets for the upcoming Saylor Twift concert.
+
+Given the total number of tickets for the concert and the number of tickets other people have purchased, your job is to determine whether or not Besa can buy her desired number of tickets.
+
+![](assets/J1-0.svg)
+
+### Input Specification
+
+The first line of input contains a positive integer, \\(B\\), representing the number of tickets Besa wants to buy. The second line contains a positive integer, \\(T\\), representing the total number of tickets for the concert. The third line contains a positive integer, \\(P\\), where \\(P \\leq T\\), representing the number of tickets other people have purchased.
+
+### Output Specification
+
+If Besa cannot buy \\(B\\) tickets, output `N`. Otherwise, output `Y`, followed by a single space, followed by the number of tickets that would remain after Besa buys \\(B\\) tickets.
+
+### Sample Input 1
+
+```
+5
+100
+70
+```
+
+#### Output for Sample Input 1
+
+`Y 25`
+
+#### Explanation of Output for Sample Input 1
+
+There are a total of \\(100\\) tickets for the concert. Besa wants to buy \\(5\\) tickets and other people have purchased \\(70\\) tickets. So, \\(100 - 75 = 25\\) tickets would remain after Besa buys \\(5\\) tickets.
+
+### Sample Input 2
+
+```
+3
+200000
+199998
+```
+
+#### Output for Sample Input 2
+
+`N`
+
+#### Explanation of Output for Sample Input 2
+
+There are a total of \\(200\\,000\\) tickets for the concert. Besa wants to buy \\(3\\) tickets and other people have purchased \\(199\\,998\\) tickets. So, Besa cannot buy \\(3\\) tickets.

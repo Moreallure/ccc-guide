@@ -1,0 +1,67 @@
+---
+title: "Good Triplets"
+problem: "S4"
+year: 2022
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2022/2022CCCSrProblemSet.html"
+---
+## Problem S4: Good Triplets
+
+### Problem Description
+
+Andrew is a very curious student who drew a circle with the center at \\((0,0)\\) and an integer circumference of \\(C \\geq 3\\). The location of a point on the circle is the counter-clockwise arc length from the right-most point of the circle.
+
+![The rightmost point on the circle is labelled 0. Moving counterclockwise from 0, there is a point on the circle labelled 1, and then a point labelled 2. Moving clockwise from 0, there is a point on the circle labelled C minus 1, and then a point labelled C minus 2.](assets/S4-0.png)
+
+Andrew drew \\(N \\geq 3\\) points at integer locations. In particular, the \\(i\\)th point is drawn at location \\(P_i\\) \\((0 \\le P_i \\le C-1)\\). It is possible for Andrew to draw multiple points at the same location.
+
+A good triplet is defined as a triplet \\((a,b,c)\\) that satisfies the following conditions:
+
+-   \\(1 \\le a < b < c \\le N\\).
+    
+-   The origin \\((0,0)\\) lies strictly inside the triangle with vertices at \\(P_a\\), \\(P_b\\), and \\(P_c\\). In particular, the origin is **not** on the triangle’s perimeter.
+    
+
+Lastly, two triplets \\((a,b,c)\\) and \\((a',b',c')\\) are distinct if \\(a \\ne a'\\), \\(b \\ne b'\\), or \\(c \\ne c'\\).
+
+Andrew, being a curious student, wants to know the number of distinct good triplets. Please help him determine this number.
+
+### Input Specification
+
+The first line contains the integers \\(N\\) and \\(C\\), separated by one space.
+
+The second line contains \\(N\\) space-separated integers. The \\(i\\)th integer is \\(P_i\\) \\((0 \\le P_i \\le C-1)\\).
+
+The following table shows how the available 15 marks are distributed.
+
+| Marks Awarded | Number of Points | Circumference | Additional Constraints |
+| --- | --- | --- | --- |
+| 3 marks | \\(3 \\le N \\leq 200\\) | \\(3 \\le C \\leq 10^6\\) | None |
+| 3 marks | \\(3 \\le N \\leq 10^6\\) | \\(3 \\le C \\leq 6\\ 000\\) | None |
+| 6 marks | \\(3 \\le N \\leq 10^6\\) | \\(3 \\le C \\leq 10^6\\) | \\(P_1, P_2, \\ldots, P_N\\) are all distinct (i.e., every location contains at most one point) |
+| 3 marks | \\(3 \\le N \\leq 10^6\\) | \\(3 \\le C \\leq 10^6\\) | None |
+
+### Output Specification
+
+Output the number of distinct good triplets.
+
+### Sample Input
+
+```
+8 10 
+0 2 5 5 6 9 0 0
+```
+
+#### Output for Sample Input
+
+```
+6
+```
+
+#### Explanation of Output for Sample Input
+
+Andrew drew the following diagram.
+
+![Ten points labelled 0 through 9 are evenly spaced around a circle in the clockwise direction. P subscript 1, P subscript 7, and P subscript 8 are at point 0. P subscript 2 is at point 2. P subscript 3 and P subscript 4 are at point 5. P subscript 5 is at point 6. P subscript 6 is at point 9.](assets/S4-1.png)
+
+The origin lies strictly inside the triangle with vertices \\(P_1\\), \\(P_2\\), and \\(P_5\\), so \\((1,2,5)\\) is a good triplet. The other five good triplets are \\((2,3,6)\\), \\((2,4,6)\\), \\((2,5,6)\\), \\((2,5,7)\\), and \\((2,5,8)\\).

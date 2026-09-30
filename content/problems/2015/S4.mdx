@@ -1,0 +1,70 @@
+---
+title: "Convex Hull"
+problem: "S4"
+year: 2015
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2015/2015CCCSrProblems.html"
+---
+## Problem S4: Convex Hull
+
+### Problem Description
+
+You are travelling on a ship in an archipelago. The ship has a convex hull which is \\(K\\) centimetres thick. The archipelago has \\(N\\) islands, numbered from \\(1\\) to \\(N\\). There are \\(M\\) sea routes amongst them, where the \\(i\\)th route runs directly between two different islands \\(a_i\\) and \\(b_i~(1 \\leq a_i,b_i \\leq N)\\), takes \\(t_i\\) minutes to travel along in either direction, and has rocks that wear down the ship’s hull by \\(h_i\\) centimetres. There may be multiple routes running between a pair of islands.
+
+You would like to travel from island \\(A\\) to a different island \\(B~(1 \\leq A,B \\leq N)\\) along a sequence of sea routes, such that your ship’s hull remains intact – in other words, such that the sum of the routes’ \\(h_i\\) values is strictly less than \\(K\\).
+
+Additionally, you are in a hurry, so you would like to minimize the amount of time necessary to reach island \\(B\\) from island \\(A\\). It may not be possible to reach island \\(B\\) from island \\(A\\), however, either due to insufficient sea routes or the having the ship’s hull wear out.
+
+### Input Specification
+
+The first line of input contains three integers \\(K\\), \\(N\\) and \\(M~(1 \\leq K \\leq 200, 2 \\leq N \\leq 2000, 1 \\leq M \\leq 10000)\\), each separated by one space.
+
+The next \\(M\\) lines each contain 4 integers \\(a_i\\) \\(b_i\\) \\(t_i\\) and \\(h_i~(1 \\leq a_i, b_i \\leq N, 1 \\leq t_i \\leq 10^5, 0 \\leq h_i \\leq 200)\\), each separated by one space. The \\(i\\)th line in this set of \\(M\\) lines describes the \\(i\\)th sea route (which runs from island \\(a_i\\) to island \\(b_i\\), takes \\(t_i\\) minutes and wears down the ship’s hull by \\(h_i\\) centimetres). Notice that \\(a_i \\not= b_i\\) (that is, the ends of a sea route are distinct islands).
+
+The last line of input contains two integers \\(A\\) and \\(B~(1 \\leq A,B \\leq N; A \\not= B)\\), the islands between which we want to travel.
+
+For 20% of marks for this question, \\(K=1\\) and \\(N \\leq 200\\). For another 20% of the marks for this problem, \\(K=1\\) and \\(N \\leq 2000\\).
+
+### Output Specification
+
+Output a single integer: the integer representing the minimal time required to travel from \\(A\\) to \\(B\\) without wearing out the ship’s hull, or \\(-1\\) to indicate that there is no way to travel from \\(A\\) to \\(B\\) without wearing out the ship’s hull.
+
+### Sample Input 1
+
+```
+10 4 7
+1 2 4 4
+1 3 7 2
+3 1 8 1
+3 2 2 2
+4 2 1 6
+3 4 1 1
+1 4 6 12
+1 4
+```
+
+#### Output for Sample Input 1
+
+`7`
+
+#### Explanation of Output for Sample Input 1
+
+The path of length 1 from \\(1\\) to \\(4\\) would wear out the hull of the ship. The three paths of length \\(2\\) (\\([1,2,4]\\) and \\([1,3,4]\\) two different ways) take at least 8 minutes. The path \\([1,2,3,4]\\) takes 7 minutes and only wears down the hull by 7 centimetres, whereas the path \\([1,3,2,4]\\) takes \\(13\\) minutes and wears down the hull by 5 centimetres.
+
+### Sample Input 2
+
+```
+3 3 3
+1 2 5 1
+3 2 8 2
+1 3 1 3
+1 3
+```
+
+#### Output for Sample Input 2
+
+`-1`
+
+#### Explanation of Output for Sample Input 2
+
+The direct path \\([1,3]\\) wears down the hull to \\(0\\), as does the path \\([1,2,3]\\).

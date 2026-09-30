@@ -1,0 +1,80 @@
+---
+title: "CCC Word Hunt"
+problem: "J5"
+year: 2023
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2023/2023CCCJrProblemSet.html"
+---
+## Problem J5: CCC Word Hunt
+
+### Problem Description
+
+In the CCC Word Hunt, words are hidden in a grid of letters. The letters of a hidden word always appear in order on horizontal, vertical, or diagonal line segments in one of two ways. One way is for the letters of a word to appear on one line segment. The other way is for the letters of a word to appear on one line segment up to some letter and then on a second line segment that forms a right angle at this letter.
+
+Given a grid of letters and a single word to search for, your job is to determine the number of times that particular word is hidden in the grid.
+
+### Input Specification
+
+The first line of input will contain a string of distinct uppercase letters, \\(W\\), representing the word you are to search for in the grid. The length of \\(W\\) will be at least two. The second line of input will be an integer \\(R~(1 \\le R \\le 100)\\), where \\(R\\) is the number of rows in the grid. The third line of input will be an integer \\(C~(1 \\le C \\le 100)\\), where \\(C\\) is the number of columns in the grid.
+
+The remaining input will provide the letters in the grid. It will consist of \\(R\\) lines, where each line contains \\(C\\) uppercase letters separated by single spaces.
+
+The following table shows how the available 15 marks are distributed:
+
+| Marks | Word Placement |
+| --- | --- |
+| 2 | On one horizontal line segment |
+| 2 | On one horizontal or vertical line segment |
+| 2 | On one horizontal, vertical, or diagonal line segment |
+| 9 | On one line segment or two perpendicular line segments |
+
+### Output Specification
+
+The output will consist of a single non-negative integer \\(H\\), representing the number of times the word is hidden in the grid.
+
+### Sample Input 1
+
+```
+MENU
+5
+7
+F T R U B L K
+P M N A X C U
+A E R C N E O
+M N E U A R M
+M U N E M N S
+```
+
+#### Output for Sample Input 1
+
+`3`
+
+#### Explanation of Output for Sample Input 1
+
+The word `MENU` is hidden three times in the grid. Once horizontally, once vertically, and once diagonally as shown. Notice that a single letter can be used more than once.
+
+![Menu appears vertically in the second column of the grid of letters, starting in the second row of letters and moving downwards. It also appears horizontally and backwards in the fifth row, starting at the fifth square and moving to the left. It also appears diagonally, starting at the first square in the fourth row and moving up and to the right.](assets/J5-0.png)
+
+### Sample Input 2
+
+```
+NATURE
+6
+9
+N A T S F E G Q N
+S A I B M R H F A
+C F T J C U C L T
+K B H U P T A N U
+D P R R R J D I R
+I E E K M E G B E
+```
+
+#### Output for Sample Input 2
+
+`4`
+
+#### Explanation of Output for Sample Input 2
+
+The word `NATURE` is hidden four times in the grid. Once diagonally, once vertically, and twice on perpendicular line segments.
+
+![Nature appears diagonally, starting at the top-left letter of the grid and moving down and to the right, and appears vertically in the rightmost column, starting at the top and moving down. It appears as a capital L shape starting in the fourth row and eighth column and moving two to the left, then up three. It appears as a backwards and rotated L shape starting at the top-left letter and moving three diagonally down to the right, then moving two diagonally down to the left.](assets/J5-1.png)

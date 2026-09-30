@@ -1,0 +1,74 @@
+---
+title: "Lunch Concert"
+problem: "S3"
+year: 2021
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2021/2021CCCSrProblemSet.html"
+---
+## Problem S3: Lunch Concert
+
+### Problem Description
+
+It’s lunchtime at your school! Your \\(N\\) friends are all standing on a long field, as they usually do. The field can be represented as a number line, with the \\(i\\)th friend initially at position \\(P_i\\) metres along it. The \\(i\\)th friend is able to walk in either direction along the field at a rate of one metre per \\(W_i\\) seconds, and their hearing is good enough to be able to hear music up to and including \\(D_i\\) metres away from their position. Multiple students may occupy the same positions on the field, both initially and after walking.
+
+You’re going to hold a little concert at some position \\(c\\) metres along the field (where \\(c\\) is any integer of your choice), and text all of your friends about it. Once you do, each of them will walk along the field for the minimum amount of time such that they end up being able to hear your concert (in other words, such that each friend \\(i\\) ends up within \\(D_i\\) units of \\(c\\)).
+
+You’d like to choose \\(c\\) such that you minimize the sum of all \\(N\\) of your friends’ walking times. What is this minimum sum (in seconds)? Please note that the result might not fit within a 32-bit integer.
+
+### Input Specification
+
+The first line of input contains \\(N\\).
+
+The next \\(N\\) lines contain three space-separated integers, \\(P_i\\), \\(W_i\\), and \\(D_i\\) \\((1 \\le i \\le N)\\).
+
+The following table shows how the available 15 marks are distributed.
+
+<table><tbody><tr class="even"><td style="text-align: center;">4 marks</td><th style="text-align: center;"><span class="math inline">\\(1 \\le N \\le 2000\\)</span></th><td style="text-align: center;"><span class="math inline">\\(0 \\le P_i \\le 2000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(1 \\le W_i \\le 1000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(0 \\le D_i \\le 2000\\)</span></td></tr><tr class="odd"><td style="text-align: center;">9 marks</td><td style="text-align: center;"><span class="math inline">\\(1 \\le N \\leq 200\\,000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(0 \\le P_i \\le 1\\,000\\,000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(1 \\le W_i \\le 1000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(0 \\le D_i \\le 1\\,000\\,000\\)</span></td></tr><tr class="even"><td style="text-align: center;">2 marks</td><td style="text-align: center;"><span class="math inline">\\(1 \\le N \\leq 200\\,000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(0 \\le P_i \\leq 1\\,000\\,000\\ 000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(1 \\le W_i \\le 1000\\)</span></td><td style="text-align: center;"><span class="math inline">\\(0 \\le D_i \\le 1\\,000\\,000\\,000\\)</span></td></tr></tbody></table>
+
+### Output Specification
+
+Output one integer which is the minimum possible sum of walking times (in seconds) for all \\(N\\) of your friends to be able to hear your concert.
+
+### Sample Input 1
+
+```
+1
+0 1000 0
+```
+
+#### Output for Sample Input 1
+
+`0`
+
+#### Explanation of Output for Sample Input 1
+
+If you choose \\(c = 0\\), your single friend won’t need to walk at all to hear it.
+
+### Sample Input 2
+
+```
+2
+10 4 3
+20 4 2
+```
+
+#### Output for Sample Input 2
+
+`20`
+
+#### Explanation of Output for Sample Input 2
+
+One possible optimal choice of \\(c\\) is \\(14\\), which would require your first friend to walk to position \\(11\\) (taking \\(4 \\times 1 = 4\\) seconds) and your second friend to walk to position \\(16\\) (taking \\(4 \\times 4 = 16\\) seconds), for a total of \\(20\\) seconds.
+
+### Sample Input 3
+
+```
+3
+6 8 3
+1 4 1
+14 5 2
+```
+
+#### Output for Sample Input 3
+
+`43`

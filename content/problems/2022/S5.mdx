@@ -1,0 +1,100 @@
+---
+title: "Good Influencers"
+problem: "S5"
+year: 2022
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2022/2022CCCSrProblemSet.html"
+---
+## Problem S5: Good Influencers
+
+### Problem Description
+
+There are \\(N\\) (\\(N \\ge 2\\)) students in a computer science class, with distinct student IDs ranging from \\(1\\) to \\(N\\). There are \\(N-1\\) friendships amongst the students, with the \\(i\\)th being between students \\(A_i\\) and \\(B_i\\) (\\(A_i \\not= B_i\\), \\(1 \\le A_i \\le N\\) and \\(1 \\le B_i \\le N\\)). Each pair of students in the class are either friends or socially connected. A pair of students \\(a\\) and \\(b\\) are socially connected if there exists a set of students \\(m_1, m_2, \\ldots, m_k\\) such that
+
+-   \\(a\\) and \\(m_1\\) are friends,
+    
+-   \\(m_i\\) and \\(m_{i+1}\\) are friends (for \\(1 \\leq i \\leq k-1\\)), and
+    
+-   \\(m_k\\) and \\(b\\) are friends.
+    
+
+Initially, each student \\(i\\) either intends to write the CCC (if \\(P_i\\) is `Y`) or does not intend to write the CCC (if \\(P_i\\) is `N`). Initially, at least one student intends to write the CCC, and at least one student does not intend to write the CCC.
+
+The CCC has allocated some funds to pay some students to be influencers for the CCC. The CCC will repeatedly choose one student \\(i\\) who intends to write the CCC, pay them \\(C_i\\) dollars, and ask them to deliver a seminar to all of their friends, and then all of their friends will intend to write the CCC.
+
+Help the CCC determine the minimum cost required to have all of the students intend to write the CCC.
+
+### Input Specification
+
+The first line contains the integer \\(N\\).
+
+The next \\(N-1\\) lines each contain two space-separated integers, \\(A_i\\) and \\(B_i\\) (\\(1 \\leq i \\leq N-1\\)).
+
+The next line contains \\(N\\) characters, \\(P_{1}\\ldots P_{N}\\), each of which is either `Y` or `N`.
+
+The next line contains \\(N\\) space-separated integers, \\(C_{1}\\ldots C_{N}\\).
+
+The following table shows how the available 15 marks are distributed.
+
+| Marks Awarded | Number of students | Payment | Additional Constraints |
+| --- | --- | --- | --- |
+| 5 marks | \\(2 \\le N \\leq 2\\ 000\\) | \\(1 \\le C_i \\le 1\\ 000\\) | \\(A_i = i\\) and \\(B_i = i+1\\) for each \\(i\\) |
+| 7 marks | \\(2 \\le N \\leq 2\\ 000\\) | \\(1 \\le C_i \\le 1\\ 000\\) | None |
+| 3 marks | \\(2 \\le N \\leq 200\\ 000\\) | \\(1 \\le C_i \\le 1\\ 000\\) | None |
+
+### Output Specification
+
+Output the minimum integer number of dollars required to have all of the students to intend to write the CCC.
+
+### Sample Input 1
+
+```
+4 
+1 2 
+2 3 
+3 4 
+YNYN 
+4 3 6 2
+```
+
+#### Output for Sample Input 1
+
+```
+6
+```
+
+#### Explanation of Output for Sample Input 1
+
+The CCC should pay $6 to student 3 to deliver a seminar to their friends (students 2 and 4), after which all 4 students will intend to write the CCC.
+
+### Sample Input 2
+
+```
+15 
+1 5 
+5 2 
+2 15 
+15 4 
+2 10 
+8 3 
+3 1 
+1 6 
+11 6 
+12 6 
+11 9 
+11 14 
+12 7 
+13 7 
+NNYYYNYYNNNNNNN 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+```
+
+#### Output for Sample Input 2
+
+```
+6
+```
+
+#### Explanation of Output for Sample Input 2
+
+One optimal strategy is for the CCC to ask students 5, 1, 6, 11, 7, and 2 to deliver seminars, in that order, paying them $1 each.

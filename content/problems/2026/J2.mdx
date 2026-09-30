@@ -1,0 +1,47 @@
+---
+title: "Olympic Scores"
+problem: "J2"
+year: 2026
+level: "jr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2026/2026CCCJrProblems.html"
+---
+## Problem J2: Olympic Scores
+
+### Problem Description
+
+An athlete participating in an Olympic event is scored by a panel of five judges. Each judge gives the athlete an integer score from \\(0\\) to \\(10\\) (inclusive).
+
+To ensure that the scoring is fair, one occurrence of the highest score is removed and one occurrence of the lowest score is removed. The athlete's overall score is then determined by summing the three remaining scores and multiplying this total by the event's designated difficulty factor.
+
+Given the scores from the panel of judges and the event's difficulty factor, your job is to determine the athlete's overall score.
+
+![](assets/J2-0.svg)
+
+### Input Specification
+
+The first five lines of input contain the scores from the five judges: \\(S_1,\\,S_2,\\,S_3,\\,S_4\\), and \\(S_5\\). Each score will be an integer between \\(0\\) and \\(10\\) (inclusive).
+
+The sixth line of input contains a positive integer, \\(D\\), representing the event's difficulty factor.
+
+### Output Specification
+
+Output the non-negative integer, \\(T\\), which is the athlete's overall score.
+
+### Sample Input
+
+```
+7
+10
+8
+0
+10
+3
+```
+
+#### Output for Sample Input
+
+`75`
+
+#### Explanation of Output for Sample Input
+
+The five scores are \\(7, 10, 8, 0, 10\\). After removing one occurrence of the highest score and the only occurrence of the lowest score, the three remaining scores are \\(7, 8, 10\\). Therefore, the athlete's overall score is \\((7 + 8 + 10) \\times 3 = 75\\).

@@ -1,0 +1,81 @@
+---
+title: "Floor is Lava"
+problem: "S4"
+year: 2025
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/2025CCCSrProblems.html"
+---
+## Problem S4: Floor is Lava
+
+### Problem Description
+
+You're trapped in a scorching dungeon with \\(N\\) rooms numbered from \\(1\\) to \\(N\\) connected by \\(M\\) tunnels. The \\(i\\)-th tunnel connects rooms \\(a_i\\) and \\(b_i\\) in both directions, but the floor of the tunnel is covered in lava with temperature \\(c_i\\).
+
+To help you navigate the lavatic tunnels, you are wearing a pair of heat-resistant boots that initially have a chilling level of \\(0\\). In order to step through lava with temperature \\(\\ell\\), your boots must have the same chilling level \\(\\ell\\); if the chilling level is too low then the lava will melt your boots, and if it's too high then your feet will freeze as you cross the tunnel.
+
+Luckily, when you're standing in a room, you can increase or decrease the chilling level of your boots by \\(d\\) for a cost of \\(d\\) coins. You start in room \\(1\\) and would like to reach the exit which you know is located in room \\(N\\). What is the minimum cost to do so?
+
+### Input Specification
+
+The first line of input contains two integers \\(N\\) and \\(M\\) \\((1 \\le N, M \\le 200\\,000)\\).
+
+The next \\(M\\) lines each contain three integers \\(a_i\\), \\(b_i\\), and \\(c_i\\) \\((1 \\le a_i, b_i \\le N, a_i \\neq b_i, 1 \\le c_i \\le 10^9)\\), describing the \\(i\\)-th tunnel.
+
+There is at most one tunnel connecting any pair of rooms, and it is possible to reach all other rooms from room \\(1\\).
+
+The following table shows how the available \\(15\\) marks are distributed:
+
+| Marks | Additional constraints |
+| --- | --- |
+| \\(2\\) | \\(M=N-1\\) |
+| \\(4\\) | For all tunnels, \\(1 \\le c_i \\le 10\\) |
+| \\(4\\) | Each room has at most 5 outgoing tunnels |
+| \\(5\\) | None |
+
+### Output Specification
+
+Output the minimum cost (in coins) to reach room \\(N\\) from room \\(1\\).
+
+### Sample Input
+
+```
+5 7
+1 2 3
+2 3 2
+1 3 6
+3 4 3
+4 5 7
+2 4 1
+2 5 10
+```
+
+#### Output for Sample Input
+
+`9`
+
+#### Explanation of Output for Sample Input
+
+A diagram of the dungeon is shown below.
+
+![Five vertices labelled 1 through 5 connected by edges labelled with positive integers. 1 connects to 2 with label 3 and to 3 with label 6. Also, 2 connects to 3 with label 2, and to 4 with label 1, and to 5 with label 10. Also, 4 connects to 3 with label 3 and to 5 with label 7.](assets/S4-0.png)
+
+The optimal escape strategy is as follows:
+
+1.  Increase the chilling level to \\(3\\) for a cost of \\(3\\) coins.
+    
+2.  Walk through the tunnel to room \\(2\\).
+    
+3.  Decrease the chilling level to \\(2\\) for a cost of \\(1\\) coin.
+    
+4.  Walk through the tunnel to room \\(3\\).
+    
+5.  Increase the chilling level to \\(3\\) for a cost of \\(1\\) coin.
+    
+6.  Walk through the tunnel to room \\(4\\).
+    
+7.  Increase the chilling level to \\(7\\) for a cost of \\(4\\) coins.
+    
+8.  Walk through the tunnel to room \\(5\\) and escape.
+    
+
+This has a total cost of \\(9\\) coins, and it can be shown that no cheaper route exists.

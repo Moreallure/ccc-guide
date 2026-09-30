@@ -1,0 +1,45 @@
+---
+title: "Searching for Strings"
+problem: "S3"
+year: 2020
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2020/2020CCCSrProblemSet.html"
+---
+## Problem S3: Searching for Strings
+
+### Problem Description
+
+You’re given a string \\(N\\), called the _needle_, and a string \\(H\\), called the _haystack_, both of which contain only lowercase letters “a"..“z".
+
+Write a program to count the number of distinct permutations of \\(N\\) which appear as a substring of \\(H\\) at least once. Note that \\(N\\) can have anywhere between 1 and \\(|N|!\\) distinct permutations in total – for example, the string “aab" has 3 distinct permutations (“aab", “aba", and “baa").
+
+### Input Specification
+
+The first line contains \\(N\\) \\((1 \\le |N| \\le 200\\ 000)\\), the needle string.
+
+The second line contains \\(H\\) \\((1 \\le |H| \\le 200\\ 000)\\), the haystack string.
+
+For 3 of the 15 available marks, \\(|N| \\le 8\\) and \\(|H| \\le 200\\).
+
+For an additional 2 of the 15 available marks, \\(|N| \\le 200\\) and \\(|H| \\le 200\\).
+
+For an additional 2 of the 15 available marks, \\(|N| \\le 2000\\) and \\(|H| \\le 2000\\).
+
+### Output Specification
+
+Output consists of one integer, the number of distinct permutations of \\(N\\) which appear as a substring of \\(H\\).
+
+### Sample Input
+
+```
+aab
+abacabaa
+```
+
+#### Output for Sample Input
+
+`2`
+
+#### Explanation of Output for Sample Input
+
+The permutations “aba" and “baa" each appear as substrings of \\(H\\) (the former appears twice), while the permutation “aab" does not appear.

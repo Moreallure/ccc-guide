@@ -1,0 +1,61 @@
+---
+title: "Who is taller?"
+problem: "S4"
+year: 2013
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2013/2013CCCSrProblemSet.html"
+---
+## Problem S4: Who is taller?
+
+### Problem Description
+
+You have a few minutes before your class starts, and you decide to compare the heights of your classmates. You don’t have an accurate measuring device, so you just compare relative heights between two people: you stand two people back-to-back, and determine which one of the two is taller. Conveniently, none of your classmates are the same height, and you always compare correctly (i.e., you never make a mistake in your comparisons).
+
+After you have done all of your comparisons, you would like to determine who the tallest person is between two particular classmates.
+
+### Input Specification
+
+The first line contains two integers \\(N\\) and \\(M\\) separated by one space. \\(N\\), the number of people in the class, is an integer with \\(1 \\le N \\le 1000000\\). \\(M\\), the number of comparisons that have already been done, is an integer with \\(1 \\le M \\le 10000000\\). Each of the next \\(M\\) lines contains two distinct integers \\(x\\) and \\(y\\) (\\(1 \\leq x, y \\leq N\\)) separated by a space, indicating that person number \\(x\\) was determined to be taller than person number \\(y\\). Finally, the last line contains two distinct integers \\(p\\) and \\(q\\) (\\(1 \\leq p, q \\leq N\\)) separated by one space: your goal is to determine, if possible, whether person \\(p\\) is taller than person \\(q\\). Note that it may be the case that neither \\(p\\) nor \\(q\\) occur in the input concerning measurements between classmates, and each measurement between any two particular people will be recorded exactly once.
+
+### Output Specification
+
+The output is one line, containing one of three possible strings:
+
+-   `yes` (if \\(p\\) is taller than \\(q\\)),
+    
+-   `no` (if \\(q\\) is taller than \\(p\\)),
+    
+-   `unknown` (if there is not enough information to determine the relative heights of \\(p\\) and \\(q\\)).
+    
+
+### Sample Input 1
+
+```
+10 3
+8 4
+3 8
+4 2
+3 2
+```
+
+#### Output for Sample Input 1
+
+```
+yes
+```
+
+### Sample Input 2
+
+```
+10 3
+3 8
+2 8
+3 4
+3 2
+```
+
+#### Output for Sample Input 2
+
+```
+unknown
+```

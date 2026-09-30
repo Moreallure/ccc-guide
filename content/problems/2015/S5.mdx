@@ -1,0 +1,59 @@
+---
+title: "Greedy For Pies"
+problem: "S5"
+year: 2015
+level: "sr"
+source: "https://cemc.uwaterloo.ca/sites/default/files/documents/2015/2015CCCSrProblems.html"
+---
+## Problem S5: Greedy For Pies
+
+### Problem Description
+
+The local pie shop is offering a promotion - all-you-can-eat pies! Obviously, you can’t pass up this offer.
+
+The shop lines up \\(N\\) pies from left to right - the \\(i\\)th pie contains \\(A_i\\) grams of sugar. Additionally, another \\(M\\) pies are provided - the \\(i\\)th of these contains \\(B_i\\) grams of sugar.
+
+You are first allowed to insert each of the \\(M\\) pies from the second group anywhere into the first list of \\(N\\) pies, such as at its start or end, or in between any two pies already in the list. The result will be a list of \\(N+M\\) pies with the constraint that the initial \\(N\\) pies are still in their original relative order.
+
+Following this, you are allowed to take one walk along the new line of pies from left to right, to pick up your selection of all-you-can-eat pies! When you arrive at a pie, you may choose to add it to your pile, or skip it. However, because you’re required to keep moving, if you pick up a certain pie, you will not be able to also pick up the pie immediately after it (if any). In other words, you cannot eat consecutive pies in this combined list.
+
+Being a pie connoisseur, your goal is to maximize the total amount of sugar in the pies you pick up from the line. How many grams can you get?
+
+### Input Specification
+
+The first line of input contains the integer \\(N~(1 \\leq N \\leq 3000)\\). The next \\(N\\) lines contain one integer \\(A_i~(1 \\leq A_i \\leq 10^5)\\), describing the integer number of grams of sugar in pie \\(i\\) in the group of \\(N\\) pies.
+
+The next line contains \\(M~(0 \\leq M \\leq 100)\\), the number of pies in the second list. The next \\(M\\) lines contain one integer \\(B_i~(1 \\leq B_i \\leq 10^5)\\), describing the integer number of grams of sugar in pie \\(i\\) in the group of \\(M\\) pies.
+
+For 20% of the marks for this question, \\(M=0\\). For another 20% of the marks for this question \\(M=1\\). For another 20% of the marks for this question \\(M\\leq 10\\).
+
+### Output Specification
+
+Output the maximum number of grams of sugar in all the pies that you are able to pick up.
+
+### Sample Input
+
+```
+5
+10
+12
+6
+14
+7
+3
+1
+8
+2
+```
+
+#### Output for Sample Input
+
+`44`
+
+#### Explanation of Output for Sample Input
+
+Place the pies in the order
+
+10, 1, 12, 2, 8, 6, 14, 7
+
+(that is, insert the pie with 1 gram of sugar between 10 and 12, and insert pies with 2 and 8 grams of sugar, in that order, between pies 12 and 6). Then, we can grab \\(10+12+8+14=44\\) grams of sugar, which is maximal.
