@@ -14,3 +14,9 @@
 body {
   background-color: var(--color-fd-background);
 }
+
+/* Problem figures (CEMC paper diagrams) render near-intrinsic size otherwise */
+.problem-content img {
+  max-width: min(100%, 24rem);
+  height: auto;
+}

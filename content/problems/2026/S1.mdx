@@ -17,26 +17,22 @@ Samantha would like to know the fewest number of hops needed to get from \\(A\\)
 
 ### Input Specification
 
-The first line of input contains a single integer, \\(A\\), the starting lily pad \\((-10^{18} \\leq A \\leq 10^{18})\\).
+The first line of input contains a single integer, \\(A\\), the starting lily pad \\((-10^\{18\} \\leq A \\leq 10^\{18\})\\).
 
-The second line of input contains a single integer, \\(B\\), the ending lily pad \\((-10^{18} \\leq B \\leq 10^{18})\\).
+The second line of input contains a single integer, \\(B\\), the ending lily pad \\((-10^\{18\} \\leq B \\leq 10^\{18\})\\).
 
-The third line of input contains a single integer, \\(K\\), the distance of a giant hop \\((2 \\leq K \\leq 10^{18})\\).
+The third line of input contains a single integer, \\(K\\), the distance of a giant hop \\((2 \\leq K \\leq 10^\{18\})\\).
 
 The fourth line of input contains the integer, \\(T\\), which is either \\(1\\) or \\(2\\), indicating if the fewest (when \\(T=1\\)) or second fewest (when \\(T=2\\)) number of steps should be found.
 
 The following table shows how the \\(15\\) available marks are distributed:
 
-| Marks | Bounds  
-on \\(A\\), \\(B\\) | Bounds  
-on \\(K\\) | Bounds  
-on \\(T\\) | Additional  
-Restrictions |
+| Marks | Bounds<br />on \\(A\\), \\(B\\) | Bounds<br />on \\(K\\) | Bounds<br />on \\(T\\) | Additional<br />Restrictions |
 | --- | --- | --- | --- | --- |
 | \\(5\\) | \\(0 \\le A, B \\le 10\\) | \\(K=2\\) | \\(T=1\\) | Only hops in the positive direction needed |
-| \\(6\\) | \\(-10^{18} \\leq A, B \\leq 10^{18}\\) | \\(2 \\leq K \\leq 10^{18}\\) | \\(T=1\\) | None |
+| \\(6\\) | \\(-10^\{18\} \\leq A, B \\leq 10^\{18\}\\) | \\(2 \\leq K \\leq 10^\{18\}\\) | \\(T=1\\) | None |
 | \\(2\\) | \\(0 \\le A, B\\le 100\\) | \\(2 \\le K\\leq4\\) | \\(T=1\\) or \\(T=2\\) | None |
-| \\(2\\) | \\(-10^{18} \\leq A, B \\leq 10^{18}\\) | \\(2 \\leq K\\leq 10^{18}\\) | \\(T=1\\) or \\(T=2\\) | None |
+| \\(2\\) | \\(-10^\{18\} \\leq A, B \\leq 10^\{18\}\\) | \\(2 \\leq K\\leq 10^\{18\}\\) | \\(T=1\\) or \\(T=2\\) | None |
 
 Note that for full marks, solutions will need to handle 64-bit integers. For example:
 

@@ -13,7 +13,7 @@ Toronto has \\(N\\) subway stations, numbered from \\(1\\) to \\(N\\). You start
 
 There are \\(W\\) _one-way_ walkways running amongst the stations, the \\(i\\)th of which allows you to walk _from_ station \\(A_i\\) _to_ a different station \\(B_i\\) \\((1 \\le A_i, B_i \\le N, A_i \\not= B_i)\\) in 1 minute. There may be multiple walkways connecting any given pair of stations.
 
-The subway line follows a certain route through the \\(N\\) stations, starting at station \\(1\\) and visiting each station once. Initially, this route consists of stations \\(S_1, S_2, ..., S_N\\), in that order. \\(S_1 = 1\\), and \\(S_{2}, \\ldots, S_{N}\\) is a permutation of the integers \\(2, \\ldots, N\\). Only one subway train runs along this route per day, departing from station 1 at 6am in the morning and taking 1 minute to reach each subsequent station. This means that, \\(m\\) minutes after 6am, the train will be at station \\(S_{m+1}\\) (or at station \\(S_N\\) if \\(m \\ge N-1\\)).
+The subway line follows a certain route through the \\(N\\) stations, starting at station \\(1\\) and visiting each station once. Initially, this route consists of stations \\(S_1, S_2, ..., S_N\\), in that order. \\(S_1 = 1\\), and \\(S_\{2\}, \\ldots, S_\{N\}\\) is a permutation of the integers \\(2, \\ldots, N\\). Only one subway train runs along this route per day, departing from station 1 at 6am in the morning and taking 1 minute to reach each subsequent station. This means that, \\(m\\) minutes after 6am, the train will be at station \\(S_\{m+1\}\\) (or at station \\(S_N\\) if \\(m \\ge N-1\\)).
 
 Over a period of \\(D\\) days, however, the subway line’s route will keep changing. At the start of the \\(i\\)th day, the \\(X_i\\)th station and \\(Y_i\\)th station \\((2 \\le X_i, Y_i \\le N, X_i \\not= Y_i)\\) in the route will be swapped. Note that, after each such change, the route will still begin at station \\(1\\) and will visit all \\(N\\) stations once each. Changes will carry over to subsequent days – the route will not automatically reset itself back to \\(S_1,\\ldots,S_N\\).
 
@@ -25,7 +25,7 @@ The first line contains three space-separated integers, \\(N\\), \\(W\\), and \\
 
 The next \\(W\\) lines each contain two space-separated integers, \\(A_i\\) and \\(B_i\\) \\((1 \\le i \\le W)\\).
 
-The next line contains the \\(N\\) space-separated integers, \\(S_{1}, \\ldots, S_{N}\\), which form the initial permutation of stations.
+The next line contains the \\(N\\) space-separated integers, \\(S_\{1\}, \\ldots, S_\{N\}\\), which form the initial permutation of stations.
 
 The next \\(D\\) lines each contain two space-separated integers, \\(X_i\\) and \\(Y_i\\) \\((1 \\le i \\le D)\\).
 
