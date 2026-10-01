@@ -1,4 +1,7 @@
 {
   "title": "Sorting and Greedy (J4)",
-  "pages": ["junior-sorting", "junior-greedy", "junior-structures"]
+  "pages": [
+    "intro-sorting",
+    "greedy-sorting"
+  ]
 }

@@ -2,5 +2,10 @@
   "title": "Senior Core",
   "description": "Foundations for S1–S3",
   "root": true,
-  "pages": ["s1-toolkit"]
+  "pages": [
+    "math-geometry",
+    "sorting-greedy",
+    "brute-force-ds",
+    "strings-graphs"
+  ]
 }

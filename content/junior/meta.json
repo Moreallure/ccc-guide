@@ -4,12 +4,11 @@
   "root": true,
   "pages": [
     "warm-ups",
-    "string-handling",
-    "simulation-grids",
+    "simulation-adhoc",
+    "strings",
     "sorting-greedy",
     "counting-casework",
     "graphs-search",
-    "prefix-sums-dp",
-    "contest-craft"
+    "prefix-sums-dp"
   ]
 }

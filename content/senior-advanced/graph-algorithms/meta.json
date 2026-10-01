@@ -1,3 +1,10 @@
 {
-  "title": "Graph Algorithms (S4)"
+  "title": "Graph Algorithms (S4)",
+  "pages": [
+    "dijkstra",
+    "mst",
+    "topological-sort",
+    "scc",
+    "dsu-applications"
+  ]
 }

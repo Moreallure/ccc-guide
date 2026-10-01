@@ -1,4 +1,9 @@
 {
   "title": "CCC Guide",
-  "pages": ["essentials", "junior", "senior-core", "senior-advanced"]
+  "pages": [
+    "essentials",
+    "junior",
+    "senior-core",
+    "senior-advanced"
+  ]
 }

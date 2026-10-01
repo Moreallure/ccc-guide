@@ -1,0 +1,10 @@
+{
+  "title": "Sorting, Greedy and Searching (S2)",
+  "pages": [
+    "greedy-exchanges",
+    "two-pointers",
+    "more-prefix-sums",
+    "binary-search-answer",
+    "hashmaps"
+  ]
+}

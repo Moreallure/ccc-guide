@@ -2,5 +2,12 @@
   "title": "Senior Advanced",
   "description": "The S4–S5 toolkit",
   "root": true,
-  "pages": ["graph-algorithms"]
+  "pages": [
+    "graph-algorithms",
+    "trees",
+    "dp",
+    "number-theory-combinatorics",
+    "geometry-ii",
+    "data-structures-ii"
+  ]
 }

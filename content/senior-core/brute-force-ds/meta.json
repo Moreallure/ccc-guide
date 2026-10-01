@@ -1,0 +1,10 @@
+{
+  "title": "Brute Force and Data Structures (S3)",
+  "pages": [
+    "complete-search",
+    "constructive-algorithms",
+    "stacks-queues",
+    "priority-queues",
+    "dsu"
+  ]
+}

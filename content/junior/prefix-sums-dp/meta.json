@@ -1,4 +1,8 @@
 {
   "title": "Prefix Sums and Intro DP (J5)",
-  "pages": ["prefix-sums-junior", "junior-dp", "grid-shortest-path-junior"]
+  "pages": [
+    "prefix-sums",
+    "intro-dp",
+    "grid-shortest-paths"
+  ]
 }

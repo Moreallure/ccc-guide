@@ -1,0 +1,10 @@
+{
+  "title": "Strings and Graphs",
+  "pages": [
+    "string-processing",
+    "graph-search",
+    "intro-tree",
+    "func-graphs",
+    "counting"
+  ]
+}
