@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Writing Content
 
-## Getting Started
+### Embedding a problem (ProblemSections)
 
-First, run the development server:
+```mdx
+import ConcertTickets, { frontmatter as problemMeta } from '../../problems/2026/J1.mdx'
+import { ProblemSections } from '@/components/problem-sections'
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<ProblemSections component={ConcertTickets} meta={problemMeta}>
+
+## J1 Walkthrough: Concert Tickets
+
+</ProblemSections>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Code implementations (LangTabs)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+````mdx
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<LangTabs items={['Python', 'C++']}>
 
-## Learn More
+  <Tab value="Python">
 
-To learn more about Next.js, take a look at the following resources:
+```python
+B = int(input())
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  </Tab>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  <Tab value="C++">
 
-## Deploy on Vercel
+```cpp
+#include <bits/stdc++.h>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  </Tab>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</LangTabs>
+````
+
+### Math
+
+MDX processes backslashes before the math plugin does, so LaTeX needs **double backslashes** in the source. If you only use one, it may compile but show up as raw text on the page.
+
+* Inline math: `\\(x \\leq 10\\)`
+* Display math: put `\\[` and `\\]` on separate lines, with a blank line before and after the formula.
+* LaTeX commands also need double backslashes: `\\leq`, `\\times`, `\\max`, `\\bmod`.
+* Be careful with `{}`, `<`, `*`, and `~` inside math spans because MDX can treat them as JSX or formatting. Escape them when needed, for example `10^\\{-6\\}`, `\\<`, and `\\*`. `^` and `_` don't need escaping.
+* Run `npm run build` after adding math. It checks all the content files and will catch broken math or KaTeX errors.

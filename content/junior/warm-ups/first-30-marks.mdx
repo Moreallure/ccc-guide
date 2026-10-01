@@ -2,8 +2,10 @@
 title: The First 30 Marks
 ---
 
-import ConcertTickets from '../../problems/2026/J1.mdx'
+import ConcertTickets, { frontmatter as problemMeta } from '../../problems/2026/J1.mdx'
+import OlympicScores, { frontmatter as j2Meta } from '../../problems/2026/J2.mdx'
 import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # The First 30 Marks
 
@@ -11,6 +13,147 @@ The first two problems of the Junior CCC are usually the easiest 30 marks on the
 
 This module goes through the common patterns in J1 and J2 problems, using real CCC problems.
 
+<ProblemSections component={ConcertTickets} meta={problemMeta}>
+
 ## J1 Walkthrough: Concert Tickets
 
-<ProblemSections component={ConcertTickets} />
+</ProblemSections>
+
+### Solution
+
+First, we need to determine how many tickets are still available before Besa makes her purchase.
+
+There are `T` tickets in total, and `P` have already been purchased, so:
+
+\\[
+T - P
+\\]
+
+tickets remain.
+
+Besa can buy `B` tickets if there are at least `B` tickets remaining:
+
+\\[
+T - P \\geq B
+\\]
+
+If this is true, we subtract `B` from the remaining tickets and output `Y` followed by the number of tickets left after her purchase.
+
+Otherwise, we output `N`.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+B = int(input())
+T = int(input())
+P = int(input())
+
+remaining = T - P
+
+if remaining >= B:
+    print("Y", remaining - B)
+else:
+    print("N")
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int B, T, P;
+    cin >> B >> T >> P;
+
+    int remaining = T - P;
+
+    if (remaining >= B) {
+        cout << "Y " << remaining - B << '\n';
+    } else {
+        cout << "N\n";
+    }
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={OlympicScores} meta={j2Meta}>
+
+## J2 Walkthrough: Olympic Scores
+
+</ProblemSections>
+
+### Solution
+
+We read the five scores and the difficulty factor `D`.
+
+The overall score removes one occurrence of the highest score and one occurrence of the lowest score, then adds up the three scores that remain:
+
+\\[
+(S_1 + S_2 + S_3 + S_4 + S_5) - \\max - \\min
+\\]
+
+where `max` is the highest of the five scores and `min` is the lowest. Since only one occurrence of each is removed, this works even when judges tie — the sample has two 10s, and only one of them is removed.
+
+Finally, the result is multiplied by the difficulty factor:
+
+\\[
+((S_1 + S_2 + S_3 + S_4 + S_5) - \\max - \\min) \\times D
+\\]
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+scores = [int(input()) for _ in range(5)]
+D = int(input())
+
+print((sum(scores) - max(scores) - min(scores)) * D)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int total = 0, mx = 0, mn = 10;
+
+    for (int i = 0; i < 5; i++) {
+        int s;
+        cin >> s;
+
+        total += s;
+        mx = max(mx, s);
+        mn = min(mn, s);
+    }
+
+    int D;
+    cin >> D;
+
+    cout << (total - mx - mn) * D << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+## Key Takeaways
+
+The main idea in these problems is to keep the solution simple. Read the input, identify what the problem is asking for, and translate those steps into code. If you can do that reliably, you can solve a large part of the Junior CCC without needing complicated algorithms.
+
+Once these problems start feeling comfortable, the next step is to work on problems that require a bit more logic and problem solving.
