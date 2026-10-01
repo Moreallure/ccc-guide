@@ -13,6 +13,8 @@ import { ProblemSections } from '@/components/problem-sections'
 </ProblemSections>
 ```
 
+Pass `imageSize="6rem"` (any CSS length) to cap the problem's images; the default is 12rem.
+
 ### Code implementations (LangTabs)
 
 ````mdx

@@ -15,25 +15,29 @@ import { GithubIcon } from "@/components/github-icon";
 import { GITHUB_URL } from "@/lib/layout.shared";
 import "@/app/hero.css";
 
+const KW = "tok-kw";
+const FN = "tok-fn";
+const NUM = "tok-num";
+
 const code = [
   [["# CCC Senior · Grid Escape", "italic text-fd-muted-foreground/70"]],
   [
-    ["from", "font-semibold"],
-    [" collections ", "text-fd-muted-foreground"],
-    ["import", "font-semibold"],
+    ["from", KW],
+    [" collections ", ""],
+    ["import", KW],
     [" deque", ""],
   ],
   [[""]],
   [
-    ["def", "font-semibold"],
-    [" escape", ""],
-    ["(grid, start, end):", "text-fd-muted-foreground"],
+    ["def", KW],
+    [" escape", FN],
+    ["(grid, start, end):", ""],
   ],
   [
     ["    dist = {", ""],
     ["start", ""],
-    [": ", "text-fd-muted-foreground"],
-    ["0", "font-semibold"],
+    [": ", ""],
+    ["0", NUM],
     ["}", ""],
   ],
   [
@@ -43,56 +47,69 @@ const code = [
   ],
   [
     ["    ", ""],
-    ["while", "font-semibold"],
-    [" q:", "text-fd-muted-foreground"],
+    ["while", KW],
+    [" q:", ""],
   ],
   [
     ["        r, c = q.", ""],
-    ["popleft", "font-semibold"],
-    ["()", "text-fd-muted-foreground"],
+    ["popleft", FN],
+    ["()", ""],
   ],
   [
     ["        ", ""],
-    ["if", "font-semibold"],
-    [" (r, c) == end: ", "text-fd-muted-foreground"],
-    ["return", "font-semibold"],
+    ["if", KW],
+    [" (r, c) == end: ", ""],
+    ["return", KW],
     [" dist[(r, c)]", ""],
   ],
   [
     ["        ", ""],
-    ["for", "font-semibold"],
-    [" dr, dc ", "text-fd-muted-foreground"],
-    ["in", "font-semibold"],
-    [" ((1,0), (-1,0), (0,1), (0,-1)):", "text-fd-muted-foreground"],
+    ["for", KW],
+    [" dr, dc ", ""],
+    ["in", KW],
+    [" ((", ""],
+    ["1", NUM],
+    [",", ""],
+    ["0", NUM],
+    ["), (", ""],
+    ["-1", NUM],
+    [",", ""],
+    ["0", NUM],
+    ["), (", ""],
+    ["0", NUM],
+    [",", ""],
+    ["1", NUM],
+    ["), (", ""],
+    ["0", NUM],
+    [",", ""],
+    ["-1", NUM],
+    [")):", ""],
   ],
-  [
-    ["            nxt = (r + dr, c + dc)", ""],
-  ],
+  [["            nxt = (r + dr, c + dc)", ""]],
   [
     ["        ", ""],
-    ["if", "font-semibold"],
-    [" nxt ", "text-fd-muted-foreground"],
-    ["in", "font-semibold"],
-    [" grid ", "text-fd-muted-foreground"],
-    ["and", "font-semibold"],
-    [" nxt ", "text-fd-muted-foreground"],
-    ["not in", "font-semibold"],
+    ["if", KW],
+    [" nxt ", ""],
+    ["in", KW],
+    [" grid ", ""],
+    ["and", KW],
+    [" nxt ", ""],
+    ["not in", KW],
     [" dist:", ""],
   ],
   [
     ["            dist[nxt] = dist[(r, c)] + ", ""],
-    ["1", "font-semibold"],
+    ["1", NUM],
   ],
   [
     ["            q.", ""],
-    ["append", "font-semibold"],
+    ["append", FN],
     ["(nxt)", ""],
   ],
   [
     ["    ", ""],
-    ["return", "font-semibold"],
-    [" -", "text-fd-muted-foreground"],
-    ["1", "font-semibold"],
+    ["return", KW],
+    [" -1", NUM],
   ],
 ];
 
@@ -207,10 +224,6 @@ export function Landing() {
 
         <div className="relative mx-auto grid w-full max-w-6xl flex-1 items-center gap-16 px-4 pt-16 pb-24 lg:grid-cols-[1.1fr_1fr]">
           <div className="max-w-xl">
-            <p className="reveal font-mono text-sm text-fd-muted-foreground">
-              $ npx ccc-guide
-              <span className="ml-2 inline-block h-4 w-2 translate-y-0.5 animate-[hero-blink_1.1s_steps(2)_infinite] bg-fd-foreground" />
-            </p>
             <h1 className="reveal mt-5 text-5xl font-extrabold tracking-tight [animation-delay:100ms]">
               <span className="block">Canadian</span>
               <span className="block">Computing</span>

@@ -17,7 +17,9 @@ function textOf(node) {
 /**
  * Renders an imported problem MDX component with each h3 section collapsed
  * into an accordion. The problem's h2 title is dropped as redundant. Pass the
- * problem's `frontmatter` export as `meta` to enable the metadata line.
+ * problem's `frontmatter` export as `meta` to enable the metadata line. Pass
+ * `imageSize` (any CSS length, e.g. "6rem") to cap the problem's images;
+ * the default is 24rem.
  *
  * The section heading is passed as an h2 JSX child (markdown inside the
  * component tags), e.g. `<ProblemSections ...>## J1 Walkthrough</...>`. That
@@ -25,7 +27,7 @@ function textOf(node) {
  * page" entry; here its text and id are lifted into the heading line instead
  * of rendering the wrapped heading. Without an h2 child, meta.title is used.
  */
-export function ProblemSections({ component: Problem, meta, children }) {
+export function ProblemSections({ component: Problem, meta, imageSize, children }) {
   const heading = Children.toArray(children).find((child) => child?.props);
   const headingId = heading?.props?.id;
   const rawTitle = heading?.props?.children;
@@ -60,7 +62,10 @@ export function ProblemSections({ component: Problem, meta, children }) {
   }
 
   return (
-    <div className="problem-content">
+    <div
+      className="problem-content"
+      style={imageSize ? { '--problem-img-w': imageSize } : undefined}
+    >
       {(headingTitle ?? meta?.title) && (
         <h2
           id={headingId}

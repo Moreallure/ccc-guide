@@ -1,3 +1,23 @@
+/* escape.py hero card syntax colors */
+.tok-kw {
+  color: #cf222e;
+}
+.dark .tok-kw {
+  color: #ff7b72;
+}
+.tok-fn {
+  color: #8250df;
+}
+.dark .tok-fn {
+  color: #d2a8ff;
+}
+.tok-num {
+  color: #0550ae;
+}
+.dark .tok-num {
+  color: #79b8ff;
+}
+
 @keyframes hero-fade-up {
   from {
     opacity: 0;

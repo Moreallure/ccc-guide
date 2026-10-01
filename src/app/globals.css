@@ -15,8 +15,12 @@ body {
   background-color: var(--color-fd-background);
 }
 
-/* Problem figures (CEMC paper diagrams) render near-intrinsic size otherwise */
+/* Problem figures (CEMC paper diagrams) render near-intrinsic size otherwise;
+   --problem-img-w lets a ProblemSections embed cap them further. Inline-block
+   undoes Tailwind preflight's img{display:block} so images that share a line
+   in the problem source flow side by side. */
 .problem-content img {
-  max-width: min(100%, 24rem);
+  display: inline-block;
+  max-width: min(100%, var(--problem-img-w, 12rem));
   height: auto;
 }
