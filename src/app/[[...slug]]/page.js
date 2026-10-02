@@ -8,6 +8,9 @@ import { source } from '@/lib/source';
 import { baseOptions, GITHUB_URL } from '@/lib/layout.shared';
 import { Landing } from '@/components/landing';
 
+const FREQ_LABELS = { 0: 'rare', 1: 'occasional', 2: 'common', 3: 'frequent', 4: 'very-frequent' };
+const FREQ_COLORS = { 0: 'bg-red-500', 1: 'bg-orange-500', 2: 'bg-amber-500', 3: 'bg-lime-500', 4: 'bg-emerald-500' };
+
 export function generateStaticParams() {
   return source.generateParams();
 }
@@ -70,6 +73,31 @@ export default async function Page({ params }) {
             Step,
             Accordion,
             Accordions,
+            // freq badge renders right under the page title (the MDX h1)
+            h1: (props) => {
+              const H1 = defaultMdxComponents.h1 ?? 'h1';
+              return (
+                <>
+                  <H1 {...props} />
+                  {page.data.freq != null && (
+                    <p className="-mt-4 mb-4 flex items-center gap-2 text-xs uppercase tracking-widest text-fd-foreground/70">
+                      <span
+                        className="flex items-center gap-0.5"
+                        title={`Frequency ${page.data.freq} of 4 — ${FREQ_LABELS[page.data.freq]}`}
+                      >
+                        {[0, 1, 2, 3].map((i) => (
+                          <span
+                            key={i}
+                            className={`h-2 w-1.5 rounded-[1px] ${i < page.data.freq ? FREQ_COLORS[page.data.freq] : 'bg-fd-muted-foreground/40'}`}
+                          />
+                        ))}
+                      </span>
+                      {FREQ_LABELS[page.data.freq]}
+                    </p>
+                  )}
+                </>
+              );
+            },
           }}
         />
         </DocsBody>
