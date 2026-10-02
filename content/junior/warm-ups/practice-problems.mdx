@@ -10,17 +10,13 @@ import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # Practice Problems
 
-You can read a hundred walkthroughs and still freeze at a blank editor. The fix
-is solving problems yourself, and the best ones to start with are real J1 and
-J2 problems from past contests.
+Walkthroughs help, but the skill only comes from solving problems yourself.
+The best place to start is real J1 and J2 problems from past contests.
 
-This module works through three of them, from 2025 and 2024. They look
-different on the surface, but all three come down to the same approach as the
-last module: read carefully, work out what is actually being asked, and
+This module works through three of them, from 2025 and 2024. Try each problem
+on your own before reading its walkthrough. All three come down to the same
+approach as the last module: read carefully, work out what is being asked, and
 translate it directly into code.
-
-Try each problem on your own before reading its walkthrough. A wrong attempt
-teaches you more than a solution you only read.
 
 <ProblemSections component={RollerCoaster} meta={coasterMeta}>
 
@@ -30,16 +26,15 @@ teaches you more than a solution you only read.
 
 ### Solution
 
-The entire problem is one comparison. The train holds \\(C \\times P\\)
-people, and you ride if your place in line falls within that capacity:
+We need to decide whether you get on the ride. The train holds \\(C \\times P\\)
+people and your place in line is \\(N\\), so you ride when:
 
 \\[
 N \\leq C \\times P
 \\]
 
-Sample 2 is worth a second look. You are 12th in line and the train holds
-\\(4 \\times 3 = 12\\) people, so you take the last seat — being exactly at
-the limit still counts as getting on.
+Sample 2 checks the boundary: the train holds \\(4 \\times 3 = 12\\) people and
+you are 12th in line, so being exactly at the limit still counts.
 
 ### Implementation
 
@@ -89,13 +84,13 @@ int main() {
 
 ### Solution
 
-Keep a running total. Start with the \\(D\\) donuts the shop opens with, then
-process the \\(E\\) events one at a time: a `+` adds \\(Q\\) donuts, a `-`
+We keep a running total. Start with the \\(D\\) donuts the shop opens with,
+then process the \\(E\\) events one at a time: a `+` adds \\(Q\\) donuts, a `-`
 removes them. When the events run out, the total is the answer.
 
-One line in the input specification does the work for us: every sale is
-guaranteed to have enough donuts in stock. The total never goes negative, so
-there is nothing to check and nothing to clamp.
+The input specification guarantees that every sale has enough donuts in stock,
+so the total never goes negative. There is nothing to check and nothing to
+clamp.
 
 ### Implementation
 
@@ -158,14 +153,14 @@ int main() {
 
 ### Solution
 
-This is the first problem where the input has no count — you aren't told how
-many Yobis there are. You just read sizes and react to each one: if the Yobi
-is smaller than Dusa, Dusa eats it and grows; if it is the same size or
+This is the first problem where the input has no count — we are not told how
+many Yobis there are. We read sizes one at a time and react to each: if the
+Yobi is smaller than Dusa, Dusa eats it and grows; if it is the same size or
 bigger, Dusa runs away and the process ends.
 
 The problem guarantees that a Yobi big enough to stop Dusa will eventually
-appear, so a loop that reads until it breaks is safe to write. That guarantee
-is what lets you skip any end-of-input handling entirely.
+appear, so a loop that reads until it breaks is safe. That guarantee is also
+why there is no end-of-input handling to write.
 
 ### Implementation
 
@@ -215,17 +210,15 @@ int main() {
   </Tab>
 </LangTabs>
 
-## Key Takeaways
+## Takeaways
 
 None of these problems needs anything beyond input, a condition, and a loop.
-J1 and J2 reward careful reading translated directly into code, and the
-specifications pay you back for it: the roller coaster samples show that
-being exactly at capacity still counts, the donut spec promises that sales
-never exceed stock so there is nothing to check, and Dusa guarantees the loop
-terminates so there is no end-of-input handling to write.
+What they reward is careful reading: being exactly at capacity still gets you
+on the ride, the donut spec promises sales never exceed stock, and Dusa
+guarantees the loop terminates.
 
-When a problem feels harder than it should, the missing piece is usually in
-the specification, not in the code.
+When a problem feels harder than it should, re-read the specification before
+rewriting the code.
 
-The next module starts applying these habits to problems where the input is
-text instead of numbers.
+The next module applies these habits to problems where the input is text
+instead of numbers.

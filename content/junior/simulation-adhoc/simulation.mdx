@@ -1,10 +1,237 @@
 ---
-title: "Simulation"
-description: "Simulation — anchored on 2019 J4 *Flipper*, 2020 J4 *Cyclic Shifts*, and 2016 J4 *Arrival Time*"
+title: Simulation
 ---
+
+import Flipper, { frontmatter as flipperMeta } from '../../problems/2019/J4.mdx'
+import CyclicShifts, { frontmatter as cyclicMeta } from '../../problems/2020/J4.mdx'
+import ArrivalTime, { frontmatter as arrivalMeta } from '../../problems/2016/J4.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # Simulation
 
-<Callout type="info" title="Work in progress">
-  This module is scaffolding — content coming soon.
-</Callout>
+A simulation follows a process step by step, keeping track of the current state and applying the operations described in the problem.
+
+Before writing the loop, check that it is fast enough. Estimate:
+
+**number of steps × work per step**
+
+If this fits within the time limit, a direct simulation is usually sufficient. If not, look for a more efficient approach.
+
+Simulation problems usually come in three forms:
+
+1. **Apply the operations** — perform the given moves in order (*Flipper*).
+2. **Generate and test** — generate a bounded set of possibilities and check each one (*Cyclic Shifts*).
+3. **Step through time** — advance the state one unit at a time until the process ends (*Arrival Time*).
+
+<ProblemSections component={Flipper} meta={flipperMeta}>
+
+## J4 Walkthrough: Flipper
+
+</ProblemSections>
+
+### Solution
+
+The statement hands us a 2×2 grid and a string of flips, so the natural plan is to do exactly what it says: start from the grid `1 2 / 3 4` and apply the flips one at a time.
+
+A horizontal flip swaps the two rows. A vertical flip swaps the two entries within each row. Each flip is at most a couple of swaps, and the input has at most 1 000 000 characters, so the whole solution is one pass over the string with constant work per step. Running the estimate: a million steps times a couple of swaps each — nowhere near any limit.
+
+The subtasks hint that the setters expected brute force to struggle: 8 of the 15 marks are for inputs of at most 1 000 characters. But a 2×2 grid is so small that simulating all 1 000 000 flips is still instant.
+
+There is a shortcut worth knowing here. Doing the same flip twice returns the grid to where it started, and a horizontal and vertical flip commute — either order produces the same 180° rotation. So only the parity of the number of `H`'s and `V`'s actually matters. That saves a pass over the string, but the direct simulation is easier to get right on the first try, and in a contest that is usually the better trade.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+grid = [[1, 2], [3, 4]]
+
+for c in input():
+    if c == "H":
+        grid[0], grid[1] = grid[1], grid[0]
+    else:
+        for row in grid:
+            row[0], row[1] = row[1], row[0]
+
+for row in grid:
+    print(*row)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int grid[2][2] = {{1, 2}, {3, 4}};
+    string flips;
+    cin >> flips;
+
+    for (char c : flips) {
+        if (c == 'H') {
+            swap(grid[0], grid[1]);
+        } else {
+            for (int i = 0; i < 2; i++) {
+                swap(grid[i][0], grid[i][1]);
+            }
+        }
+    }
+
+    for (int i = 0; i < 2; i++) {
+        cout << grid[i][0] << ' ' << grid[i][1] << '\n';
+    }
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={CyclicShifts} meta={cyclicMeta}>
+
+## J4 Walkthrough: Cyclic Shifts
+
+</ProblemSections>
+
+### Solution
+
+The definition does most of the work here. A cyclic shift of `S` moves some characters from the front to the back, and `S` counts as a cyclic shift of itself. Since `S` has at most 1000 characters, there are at most 1000 shifts in total: shift by 0 positions, by 1, by 2, and so on.
+
+So the plan is to generate every shift — `S[i:] + S[:i]` for each starting position `i` — and check whether `T` contains it as a substring. Both languages have a built-in substring search that is heavily optimized: Python's `in` operator and C++'s `find`. There is no need to hand-roll the search.
+
+That is the whole solution: build the candidate set straight from the definition, then lean on the standard library. The estimate is comfortable too — a thousand shifts times a fast scan of a thousand-character text, well under the budget.
+
+Two details worth noting. If `S` is longer than `T`, no shift can fit, but the substring check simply fails for every shift, so no special case is needed. And the shift by 0 positions is `S` itself, which handles the "a string is a cyclic shift of itself" rule automatically.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+T = input()
+S = input()
+
+found = "no"
+for i in range(len(S)):
+    shift = S[i:] + S[:i]
+    if shift in T:
+        found = "yes"
+        break
+
+print(found)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string T, S;
+    cin >> T >> S;
+
+    for (int i = 0; i < (int)S.size(); i++) {
+        string shift = S.substr(i) + S.substr(0, i);
+        if (T.find(shift) != string::npos) {
+            cout << "yes\n";
+            return 0;
+        }
+    }
+
+    cout << "no\n";
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={ArrivalTime} meta={arrivalMeta}>
+
+## J4 Walkthrough: Arrival Time
+
+</ProblemSections>
+
+### Solution
+
+The trap in this problem is clock arithmetic. Fiona covers two hours of distance, but rush hour halves her speed, and her drive might start inside rush hour, end inside it, span both rush-hour windows, or cross midnight. Computing the arrival time with time arithmetic and special cases is where most wrong answers come from.
+
+Simulation replaces all of that case work with a loop. Keep two numbers: the current time `t` in minutes, and how much of the trip is done, measured in minutes of normal-speed travel. Advance one minute at a time. If the minute we are driving through falls in a rush-hour window — 07:00 to 10:00 is minutes 420 through 599, and 15:00 to 19:00 is minutes 900 through 1139 — it covers half a normal minute of distance, otherwise it covers one. Stop once two full hours of distance are covered.
+
+To stay in integers, measure progress in half-minutes: a rush-hour minute adds 1, a regular minute adds 2, and the trip needs 240. Taking `t` modulo 1440 handles crossing midnight, as in the third sample. The loop is bounded as well — every minute adds at least 1 to the progress, so it runs for at most 240 minutes — and a few hundred constant-work steps is as cheap as simulation gets.
+
+Check the second sample against the loop: leaving at 07:00, Fiona spends minutes 420 through 599 in rush hour — 180 minutes covering 90 normal minutes of distance — then needs 30 more regular minutes, arriving at 10:30. The loop also explains why arrivals are not always multiples of 20 minutes even though departures are: the trip ends wherever the 240 half-minutes land, and that can be any minute.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+h, m = input().split(":")
+t = int(h) * 60 + int(m)
+
+travelled = 0  # in half-minutes; the trip needs 240
+while travelled < 240:
+    minute = t % 1440
+    if 420 <= minute < 600 or 900 <= minute < 1140:
+        travelled += 1
+    else:
+        travelled += 2
+    t += 1
+
+t %= 1440
+print(f"{t // 60:02d}:{t % 60:02d}")
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+
+    int t = stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3, 2));
+    int travelled = 0;  // in half-minutes; the trip needs 240
+
+    while (travelled < 240) {
+        int minute = t % 1440;
+        bool rush = (420 <= minute && minute < 600) || (900 <= minute && minute < 1140);
+        travelled += rush ? 1 : 2;
+        t++;
+    }
+
+    t %= 1440;
+    cout << setfill('0') << setw(2) << t / 60 << ':' << setw(2) << t % 60 << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+## Summary
+
+Simulation problems are usually straightforward once the process is represented correctly.
+
+When solving a simulation problem:
+
+1. **Identify the state** — what information needs to be tracked?
+2. **Identify the operations** — what changes the state?
+3. **Check the complexity** — will the simulation finish within the time limit?
+
+If the process is small enough, simulating it directly is often the simplest solution. The main challenge is usually translating the problem statement into the right state and operations.
