@@ -64,7 +64,7 @@ export default async function Page({ params }) {
       sidebar={{ tabs: sectionTabs() }}
       githubUrl={GITHUB_URL}
     >
-      <DocsPage toc={page.data.toc}>
+      <DocsPage toc={page.data.toc} footer={{ className: 'mt-8' }}>
         <DocsBody>
           <MDX
           components={{

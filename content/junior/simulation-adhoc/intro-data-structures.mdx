@@ -1,10 +1,207 @@
 ---
-title: "Arrays, lists, and maps"
-description: "Arrays, lists, and maps — anchored on 2021 J2 *Silent Auction* and 2022 J4/S2 *Good Groups*"
+title: "Lists and maps"
+freq: 2
 ---
 
-# Arrays, lists, and maps
+import SilentAuction, { frontmatter as auctionMeta } from '../../problems/2021/J2.mdx'
+import GroupWork, { frontmatter as groupMeta } from '../../problems/2022/J4.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
-<Callout type="info" title="Work in progress">
-  This module is scaffolding — content coming soon.
-</Callout>
+# Lists and maps
+
+Many problems require you to store data and use it later. A **list** stores items in order, while a **map** stores values under a key such as a name or id. Python calls them `list` and `dict`; in C++, you'll usually use `vector` and `map` or `unordered_map`.
+
+The choice depends on how you use the data:
+
+1. **Collect, then scan** — store everything in a list and loop through it to find the answer (*Silent Auction*).
+2. **Store, then look up** — store each value under a key and retrieve it when you need it (*Group Work*).
+
+<ProblemSections component={SilentAuction} meta={auctionMeta}>
+
+## J2 Walkthrough: Silent Auction
+
+</ProblemSections>
+
+### Solution
+
+Each bid is a pair — a name and an amount — and the winner is the highest amount, with ties going to the bid placed first. The input is exactly that sequence of pairs in placement order, so we read all of them into lists and scan afterwards: `names` holds the bidders and `bids` the amounts, with matching positions.
+
+We track the index of the best bid rather than the bid itself, so the name comes along for free. The comparison is strict — a bid replaces the current best only if it is strictly higher — so on a tie, the earlier bid keeps the win. Sample 2 is exactly this case: Ijeoma and Goor both bid 20, and Ijeoma stays the winner.
+
+Running the estimate: at most 100 bids, one comparison per bid in the scan — nowhere near any limit.
+
+Since each bid is only compared once, we could skip the lists and track the best bid while reading. Collecting first and scanning afterwards is the pattern worth practicing, though — most problems need their input more than once, and separating "read the data" from "answer the question" keeps a solution easy to fix.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+n = int(input())
+
+names = []
+bids = []
+for _ in range(n):
+    names.append(input())
+    bids.append(int(input()))
+
+best = 0
+for i in range(1, n):
+    if bids[i] > bids[best]:
+        best = i
+
+print(names[best])
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<string> names(n);
+    vector<int> bids(n);
+    for (int i = 0; i < n; i++) {
+        cin >> names[i] >> bids[i];
+    }
+
+    int best = 0;
+    for (int i = 1; i < n; i++) {
+        if (bids[i] > bids[best]) {
+            best = i;
+        }
+    }
+
+    cout << names[best] << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={GroupWork} meta={groupMeta}>
+
+## J4 Walkthrough: Group Work
+
+</ProblemSections>
+
+### Solution
+
+The constraints arrive before the groups do, so the reading order forces the plan: store the constraints while reading them, build the grouping, then check.
+
+First, read the `X` same-group constraints and `Y` separate-group constraints into two lists of pairs. Then read the `G` groups and record each student's group number in a map keyed by name — all three names on group line `i` map to `i`.
+
+With the map built, every constraint is two lookups and one comparison. A same-group constraint is violated when the two students are not in the same group; a separate-group constraint is violated when they are.
+
+Running the estimate: the full-size subtask allows `G`, `X`, and `Y` up to 100 000. Building the map is 300 000 assignments, and checking the constraints is 200 000 pairs of constant-time lookups — a few million operations in total, well within limits. Without the map, checking a constraint means scanning the groups to find each student: up to 100 000 constraints times 100 000 groups, tens of billions of operations across the whole run. That scan-inside-a-loop is exactly what the map removes, and it is what the last subtask is testing.
+
+Two guarantees in the statement keep the code short. Every constrained student appears in exactly one group, so no lookup can fail. And `X` or `Y` may be zero — the empty lists simply check nothing.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+x = int(input())
+same = []
+for _ in range(x):
+    a, b = input().split()
+    same.append((a, b))
+
+y = int(input())
+diff = []
+for _ in range(y):
+    a, b = input().split()
+    diff.append((a, b))
+
+group = {}
+g = int(input())
+for i in range(g):
+    a, b, c = input().split()
+    group[a] = i
+    group[b] = i
+    group[c] = i
+
+violations = 0
+for a, b in same:
+    if group[a] != group[b]:
+        violations += 1
+for a, b in diff:
+    if group[a] == group[b]:
+        violations += 1
+
+print(violations)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int x;
+    cin >> x;
+    vector<pair<string, string>> same(x);
+    for (int i = 0; i < x; i++) {
+        cin >> same[i].first >> same[i].second;
+    }
+
+    int y;
+    cin >> y;
+    vector<pair<string, string>> diff(y);
+    for (int i = 0; i < y; i++) {
+        cin >> diff[i].first >> diff[i].second;
+    }
+
+    unordered_map<string, int> group;
+    int g;
+    cin >> g;
+    for (int i = 0; i < g; i++) {
+        string a, b, c;
+        cin >> a >> b >> c;
+        group[a] = i;
+        group[b] = i;
+        group[c] = i;
+    }
+
+    int violations = 0;
+    for (auto& [a, b] : same) {
+        if (group[a] != group[b]) {
+            violations++;
+        }
+    }
+    for (auto& [a, b] : diff) {
+        if (group[a] == group[b]) {
+            violations++;
+        }
+    }
+
+    cout << violations << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+## Summary
+
+Most Junior problems are decided by picking the right container for the data:
+
+1. **Access by position, or in order** — collect into a list, then scan.
+2. **Access by key** — store each item once in a map, then look it up directly.
+
+When a solution searches inside a loop, check whether a map lookup removes the search before reaching for anything more advanced. Both structures appear in almost every module that follows — especially the map, once problems start counting and connecting things.
