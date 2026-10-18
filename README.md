@@ -62,6 +62,17 @@ import { Prerequisites } from '@/components/prerequisites'
 
 `items` render as a heading + description text when there is one, and as a bullet list when there are several. `resources` are optional and always render one link per line, opened in a new tab. Place the card right after the page `#` title, before any other content.
 
+### Work in progress modules
+
+Modules that are scaffolding get `wip: true` in their frontmatter. The "Work in progress" banner renders automatically under the page title, and the module is dimmed in the sidebar.
+
+```mdx
+---
+title: "Module title"
+wip: true
+---
+```
+
 ### Math
 
 MDX processes backslashes before the math plugin does, so LaTeX needs **double backslashes** in the source. If you only use one, it may compile but show up as raw text on the page.

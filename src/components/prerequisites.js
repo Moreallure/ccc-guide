@@ -2,7 +2,7 @@ export function Prerequisites({ items, resources }) {
   const multiple = items.length > 1;
   return (
 
-<aside className="not-prose my-6 rounded-lg border border-slate-400/20 bg-slate-400/5 p-4">
+<aside className="not-prose my-6 rounded-lg border border-dashed border-slate-400/35 bg-slate-400/10 p-4">
   <p className="mb-1 text-sm font-semibold text-slate-600 dark:text-slate-300">
     Prerequisites
   </p>

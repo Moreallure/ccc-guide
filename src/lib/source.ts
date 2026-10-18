@@ -7,7 +7,10 @@ const docs = defineDocs({
   // content/problems + content/problems-html hold raw problem data — not part of the docs tree.
   docs: {
     files: ['**/*.{mdx,md}', '!problems/**'],
-    schema: pageSchema.extend({ freq: z.number().int().min(0).max(4).optional() }),
+    schema: pageSchema.extend({
+      freq: z.number().int().min(0).max(4).optional(),
+      wip: z.boolean().optional(),
+    }),
   },
   meta: { files: ['**/*.{json,yaml}', '!problems/**'] },
 });
