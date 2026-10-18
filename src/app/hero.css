@@ -35,16 +35,6 @@
   }
 }
 
-@keyframes hero-float {
-  0%,
-  100% {
-    transform: rotate(2deg) translateY(0);
-  }
-  50% {
-    transform: rotate(2deg) translateY(-6px);
-  }
-}
-
 @keyframes hero-marquee {
   to {
     transform: translateX(-50%);
@@ -88,7 +78,7 @@
 
 .hero-outline {
   color: transparent;
-  -webkit-text-stroke: 2px var(--color-fd-foreground);
+  -webkit-text-stroke: 1px var(--color-fd-foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {

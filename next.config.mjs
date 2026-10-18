@@ -1,13 +1,13 @@
-﻿import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from 'fumadocs-mdx/next';
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
   async redirects() {
     return [
       { source: '/essentials', destination: '/essentials/introduction/using-this-guide', permanent: false },
-      { source: '/junior', destination: '/junior/warm-ups/junior-warmups', permanent: false },
-      { source: '/senior-core', destination: '/senior-core/s1-toolkit/s1-geometry', permanent: false },
-      { source: '/senior-advanced', destination: '/senior-advanced/graph-algorithms/graph-representation-senior', permanent: false },
+      { source: '/junior', destination: '/junior/warm-ups/first-30-marks', permanent: false },
+      { source: '/senior-core', destination: '/senior-core/math-geometry/geometry', permanent: false },
+      { source: '/senior-advanced', destination: '/senior-advanced/graph-algorithms/dijkstra', permanent: false },
       { source: '/docs', destination: '/essentials/introduction/using-this-guide', permanent: false },
       { source: '/docs/:path*', destination: '/:path*', permanent: false },
     ];

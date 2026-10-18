@@ -167,7 +167,7 @@ function Footer() {
           <div>
             <Logo className="text-xl" />
             <p className="mt-3 font-mono text-xs text-fd-muted-foreground">
-              © 2026 Moreallure. All rights reserved.
+              © 2026 <a href="https://moreallure.work" target="_blank" rel="noreferrer" className="transition-colors hover:text-fd-foreground">Moreallure</a>. All rights reserved.
             </p>
           </div>
           <nav className="flex gap-16">
@@ -191,7 +191,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href={`${GITHUB_URL}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">
+                  <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground">
                     <PenLine className="size-3.5" /> Contributing
                   </a>
                 </li>
@@ -228,7 +228,7 @@ export function Landing() {
               <span className="block">Canadian</span>
               <span className="block">Computing</span>
               <span className="block">Competition,</span>{" "}
-              <span className="hero-outline">decoded.</span>
+              <span className="hero-outline">Guided.</span>
             </h1>
             <p className="reveal mt-5 max-w-xl text-lg leading-relaxed text-fd-foreground/80 [animation-delay:200ms]">
               An open-source guide for learning and preparing for the Canadian
@@ -269,9 +269,6 @@ export function Landing() {
           </div>
 
           <div className="reveal relative hidden md:block [animation-delay:350ms]">
-            <div className="absolute -top-5 -right-3 z-10 animate-[hero-float_4s_ease-in-out_infinite] rounded-lg bg-fd-primary px-3 py-1.5 font-mono text-xs text-fd-primary-foreground shadow-lg">
-              15/15 pts · Accepted
-            </div>
             <div className="overflow-hidden rounded-xl border border-fd-border bg-fd-card shadow-2xl">
               <div className="flex items-center gap-1.5 border-b border-fd-border px-4 py-3">
                 <span className="size-3 rounded-full bg-fd-border" />

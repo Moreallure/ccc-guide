@@ -1,17 +1,15 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { ThemeSwitch } from "fumadocs-ui/layouts/shared/slots/theme-switch";
 import { FullSearchTrigger } from "fumadocs-ui/layouts/shared/slots/search-trigger";
 import {
-  Braces,
+  ArrowUpDown,
   Calculator,
   ChevronDown,
   Database,
-  Layers,
   LetterText,
-  Repeat,
   Terminal,
   Waypoints,
 } from "lucide-react";
@@ -32,10 +30,10 @@ const menus = [
       variant: "blue",
     },
     links: [
-      { title: "Basics & I/O", href: "/essentials/introduction/intro-ccc", description: "Input, output, and simple variables", icon: Terminal },
-      { title: "Loops & Conditionals", href: "/essentials/introduction/intro-ccc", description: "Repetition and decision making", icon: Repeat },
-      { title: "Strings", href: "/essentials/introduction/intro-ccc", description: "Text processing and manipulation", icon: LetterText },
-      { title: "Simple Math", href: "/essentials/introduction/intro-ccc", description: "Arithmetic, modulos, and number tricks", icon: Calculator },
+      { title: "Getting Started", href: "/junior/warm-ups/first-30-marks", description: "Input, output, and your first contest marks", icon: Terminal },
+      { title: "Data Structures & Simulation", href: "/junior/simulation-adhoc/intro-data-structures", description: "Arrays, lists, and step-by-step simulation", icon: Database },
+      { title: "Strings", href: "/junior/strings/junior-strings", description: "Text processing and manipulation", icon: LetterText },
+      { title: "Sorting & Greedy", href: "/junior/sorting-greedy/intro-sorting", description: "Ordering data and greedy exchange arguments", icon: ArrowUpDown },
     ],
   },
   {
@@ -49,10 +47,10 @@ const menus = [
       variant: "pink",
     },
     links: [
-      { title: "Data Structures", href: "/essentials/introduction/intro-ccc", description: "Arrays, sets, maps, and queues", icon: Database },
-      { title: "Algorithms", href: "/essentials/introduction/intro-ccc", description: "Sorting, searching, and greedy ideas", icon: Braces },
-      { title: "Dynamic Programming", href: "/essentials/introduction/intro-ccc", description: "Breaking problems into overlapping subproblems", icon: Layers },
-      { title: "Graph Theory", href: "/essentials/introduction/intro-ccc", description: "BFS, DFS, and shortest paths", icon: Waypoints },
+      { title: "Math & Geometry", href: "/senior-core/math-geometry/geometry", description: "Coordinate geometry and modular arithmetic", icon: Calculator },
+      { title: "Sorting & Searching", href: "/senior-core/sorting-greedy/greedy-exchanges", description: "Greedy exchanges, binary search, and two pointers", icon: ArrowUpDown },
+      { title: "Brute Force & Data Structures", href: "/senior-core/brute-force-ds/complete-search", description: "Complete search, stacks, queues, and DSU", icon: Database },
+      { title: "Strings & Graphs", href: "/senior-core/strings-graphs/string-processing", description: "String algorithms, graphs, and trees", icon: Waypoints },
     ],
   },
 ];
@@ -136,7 +134,7 @@ export function SiteHeader() {
               sideOffset={8}
               className="z-50 outline-none"
             >
-              <NavigationMenu.Popup className="relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-xl border border-fd-border bg-fd-popover text-fd-popover-foreground shadow-xl outline-none transition-[opacity,transform,width,height,scale] duration-150 data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-95 data-ending-style:opacity-0">
+              <NavigationMenu.Popup className="relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-xl border border-fd-border/60 bg-fd-popover/80 text-fd-popover-foreground shadow-lg backdrop-blur-xl backdrop-saturate-125 outline-none transition-[opacity,transform,width,height,scale] duration-150 data-starting-style:scale-95 data-starting-style:opacity-0 data-ending-style:scale-95 data-ending-style:opacity-0">
                 <NavigationMenu.Viewport className="relative h-full w-full overflow-hidden" />
               </NavigationMenu.Popup>
             </NavigationMenu.Positioner>
