@@ -41,6 +41,27 @@ B = int(input())
 </LangTabs>
 ````
 
+### Prerequisites card
+
+```mdx
+import { Prerequisites } from '@/components/prerequisites'
+
+<Prerequisites
+  items={[
+    {
+      name: 'Programming concepts',
+      body: 'Input & output, variables & arithmetic, conditionals, lists & loops',
+    },
+  ]}
+  resources={[
+    { label: 'Python input/output basics', href: 'https://...' },
+    { label: 'C++ I/O and types', href: 'https://...' },
+  ]}
+/>
+```
+
+`items` render as a heading + description text when there is one, and as a bullet list when there are several. `resources` are optional and always render one link per line, opened in a new tab. Place the card right after the page `#` title, before any other content.
+
 ### Math
 
 MDX processes backslashes before the math plugin does, so LaTeX needs **double backslashes** in the source. If you only use one, it may compile but show up as raw text on the page.

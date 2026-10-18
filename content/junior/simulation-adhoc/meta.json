@@ -1,8 +1,8 @@
 {
-  "title": "Simulation, Data Structures and Ad-hoc (J2–J4)",
+  "title": "Data Structures, Simulation and Ad-hoc (J2–J4)",
   "pages": [
-    "simulation",
     "intro-data-structures",
+    "simulation",
     "intro-geometry",
     "ad-hoc"
   ]

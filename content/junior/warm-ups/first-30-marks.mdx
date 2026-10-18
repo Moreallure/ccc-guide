@@ -7,8 +7,23 @@ import ConcertTickets, { frontmatter as problemMeta } from '../../problems/2026/
 import OlympicScores, { frontmatter as j2Meta } from '../../problems/2026/J2.mdx'
 import { ProblemSections } from '@/components/problem-sections'
 import { LangTabs, Tab } from '@/components/lang-tabs'
+import { Prerequisites } from '@/components/prerequisites'
 
 # The First 30 Marks
+
+<Prerequisites
+  items={[
+    {
+      name: 'Basic programming concepts',
+      body: 'Input & output, variables & arithmetic, conditionals, lists & loops',
+    },
+  ]}
+  resources={[
+    { label: 'W3Schools - Python Getting Started', href: 'https://www.w3schools.com/python/python_getstarted.asp' },
+    { label: 'W3Schools - Python Variables', href: 'https://www.w3schools.com/Python/python_variables.asp' },
+    { label: 'W3Schools - Python Data Types', href: 'https://www.w3schools.com/python/python_datatypes.asp' },
+  ]}
+/>
 
 The first two problems of the Junior CCC are usually the easiest 30 marks on the contest. They don't require advanced algorithms. Most of the work is reading the problem carefully and translating it directly into code.
 
