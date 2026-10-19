@@ -13,6 +13,24 @@ import { WipSidebarItem } from '@/components/wip-sidebar-item';
 const FREQ_LABELS = { 0: 'rare', 1: 'occasional', 2: 'common', 3: 'frequent', 4: 'very-frequent' };
 const FREQ_COLORS = { 0: 'bg-red-500', 1: 'bg-orange-500', 2: 'bg-amber-500', 3: 'bg-lime-500', 4: 'bg-emerald-500' };
 
+// Cross-tab footer neighbours: fumadocs derives prev/next from the current
+// sidebar tab's tree only, so pages that end a tab would dead-end. Passing
+// `items` bypasses the tree, so both previous and next are hardcoded here.
+const FOOTER_ITEMS = {
+  '/essentials/introduction/choosing-a-language': {
+    previous: {
+      name: 'What is the CCC?',
+      url: '/essentials/introduction/intro-ccc',
+      description: 'What the Canadian Computing Competition is and how judging works',
+    },
+    next: {
+      name: 'Junior',
+      url: '/junior/warm-ups/first-30-marks',
+      description: 'Start with the first 30 marks of the contest.',
+    },
+  },
+};
+
 export function generateStaticParams() {
   return source.generateParams();
 }
@@ -89,7 +107,10 @@ export default async function Page({ params }) {
       sidebar={{ tabs: sectionTabs(), components: { Item: WipSidebarItem } }}
       githubUrl={GITHUB_URL}
     >
-      <DocsPage toc={page.data.toc} footer={{ className: 'mt-8' }}>
+      <DocsPage
+        toc={page.data.toc}
+        footer={{ className: 'mt-8', ...(FOOTER_ITEMS[page.url] ? { items: FOOTER_ITEMS[page.url] } : {}) }}
+      >
         <DocsBody>
           <MDX
           components={{

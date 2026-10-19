@@ -2,6 +2,9 @@ import { createMDX } from 'fumadocs-mdx/next';
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [{ protocol: 'https', hostname: 't1.gstatic.com' }],
+  },
   async redirects() {
     return [
       { source: '/essentials', destination: '/essentials/introduction/using-this-guide', permanent: false },
