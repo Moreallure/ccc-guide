@@ -82,6 +82,15 @@ export function ProblemSections({ component: Problem, meta, imageSize, children 
                 className="text-fd-muted-foreground underline decoration-fd-muted-foreground/40 underline-offset-2 transition-colors hover:text-fd-foreground hover:decoration-fd-foreground/60"
               >
                 Original problem
+              </a>{' '}
+              ·{' '}
+              <a
+                href={`https://dmoj.ca/problem/ccc${String(meta.year).slice(-2)}${meta.problem.toLowerCase()}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-fd-muted-foreground underline decoration-fd-muted-foreground/40 underline-offset-2 transition-colors hover:text-fd-foreground hover:decoration-fd-foreground/60"
+              >
+                DMOJ
               </a>
             </span>
           )}
