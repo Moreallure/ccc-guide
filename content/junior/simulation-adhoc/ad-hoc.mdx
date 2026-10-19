@@ -1,9 +1,232 @@
 ---
 title: "Ad-hoc insight problems"
 freq: 2
-description: "Ad-hoc insight problems — anchored on 2016 J5 *Tandem Bicycle*"
-wip: true
+description: "Ad-hoc insight problems — anchored on 2017 J4 *Favourite Times* and 2016 J5 *Tandem Bicycle*"
 ---
+
+import FavouriteTimes, { frontmatter as favouriteTimesMeta } from '../../problems/2017/J4.mdx'
+import TandemBicycle, { frontmatter as tandemBicycleMeta } from '../../problems/2016/J5.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # Ad-hoc insight problems
 
+**Ad-hoc** problems are solved with a custom observation specific to the problem, rather than a standard algorithm or data structure. Some problems don't fit any named technique — there is usually a short observation that makes the problem easy, and the hard part is finding it. Once the observation is in hand, the code is only a few lines. Two common observations show up in the problems below:
+
+1. **Rewrite the quantity** — express what you're optimizing in a form where the choices become obvious (*Tandem Bicycle*).
+2. **Look for repetition** — if the input is huge but the situation repeats, solve one repetition and scale up (*Favourite Times*).
+
+<ProblemSections component={FavouriteTimes} meta={favouriteTimesMeta}>
+
+## J4 Walkthrough: Favourite Times
+
+</ProblemSections>
+
+### Solution
+
+The most direct approach is to simulate the clock. Start at `12:00`, move forward one minute at a time for `D` minutes, and check whether the digits of each time form an arithmetic sequence. That is enough for the first 4 marks, where `D ≤ 10 000`. But `D` can be as large as `1 000 000 000`, and a billion checks won't finish in 1 second.
+
+The way around this is that the clock repeats. It shows 12 × 60 = 720 different times and is back at `12:00` after 720 minutes, so whether a minute is a favourite time depends only on where it falls in the 720-minute cycle. That means we only need two numbers: how many favourite times there are in one full cycle, and how many there are in whatever is left over.
+
+We find the first by running the simple check over 720 minutes (it comes out to 31). Then we split `D` into `D // 720` full cycles and `D % 720` leftover minutes. Each full cycle contributes 31, and we simulate the leftover minutes directly. Since the ending time counts, that means checking the first `D % 720 + 1` times of a cycle. The starting time `12:00` isn't a favourite (the digits are 1, 2, 0, 0), so we don't need to worry about whether it should count.
+
+Sample 2 has `D = 180`, which is zero full cycles and 180 leftover minutes, so it's just the simple simulation and gives 11.
+
+Two small things to get right when building the digits. Minutes always have two digits, so `2:07` is the digits 2, 0, 7 and not 2, 7. And the clock starts at 12, not 0, so the hour sequence is 12, 1, 2, ..., 11. Using 0 for the first hour would turn `12:34` into the digits 0, 3, 4 and lose a favourite time.
+
+With `D = 1 000 000 000` the answer is about 43 million, which fits in a 32-bit integer.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+def favourite(m):
+    t = m % 720
+    hour = t // 60
+    if hour == 0:
+        hour = 12
+    digits = str(hour) + str(t % 60).zfill(2)
+
+    diff = int(digits[1]) - int(digits[0])
+    for i in range(1, len(digits) - 1):
+        if int(digits[i + 1]) - int(digits[i]) != diff:
+            return False
+    return True
+
+
+d = int(input())
+
+cycle = 0
+for m in range(720):
+    if favourite(m):
+        cycle += 1
+
+full, rest = divmod(d, 720)
+count = full * cycle
+for m in range(rest + 1):
+    if favourite(m):
+        count += 1
+
+print(count)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool favourite(int m) {
+    int t = m % 720;
+    int hour = t / 60;
+    if (hour == 0) {
+        hour = 12;
+    }
+    int minute = t % 60;
+
+    string s = to_string(hour);
+    s += char('0' + minute / 10);
+    s += char('0' + minute % 10);
+
+    int diff = s[1] - s[0];
+    for (int i = 1; i + 1 < (int)s.size(); i++) {
+        if (s[i + 1] - s[i] != diff) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int d;
+    cin >> d;
+
+    int cycle = 0;
+    for (int m = 0; m < 720; m++) {
+        if (favourite(m)) {
+            cycle++;
+        }
+    }
+
+    int full = d / 720, rest = d % 720;
+    long long count = (long long)full * cycle;
+    for (int m = 0; m <= rest; m++) {
+        if (favourite(m)) {
+            count++;
+        }
+    }
+
+    cout << count << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={TandemBicycle} meta={tandemBicycleMeta}>
+
+## J5 Walkthrough: Tandem Bicycle
+
+</ProblemSections>
+
+### Solution
+
+There are `N!` ways to pair up the two countries, so we can't try them all when `N` is 100. The question is whether there's a pattern we can exploit.
+
+In every pair, the faster person drives and the slower person is just a passenger. Everyone is either a driver or a passenger, so:
+
+`total speed = (sum of all 2N speeds) − (sum of the passengers' speeds)`
+
+The sum of all speeds never changes, so both questions are really asking who should be the passengers.
+
+**Question 1 (minimum).** We want the passengers to be as fast as possible. A passenger can never be faster than their driver, so the best we can do is pair people with similar speeds. Sort each country's speeds and pair the i-th slowest person from one country with the i-th slowest from the other.
+
+To see why crossing pairs never helps, take two pairs with speeds `a1 ≤ a2` from Dmojistan and `b1 ≤ b2` from Pegland. The fastest of the four is a driver however we pair them, so only the other pair's bike speed changes. If the fastest is `a2`, then pairing `(a1, b1)` and `(a2, b2)` leaves `(a1, b1)` as the other pair, while swapping partners leaves `(a1, b2)`, which is at least as fast since `b2 ≥ b1`. The case where `b2` is the fastest works the same way. So uncrossing pairs never raises the total, and a pairing with no crossings left is exactly the sorted one.
+
+**Question 2 (maximum).** Now we want the passengers to be as slow as possible. The best case is that the `N` slowest people overall are all passengers, which makes the total the sum of the `N` fastest speeds. This is also an upper bound, since the `N` bike speeds belong to `N` different people.
+
+We can always reach it. Suppose `k` of the `N` fastest people are from Dmojistan and `N − k` are from Pegland. Then Pegland has exactly `k` people outside the fastest `N`, and Dmojistan has exactly `N − k`. So every fast Dmojistan citizen can be paired with a slower Pegland citizen, and every fast Pegland citizen with a slower Dmojistan citizen. Notice that we never need to know which country anyone belongs to.
+
+Checking the samples: sorting sample 1 gives the pairs `(1, 2)`, `(4, 4)`, `(5, 6)`, so the total is `2 + 4 + 6 = 12`. For Question 2 on sample 2, the three fastest speeds are `6, 5, 4`, giving 15. On sample 3, the five fastest are `589, 540, 496, 202, 189`, giving 2016.
+
+The mark split is 8 marks for Question 1 and 7 for Question 2, so both ideas are needed for full marks. With `N ≤ 100`, the sorting is nowhere near the limits.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+q = int(input())
+n = int(input())
+a = [int(t) for t in input().split()]
+b = [int(t) for t in input().split()]
+
+total = 0
+if q == 1:
+    a.sort()
+    b.sort()
+    for i in range(n):
+        total += max(a[i], b[i])
+else:
+    speeds = sorted(a + b)
+    for i in range(n, 2 * n):
+        total += speeds[i]
+
+print(total)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int q, n;
+    cin >> q >> n;
+
+    vector<int> a(n), b(n);
+    for (int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < n; i++) cin >> b[i];
+
+    long long total = 0;
+    if (q == 1) {
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        for (int i = 0; i < n; i++) {
+            total += max(a[i], b[i]);
+        }
+    } else {
+        vector<int> speeds = a;
+        speeds.insert(speeds.end(), b.begin(), b.end());
+        sort(speeds.begin(), speeds.end());
+        for (int i = n; i < 2 * n; i++) {
+            total += speeds[i];
+        }
+    }
+
+    cout << total << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+## Summary
+
+*Favourite Times* and *Tandem Bicycle* are both short once you have the right observation. Finding it is the hard part.
+
+In *Favourite Times*, the observation was that a 720-minute clock cycle means a billion checks collapses to about 1,500. In *Tandem Bicycle*, rewriting the total speed as "everyone's speed minus the passengers" separated the fixed part from the part that could be optimised, and each question became a simple sorting argument.
+
+For both, a slow brute force on small inputs is worth keeping around. Ad-hoc problems are easy to get almost right, and the samples usually don't cover the case where the observation breaks.
+
+For more ad-hoc problems and insights, the [USACO Guide's ad-hoc page](https://usaco.guide/bronze/ad-hoc) covers further examples at a similar difficulty level.

@@ -96,9 +96,7 @@ int main() {
 
 ### Solution
 
-The constraints arrive before the groups do, so the reading order forces the plan: store the constraints while reading them, build the grouping, then check.
-
-First, read the `X` same-group constraints and `Y` separate-group constraints into two lists of pairs. Then read the `G` groups and record each student's group number in a map keyed by name — all three names on group line `i` map to `i`.
+The constraints arrive before the groups do, so we read the `X` same-group constraints and `Y` separate-group constraints into two lists of pairs before seeing any groups. Then we read the `G` groups and record each student's group number in a map keyed by name — all three names on group line `i` map to `i`.
 
 With the map built, every constraint is two lookups and one comparison. A same-group constraint is violated when the two students are not in the same group; a separate-group constraint is violated when they are.
 
@@ -199,9 +197,6 @@ int main() {
 
 ## Summary
 
-Most Junior problems are decided by picking the right container for the data:
+The choice between a list and a map usually comes down to how you access the data. If you need to scan everything, a list is fine. If you need to jump to a specific item by name or id, the map pays for itself immediately — as *Group Work* shows, replacing a scan-inside-a-loop with a single lookup is often the difference between passing the last subtask and timing out.
 
-1. **Access by position, or in order** — collect into a list, then scan.
-2. **Access by key** — store each item once in a map, then look it up directly.
-
-When a solution searches inside a loop, check whether a map lookup removes the search before reaching for anything more advanced. Both structures appear in almost every module that follows — especially the map, once problems start counting and connecting things.
+Both structures appear in almost every module from here on.

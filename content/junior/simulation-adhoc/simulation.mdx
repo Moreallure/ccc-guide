@@ -103,9 +103,9 @@ int main() {
 
 The definition does most of the work here. A cyclic shift of `S` moves some characters from the front to the back, and `S` counts as a cyclic shift of itself. Since `S` has at most 1000 characters, there are at most 1000 shifts in total: shift by 0 positions, by 1, by 2, and so on.
 
-So the plan is to generate every shift — `S[i:] + S[:i]` for each starting position `i` — and check whether `T` contains it as a substring. Both languages have a built-in substring search that is heavily optimized: Python's `in` operator and C++'s `find`. There is no need to hand-roll the search.
+Generating every shift — `S[i:] + S[:i]` for each starting position `i` — and checking whether `T` contains it as a substring covers all cases. Both languages have a built-in substring search that is heavily optimized: Python's `in` operator and C++'s `find`. There is no need to hand-roll the search.
 
-That is the whole solution: build the candidate set straight from the definition, then lean on the standard library. The estimate is comfortable too — a thousand shifts times a fast scan of a thousand-character text, well under the budget.
+The candidate set comes straight from the definition, and the standard library handles the search. The estimate is comfortable too — a thousand shifts times a fast scan of a thousand-character text, well under the budget.
 
 Two details worth noting. If `S` is longer than `T`, no shift can fit, but the substring check simply fails for every shift, so no special case is needed. And the shift by 0 positions is `S` itself, which handles the "a string is a cyclic shift of itself" rule automatically.
 
@@ -164,7 +164,7 @@ int main() {
 
 ### Solution
 
-The trap in this problem is clock arithmetic. Fiona covers two hours of distance, but rush hour halves her speed, and her drive might start inside rush hour, end inside it, span both rush-hour windows, or cross midnight. Computing the arrival time with time arithmetic and special cases is where most wrong answers come from.
+The awkward part of this problem is clock arithmetic. Fiona covers two hours of distance, but rush hour halves her speed, and her drive might start inside rush hour, end inside it, span both rush-hour windows, or cross midnight. Handling these cases directly with time arithmetic invites mistakes.
 
 Simulation replaces all of that case work with a loop. Keep two numbers: the current time `t` in minutes, and how much of the trip is done, measured in minutes of normal-speed travel. Advance one minute at a time. If the minute we are driving through falls in a rush-hour window — 07:00 to 10:00 is minutes 420 through 599, and 15:00 to 19:00 is minutes 900 through 1139 — it covers half a normal minute of distance, otherwise it covers one. Stop once two full hours of distance are covered.
 
@@ -227,12 +227,6 @@ int main() {
 
 ## Summary
 
-Simulation problems are usually straightforward once the process is represented correctly.
+All three problems above were small enough that a direct simulation was the simplest approach. The difficulty was never the loop itself — it was choosing the right state to track. In *Flipper*, state was just a 2×2 grid. In *Cyclic Shifts*, it was a set of candidate strings. In *Arrival Time*, switching from clock time to half-minutes eliminated all the messy time arithmetic.
 
-When solving a simulation problem:
-
-1. **Identify the state** — what information needs to be tracked?
-2. **Identify the operations** — what changes the state?
-3. **Check the complexity** — will the simulation finish within the time limit?
-
-If the process is small enough, simulating it directly is often the simplest solution. The main challenge is usually translating the problem statement into the right state and operations.
+When a simulation feels complicated, the first question to ask is whether the state can be reframed.

@@ -11,13 +11,7 @@ import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # Practice Problems
 
-Walkthroughs help, but the skill only comes from solving problems yourself.
-The best place to start is real J1 and J2 problems from past contests.
-
-This module works through three of them, from 2025 and 2024. Try each problem
-on your own before reading its walkthrough. All three come down to the same
-approach as the last module: read carefully, work out what is being asked, and
-translate it directly into code.
+This module works through three J1 and J2 problems from 2025 and 2024. Each one comes down to the same approach as the previous module: read carefully, work out what is being asked, and translate it directly into code.
 
 <ProblemSections component={RollerCoaster} meta={coasterMeta}>
 
@@ -27,15 +21,15 @@ translate it directly into code.
 
 ### Solution
 
-We need to decide whether you get on the ride. The train holds \\(C \\times P\\)
-people and your place in line is \\(N\\), so you ride when:
+We need to decide whether the person gets on the ride. The train holds \\(C \\times P\\)
+people, and the position in line is \\(N\\), so the rider boards when:
 
 \\[
 N \\leq C \\times P
 \\]
 
 Sample 2 checks the boundary: the train holds \\(4 \\times 3 = 12\\) people and
-you are 12th in line, so being exactly at the limit still counts.
+the person is 12th in line, so being exactly at the limit still counts.
 
 ### Implementation
 
@@ -214,12 +208,8 @@ int main() {
 ## Takeaways
 
 None of these problems needs anything beyond input, a condition, and a loop.
-What they reward is careful reading: being exactly at capacity still gets you
+What they reward is careful reading: being exactly at capacity still gets the rider
 on the ride, the donut spec promises sales never exceed stock, and Dusa
 guarantees the loop terminates.
 
-When a problem feels harder than it should, re-read the specification before
-rewriting the code.
-
-The next module applies these habits to problems where the input is text
-instead of numbers.
+The next module covers problems where the input is text instead of numbers.

@@ -1,9 +1,205 @@
 ---
-title: "Coordinates, distance, and rectangles"
+title: "Intro to Geometry"
 freq: 2
-description: "Coordinates, distance, and rectangles — anchored on 2023 J4 *Trianglane* and 2020 J3 *Art*"
-wip: true
+description: "Bounding boxes and counting shared sides — anchored on 2023 J4 *Trianglane* and 2020 J3 *Art*"
 ---
 
-# Coordinates, distance, and rectangles
+import Art, { frontmatter as artMeta } from '../../problems/2020/J3.mdx'
+import Trianglane, { frontmatter as trianglaneMeta } from '../../problems/2023/J4.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
+
+# Intro to Geometry
+
+Some Junior problems describe points or tiles laid out in a plane and ask a question about where they are. They need little formal geometry. The work is reading the layout carefully and reducing it to something you can compare or count:
+
+1. **Track the extremes** — scan the points once, keeping the smallest and largest coordinates (*Art*).
+2. **Count the contacts** — what a tile contributes depends on which tiles it touches (*Trianglane*).
+
+*Art* places drops of paint on a canvas using `(x, y)` coordinates: `x` grows to the right, `y` grows upward, and `(0, 0)` is the bottom-left corner. *Trianglane* has no coordinates, and its tiles are identified by row and column.
+
+<ProblemSections component={Art} meta={artMeta}>
+
+## J3 Walkthrough: Art
+
+</ProblemSections>
+
+### Solution
+
+The picture in the statement only illustrates the sample, and the answer depends on four numbers: the smallest and largest X, and the smallest and largest Y. A rectangle containing every drop has to reach at least as far left as the leftmost drop, as far right as the rightmost, and likewise up and down, and the smallest such rectangle stops exactly there. Its bottom-left corner is built from the smallest X and Y, and its top-right corner from the largest X and Y. So read all `N` points, keep a running minimum and maximum of each coordinate, and print the two corners.
+
+One sentence in the statement changes the answer: **points on the frame are not considered inside**. A rectangle built from the raw minima and maxima would have the extreme drops sitting on its edges, which is not allowed. The output must be integers, so the closest the frame can get is one unit away: subtract 1 from each minimum and add 1 to each maximum. The sample shows this. The drops span x from 24 to 64 and y from 10 to 78, and the expected output is (23,9) to (65,79). It also explains why the input coordinates are positive while the output only has to be non-negative: a drop at x = 1 puts the frame at x = 0.
+
+Each input line has the form `X,Y` with no spaces. For 12 of the 15 marks, both coordinates are two-digit numbers. A solution that slices fixed character positions would pass those marks and fail the rest, while splitting on the comma and converting each half with `int` works for any width.
+
+With at most 100 points and one comparison per coordinate, the running time is not a concern.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+n = int(input())
+
+xs = []
+ys = []
+for _ in range(n):
+    x, y = input().split(',')
+    xs.append(int(x))
+    ys.append(int(y))
+
+print(min(xs) - 1, min(ys) - 1, sep=',')
+print(max(xs) + 1, max(ys) + 1, sep=',')
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    // X and Y are below 100, so these starting values are safe
+    int minX = 100, minY = 100, maxX = 0, maxY = 0;
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        char comma;
+        cin >> x >> comma >> y;
+
+        minX = min(minX, x);
+        maxX = max(maxX, x);
+        minY = min(minY, y);
+        maxY = max(maxY, y);
+    }
+
+    cout << minX - 1 << ',' << minY - 1 << '\n';
+    cout << maxX + 1 << ',' << maxY + 1 << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+<ProblemSections component={Trianglane} meta={trianglaneMeta}>
+
+## J4 Walkthrough: Trianglane
+
+</ProblemSections>
+
+### Solution
+
+Warning tape goes on every side of a wet tile that faces a dry tile or the outside, and a side shared by two wet tiles needs none. That turns the problem into counting sides instead of tracing the shape. Every wet tile has three sides, which gives `3 × (wet tiles)` in total, but a side shared by two wet tiles has been counted twice and shouldn't be counted at all, so each shared side removes 2:
+
+`tape = 3 × (wet tiles) − 2 × (shared wet sides)`
+
+What remains is to decide which pairs of tiles share a side, and this is where the triangles matter. There are two kinds of pairs:
+
+1. **Neighbours in the same row** — consecutive tiles in a row point in opposite directions and always share a slanted side.
+2. **The two tiles in the same column** — these also point in opposite directions, but they share a side only when the top tile points up, because its flat base is then the flat top of the tile below. When the top tile points down, its flat side lies on the outer edge of the laneway and the two tiles touch only at a corner. The first tile points up and directions alternate, so the top tile points up in columns 1, 3, 5, and so on.
+
+A column therefore contributes a shared side only if it is an odd-numbered column and both of its tiles are wet.
+
+Check this against the samples. Sample 1 has three wet tiles and none of them touch, so the tape is `3 × 3 = 9`. Sample 2 has five wet tiles and two shared sides, the top-row pair in columns 3 and 4 and the pair in column 3, so the tape is `3 × 5 − 2 × 2 = 11`.
+
+The samples will not catch the most common mistake. In both, the only column with two wet tiles is column 3, which is odd. A solution that subtracts for *every* column with two wet tiles passes both samples and fails others: with `C = 2`, top row `0 1` and bottom row `0 1`, the two wet tiles touch only at a corner, so the answer is `6`, not `4`. When a counting formula passes the samples, test one case where the geometry differs, such as an even column here.
+
+The mark split follows the formula term by term. The first subtask (no adjacent black tiles, second row white) needs only `3 × (wet tiles)`. The second adds the same-row neighbours, and the third adds the column pairs. The last 4 marks raise `C` to 200 000, which three linear passes handle without trouble.
+
+### Implementation
+
+<LangTabs items={['Python', 'C++']}>
+  <Tab value="Python">
+
+```python
+c = int(input())
+top = [int(t) for t in input().split()]
+bottom = [int(t) for t in input().split()]
+rows = [top, bottom]
+
+tape = 0
+for row in rows:
+    for i in range(c):
+        if row[i] == 1:
+            tape += 3
+
+# sides shared by neighbouring wet tiles in the same row
+for row in rows:
+    for i in range(1, c):
+        if row[i] == 1 and row[i - 1] == 1:
+            tape -= 2
+
+# sides shared between the rows: only where the top tile points up,
+# which is every even index (index 0 is column 1)
+for i in range(0, c, 2):
+    if top[i] == 1 and bottom[i] == 1:
+        tape -= 2
+
+print(tape)
+```
+
+  </Tab>
+  <Tab value="C++">
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int c;
+    cin >> c;
+
+    vector<vector<int>> rows(2, vector<int>(c));
+    for (auto& row : rows) {
+        for (int i = 0; i < c; i++) {
+            cin >> row[i];
+        }
+    }
+
+    int tape = 0;
+    for (auto& row : rows) {
+        for (int i = 0; i < c; i++) {
+            if (row[i] == 1) {
+                tape += 3;
+            }
+        }
+    }
+
+    // sides shared by neighbouring wet tiles in the same row
+    for (auto& row : rows) {
+        for (int i = 1; i < c; i++) {
+            if (row[i] == 1 && row[i - 1] == 1) {
+                tape -= 2;
+            }
+        }
+    }
+
+    // sides shared between the rows: only where the top tile points up,
+    // which is every even index (index 0 is column 1)
+    for (int i = 0; i < c; i += 2) {
+        if (rows[0][i] == 1 && rows[1][i] == 1) {
+            tape -= 2;
+        }
+    }
+
+    cout << tape << '\n';
+
+    return 0;
+}
+```
+
+  </Tab>
+</LangTabs>
+
+## Summary
+
+Both problems above boil down to a single careful scan. In *Art*, one pass through the coordinates picks out the four extremes, and one sentence in the statement — that drops on the frame don’t count as inside — shifts every answer by 1. In *Trianglane*, the perimeter formula is just counting each tile's sides and subtracting for shared ones, but getting the shared-side rule right for column pairs requires knowing which direction each tile points.
+
+For geometry problems at this level, the geometry itself is rarely the bottleneck. The subtleties are almost always in the edge conditions.
