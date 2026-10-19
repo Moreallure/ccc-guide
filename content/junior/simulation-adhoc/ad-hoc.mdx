@@ -8,6 +8,7 @@ import FavouriteTimes, { frontmatter as favouriteTimesMeta } from '../../problem
 import TandemBicycle, { frontmatter as tandemBicycleMeta } from '../../problems/2016/J5.mdx'
 import { ProblemSections } from '@/components/problem-sections'
 import { LangTabs, Tab } from '@/components/lang-tabs'
+import { Resources } from '@/components/resources'
 
 # Ad-hoc insight problems
 
@@ -229,4 +230,10 @@ In *Favourite Times*, the observation was that a 720-minute clock cycle means a 
 
 For both, a slow brute force on small inputs is worth keeping around. Ad-hoc problems are easy to get almost right, and the samples usually don't cover the case where the observation breaks.
 
-For more ad-hoc problems and insights, the [USACO Guide's ad-hoc page](https://usaco.guide/bronze/ad-hoc) covers further examples at a similar difficulty level.
+If you want to explore more ad-hoc problems and insights, the USACO Guide's ad-hoc page below covers further examples at a similar difficulty level.
+
+<Resources
+  items={[
+    { label: 'USACO Guide — Ad-hoc', href: 'https://usaco.guide/bronze/ad-hoc', description: 'Further ad-hoc problems and observations.' },
+  ]}
+/>

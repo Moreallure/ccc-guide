@@ -53,14 +53,24 @@ import { Prerequisites } from '@/components/prerequisites'
       body: 'Input & output, variables & arithmetic, conditionals, lists & loops',
     },
   ]}
-  resources={[
-    { label: 'Python input/output basics', href: 'https://...' },
-    { label: 'C++ I/O and types', href: 'https://...' },
+/>
+```
+
+`items` render as a heading + description text when there is one, and as a bullet list when there are several. Place the card right after the page `#` title, before any other content.
+
+### Resources card
+
+```mdx
+import { Resources } from '@/components/resources'
+
+<Resources
+  items={[
+    { label: 'USACO Guide — Ad-hoc', href: 'https://usaco.guide/bronze/ad-hoc', description: 'Further ad-hoc problems and observations.' },
   ]}
 />
 ```
 
-`items` render as a heading + description text when there is one, and as a bullet list when there are several. `resources` are optional and always render one link per line, opened in a new tab. Place the card right after the page `#` title, before any other content.
+`items` are `{ label, href, description? }`; each renders as a link (new tab) with the site's favicon fetched automatically from the href's domain. `description` is optional. Typically placed at the end of a module, after the practice problems.
 
 ### Work in progress modules
 
