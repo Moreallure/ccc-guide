@@ -6,6 +6,7 @@ import {
   List,
   ListChecks,
   PenLine,
+  Search,
   Terminal,
   Trophy,
 } from "lucide-react";
@@ -159,6 +160,23 @@ const features = [
     copy: "Each division ends where the next begins. Follow the path from your first J1 submission all the way to the CCO invite.",
   },
 ];
+
+// Demo data for the archive card mini-artifacts (static, decoration only).
+const demoSlots = {
+  junior: ["J1", "J2", "J3", "J4", "J5"],
+  senior: ["S1", "S2", "S3", "S4", "S5"],
+};
+const demoHeat = [
+  [3, 0, 1, 2, 0],
+  [0, 4, 1, 0, 1],
+  [0, 2, 5, 1, 0],
+  [0, 0, 0, 1, 3],
+];
+const demoDifficulties = ["bg-emerald-500/60", "bg-amber-500/60", "bg-orange-500/60", "bg-rose-500/60"];
+const demoHeatTint = (n) =>
+  n > 0
+    ? { backgroundColor: `color-mix(in oklab, var(--color-fd-primary) ${n >= 5 ? 30 : n >= 2 ? 18 : 9}%, transparent)` }
+    : undefined;
 
 function Footer() {
   return (
@@ -414,6 +432,116 @@ export function Landing() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Archive */}
+        <section className="border-t border-fd-border">
+          <div className="reveal-scroll mx-auto w-full max-w-6xl px-4 py-24">
+            <p className="font-mono text-sm text-fd-muted-foreground">$ ls ./archive</p>
+            <h2 className="mt-4 text-4xl font-extrabold tracking-tight">
+              More than lessons.
+            </h2>
+            <p className="mt-4 max-w-xl leading-relaxed text-fd-muted-foreground">
+              Browse past CCC problems from 2012 onwards, or explore the topics and techniques behind them.
+            </p>
+            <div className="mt-12 grid gap-4 md:grid-cols-2">
+              <Link
+                href="/problems"
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-fd-border bg-fd-card p-8 no-underline transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-fd-muted-foreground">
+                    <List className="size-5" />
+                  </span>
+                </div>
+                <h3 className="mt-3 text-2xl font-extrabold tracking-tight">
+                  Problems
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-fd-muted-foreground">
+                  Search all 150 problems and filter by level, difficulty, and
+                  topic.
+                </p>
+                <div className="mt-6 rounded-lg border border-fd-border bg-fd-muted/30 p-3">
+                  <div className="flex items-center gap-2 rounded-md border border-fd-border bg-fd-background px-2.5 py-1.5">
+                    <Search className="size-3.5 text-fd-muted-foreground" />
+                    <span className="font-mono text-xs text-fd-muted-foreground">
+                      search problems…
+                    </span>
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {demoSlots.junior.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full bg-indigo-500/15 px-2 py-0.5 font-mono text-[10px] text-indigo-700 dark:text-indigo-300"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                    {demoSlots.senior.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full bg-rose-500/15 px-2 py-0.5 font-mono text-[10px] text-rose-700 dark:text-rose-300"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                    <span className="mx-1 w-px self-stretch bg-fd-border" />
+                    {demoDifficulties.map((c, i) => (
+                      <span key={i} className={`size-3 self-center rounded-full ${c}`} />
+                    ))}
+                  </div>
+                </div>
+                <span className="mt-8 flex items-center gap-1.5 text-sm font-medium">
+                  Browse Problems
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+
+              <Link
+                href="/topics"
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-fd-border bg-fd-card p-8 no-underline transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-fd-muted-foreground">
+                    <ListChecks className="size-5" />
+                  </span>
+                </div>
+                <h3 className="mt-3 text-2xl font-extrabold tracking-tight">
+                  Topics
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-fd-muted-foreground">
+                  See how each technique spreads across J1–J5 and S1–S5,
+                  computed from every paper since 2012.
+                </p>
+                <div className="mt-6 rounded-lg border border-fd-border bg-fd-muted/30 p-3">
+                  <div className="space-y-1.5">
+                    {demoHeat.map((row, r) => (
+                      <div key={r} className="flex items-center gap-1.5">
+                        <span className="w-16 shrink-0 truncate font-mono text-[10px] text-fd-muted-foreground">
+                          {["math", "sim", "strings", "graphs"][r]}
+                        </span>
+                        {row.map((n, c) => (
+                          <span
+                            key={c}
+                            className={`h-4 flex-1 rounded-sm font-mono text-[9px] leading-4 text-center ${
+                              n > 0 ? "font-semibold text-fd-foreground" : "text-fd-muted-foreground/40"
+                            }`}
+                            style={demoHeatTint(n)}
+                          >
+                            {n}
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <span className="mt-8 flex items-center gap-1.5 text-sm font-medium">
+                  Browse Topics
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
             </div>
           </div>
         </section>
