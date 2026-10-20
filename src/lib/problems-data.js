@@ -33,10 +33,33 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export const TOPICS = [...new Set(problems.map((p) => p.topic))].map((topic) => ({
-  value: topic,
-  label: topic
+const topicLabel = (topic) =>
+  topic
     .split('-')
     .map((w) => w[0].toUpperCase() + w.slice(1))
-    .join(' '),
+    .join(' ');
+
+export const TOPICS = [...new Set(problems.map((p) => p.topic))].map((topic) => ({
+  value: topic,
+  label: topicLabel(topic),
 }));
+
+// Topic × slot count matrix for one level, rows sorted by total (desc).
+export function getTopicMatrix(level) {
+  const slots = level === 'junior' ? ['J1', 'J2', 'J3', 'J4', 'J5'] : ['S1', 'S2', 'S3', 'S4', 'S5'];
+  const inLevel = problems.filter((p) => p.level === level);
+  const rows = new Map();
+  for (const p of inLevel) {
+    if (!rows.has(p.topic)) {
+      rows.set(p.topic, { topic: p.topic, label: topicLabel(p.topic), cells: {}, total: 0 });
+    }
+    const row = rows.get(p.topic);
+    row.cells[p.slot] = (row.cells[p.slot] ?? 0) + 1;
+    row.total++;
+  }
+  const list = [...rows.values()].sort(
+    (a, b) => b.total - a.total || a.topic.localeCompare(b.topic),
+  );
+  for (const row of list) row.share = row.total / inLevel.length;
+  return { slots, rows: list, count: inLevel.length };
+}

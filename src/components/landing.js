@@ -3,6 +3,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
+  List,
   ListChecks,
   PenLine,
   Terminal,
@@ -246,13 +247,25 @@ export function Landing() {
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/junior"
+                href="/problems"
                 className={buttonVariants({
                   variant: "outline",
-                  className: "px-6 py-3 text-base",
+                  className: "bg-fd-background px-6 py-3 text-base",
                 })}
               >
+                Browse Problems
+                <List className="ml-2 size-4" />
+              </Link>
+              {/* Topics lives in the desktop nav only; mobile needs its own path */}
+              <Link
+                href="/topics"
+                className={`md:hidden ${buttonVariants({
+                  variant: "outline",
+                  className: "bg-fd-background px-6 py-3 text-base",
+                })}`}
+              >
                 Browse Topics
+                <ListChecks className="ml-2 size-4" />
               </Link>
             </div>
             <div className="reveal mt-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-fd-muted-foreground [animation-delay:400ms]">

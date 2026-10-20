@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { ThemeSwitch } from "fumadocs-ui/layouts/shared/slots/theme-switch";
 import { FullSearchTrigger } from "fumadocs-ui/layouts/shared/slots/search-trigger";
@@ -56,6 +57,13 @@ const menus = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const navLink = (href) =>
+    `rounded-md px-3 py-2 text-sm font-medium no-underline transition-colors hover:bg-fd-muted focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-fd-ring ${
+      pathname.startsWith(href)
+        ? 'text-fd-foreground'
+        : 'text-fd-muted-foreground hover:text-fd-foreground'
+    }`;
   return (
     <header className="border-b border-fd-border">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-3 sm:gap-4 sm:px-4">
@@ -128,11 +136,13 @@ export function SiteHeader() {
               </NavigationMenu.Item>
             ))}
             <NavigationMenu.Item>
-              <NavigationMenu.Link
-                render={<Link href="/problems" />}
-                className="rounded-md px-3 py-2 text-sm font-medium text-fd-muted-foreground no-underline transition-colors hover:bg-fd-muted hover:text-fd-foreground focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-fd-ring"
-              >
+              <NavigationMenu.Link render={<Link href="/problems" />} className={navLink('/problems')}>
                 Problems
+              </NavigationMenu.Link>
+            </NavigationMenu.Item>
+            <NavigationMenu.Item>
+              <NavigationMenu.Link render={<Link href="/topics" />} className={navLink('/topics')}>
+                Topics
               </NavigationMenu.Link>
             </NavigationMenu.Item>
           </NavigationMenu.List>
