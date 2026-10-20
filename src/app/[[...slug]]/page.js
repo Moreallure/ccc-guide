@@ -9,6 +9,7 @@ import { baseOptions, GITHUB_URL } from '@/lib/layout.shared';
 import { Landing } from '@/components/landing';
 import { WorkInProgress } from '@/components/work-in-progress';
 import { WipSidebarItem } from '@/components/wip-sidebar-item';
+import { HeadingFolder } from '@/components/heading-folder';
 
 const FREQ_LABELS = { 0: 'rare', 1: 'occasional', 2: 'common', 3: 'frequent', 4: 'very-frequent' };
 const FREQ_COLORS = { 0: 'bg-red-500', 1: 'bg-orange-500', 2: 'bg-amber-500', 3: 'bg-lime-500', 4: 'bg-emerald-500' };
@@ -104,7 +105,7 @@ export default async function Page({ params }) {
     <DocsLayout
       {...baseOptions()}
       tree={pageTreeWithWip()}
-      sidebar={{ tabs: sectionTabs(), components: { Item: WipSidebarItem } }}
+      sidebar={{ tabs: sectionTabs(), components: { Item: WipSidebarItem, Folder: HeadingFolder } }}
       githubUrl={GITHUB_URL}
     >
       <DocsPage
