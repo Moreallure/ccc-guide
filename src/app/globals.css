@@ -24,3 +24,25 @@ body {
   max-width: min(100%, var(--problem-img-w, 12rem));
   height: auto;
 }
+
+/* One-shot staggered card reveal (problems page grid) */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.anim-fade-up {
+  animation: fade-up 0.35s ease-out backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up {
+    animation: none;
+  }
+}

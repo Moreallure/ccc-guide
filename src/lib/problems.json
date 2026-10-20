@@ -1,0 +1,1052 @@
+[
+  {
+    "year": 2012,
+    "slot": "J1",
+    "name": "Speed fines are not fine!",
+    "topic": "math",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "J2",
+    "name": "Sounds fishy!",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "J3",
+    "name": "Icon Scaling",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "J4",
+    "name": "Big Bang Secrets",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "J5",
+    "name": "A Coin Game",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "J1",
+    "name": "Next in line",
+    "topic": "math",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "J2",
+    "name": "Rotating letters",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "J3",
+    "name": "From 1987 to 2013",
+    "topic": "brute-force",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "J4",
+    "name": "Time on task",
+    "topic": "greedy",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "J5",
+    "name": "Chances of winning",
+    "topic": "brute-force",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "J1",
+    "name": "Triangle Times",
+    "topic": "math",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "J2",
+    "name": "Vote Count",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "J3",
+    "name": "Double Dice",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "J4",
+    "name": "Party Invitation",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "J5",
+    "name": "Assigning Partners",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "J1",
+    "name": "Special Day",
+    "topic": "math",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "J2",
+    "name": "Happy or Sad",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "J3",
+    "name": "Rövarspråket",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "J4",
+    "name": "Wait Time",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "J5",
+    "name": "π-day",
+    "topic": "dynamic-programming",
+    "avg": null
+  },
+  {
+    "year": 2016,
+    "slot": "J1",
+    "name": "Tournament Selection",
+    "topic": "math",
+    "avg": 12.58
+  },
+  {
+    "year": 2016,
+    "slot": "J2",
+    "name": "Magic Squares",
+    "topic": "simulation",
+    "avg": 10.32
+  },
+  {
+    "year": 2016,
+    "slot": "J3",
+    "name": "Hidden Palindrome",
+    "topic": "strings",
+    "avg": 5.72
+  },
+  {
+    "year": 2016,
+    "slot": "J4",
+    "name": "Arrival Time",
+    "topic": "simulation",
+    "avg": 5.35
+  },
+  {
+    "year": 2016,
+    "slot": "J5",
+    "name": "Tandem Bicycle",
+    "topic": "greedy",
+    "avg": 3.76
+  },
+  {
+    "year": 2017,
+    "slot": "J1",
+    "name": "Quadrant Selection",
+    "topic": "math",
+    "avg": 12.03
+  },
+  {
+    "year": 2017,
+    "slot": "J2",
+    "name": "Shifty Sum",
+    "topic": "math",
+    "avg": 10.53
+  },
+  {
+    "year": 2017,
+    "slot": "J3",
+    "name": "Exactly Electrical",
+    "topic": "math",
+    "avg": 1.02
+  },
+  {
+    "year": 2017,
+    "slot": "J4",
+    "name": "Favourite Times",
+    "topic": "simulation",
+    "avg": 0.36
+  },
+  {
+    "year": 2017,
+    "slot": "J5",
+    "name": "Nailed It!",
+    "topic": "counting",
+    "avg": 0.28
+  },
+  {
+    "year": 2018,
+    "slot": "J1",
+    "name": "Telemarketer or not?",
+    "topic": "math",
+    "avg": 13.04
+  },
+  {
+    "year": 2018,
+    "slot": "J2",
+    "name": "Occupy parking",
+    "topic": "strings",
+    "avg": 10.73
+  },
+  {
+    "year": 2018,
+    "slot": "J3",
+    "name": "Are we there yet?",
+    "topic": "prefix-sums",
+    "avg": 9.33
+  },
+  {
+    "year": 2018,
+    "slot": "J4",
+    "name": "Sunflowers",
+    "topic": "greedy",
+    "avg": 2.74
+  },
+  {
+    "year": 2018,
+    "slot": "J5",
+    "name": "Choose your own path",
+    "topic": "graph-search",
+    "avg": 0.25
+  },
+  {
+    "year": 2019,
+    "slot": "J1",
+    "name": "Winning Score",
+    "topic": "math",
+    "avg": 13.92
+  },
+  {
+    "year": 2019,
+    "slot": "J2",
+    "name": "Time to Decompress",
+    "topic": "strings",
+    "avg": 10.7
+  },
+  {
+    "year": 2019,
+    "slot": "J3",
+    "name": "Cold Compress",
+    "topic": "strings",
+    "avg": 5.82
+  },
+  {
+    "year": 2019,
+    "slot": "J4",
+    "name": "Flipper",
+    "topic": "simulation",
+    "avg": 8.35
+  },
+  {
+    "year": 2019,
+    "slot": "J5",
+    "name": "Rule of Three",
+    "topic": "recursion",
+    "avg": 0.2
+  },
+  {
+    "year": 2020,
+    "slot": "J1",
+    "name": "Dog Treats",
+    "topic": "math",
+    "avg": 14.19
+  },
+  {
+    "year": 2020,
+    "slot": "J2",
+    "name": "Epidemiology",
+    "topic": "simulation",
+    "avg": 10.87
+  },
+  {
+    "year": 2020,
+    "slot": "J3",
+    "name": "Art",
+    "topic": "geometry",
+    "avg": 7.75
+  },
+  {
+    "year": 2020,
+    "slot": "J4",
+    "name": "Cyclic Shifts",
+    "topic": "strings",
+    "avg": 5.97
+  },
+  {
+    "year": 2020,
+    "slot": "J5",
+    "name": "Escape Room",
+    "topic": "graph-search",
+    "avg": 1.02
+  },
+  {
+    "year": 2021,
+    "slot": "J1",
+    "name": "Boiling Water",
+    "topic": "math",
+    "avg": 14.02
+  },
+  {
+    "year": 2021,
+    "slot": "J2",
+    "name": "Silent Auction",
+    "topic": "simulation",
+    "avg": 11.15
+  },
+  {
+    "year": 2021,
+    "slot": "J3",
+    "name": "Secret Instructions",
+    "topic": "strings",
+    "avg": 9.53
+  },
+  {
+    "year": 2021,
+    "slot": "J4",
+    "name": "Arranging Books",
+    "topic": "greedy",
+    "avg": 2.37
+  },
+  {
+    "year": 2021,
+    "slot": "J5",
+    "name": "Modern Art",
+    "topic": "prefix-sums",
+    "avg": 2.97
+  },
+  {
+    "year": 2022,
+    "slot": "J1",
+    "name": "Cupcake Party",
+    "topic": "math",
+    "avg": 14.03
+  },
+  {
+    "year": 2022,
+    "slot": "J2",
+    "name": "Fergusonball Ratings",
+    "topic": "simulation",
+    "avg": 12.58
+  },
+  {
+    "year": 2022,
+    "slot": "J3",
+    "name": "Harp Tuning",
+    "topic": "strings",
+    "avg": 7.84
+  },
+  {
+    "year": 2022,
+    "slot": "J4",
+    "name": "Good Groups",
+    "topic": "data-structures",
+    "avg": 3.6
+  },
+  {
+    "year": 2022,
+    "slot": "J5",
+    "name": "Square Pool",
+    "topic": "brute-force",
+    "avg": 0.78
+  },
+  {
+    "year": 2023,
+    "slot": "J1",
+    "name": "Deliv-e-droid",
+    "topic": "math",
+    "avg": 13.41
+  },
+  {
+    "year": 2023,
+    "slot": "J2",
+    "name": "Chili Peppers",
+    "topic": "greedy",
+    "avg": 12.21
+  },
+  {
+    "year": 2023,
+    "slot": "J3",
+    "name": "Special Event",
+    "topic": "counting",
+    "avg": 8.68
+  },
+  {
+    "year": 2023,
+    "slot": "J4",
+    "name": "Trianglane",
+    "topic": "geometry",
+    "avg": 4.79
+  },
+  {
+    "year": 2023,
+    "slot": "J5",
+    "name": "CCC Word Hunt",
+    "topic": "graph-search",
+    "avg": 0.76
+  },
+  {
+    "year": 2024,
+    "slot": "J1",
+    "name": "Conveyor Belt Sushi",
+    "topic": "math",
+    "avg": 13.6
+  },
+  {
+    "year": 2024,
+    "slot": "J2",
+    "name": "Dusa And The Yobis",
+    "topic": "simulation",
+    "avg": 11.72
+  },
+  {
+    "year": 2024,
+    "slot": "J3",
+    "name": "Bronze Count",
+    "topic": "greedy",
+    "avg": 9.3
+  },
+  {
+    "year": 2024,
+    "slot": "J4",
+    "name": "Troublesome Keys",
+    "topic": "strings",
+    "avg": 3.25
+  },
+  {
+    "year": 2024,
+    "slot": "J5",
+    "name": "Harvest Waterloo",
+    "topic": "graph-search",
+    "avg": 1.9
+  },
+  {
+    "year": 2025,
+    "slot": "J1",
+    "name": "Roller Coaster Ride",
+    "topic": "math",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "J2",
+    "name": "Donut Shop",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "J3",
+    "name": "Product Codes",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "J4",
+    "name": "Sunny Days",
+    "topic": "greedy",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "J5",
+    "name": "Connecting Territories",
+    "topic": "graph-algorithms",
+    "avg": null
+  },
+  {
+    "year": 2026,
+    "slot": "J1",
+    "name": "Concert Tickets",
+    "topic": "math",
+    "avg": 14.49
+  },
+  {
+    "year": 2026,
+    "slot": "J2",
+    "name": "Olympic Scores",
+    "topic": "greedy",
+    "avg": 13.33
+  },
+  {
+    "year": 2026,
+    "slot": "J3",
+    "name": "Creative Candy Consumption",
+    "topic": "simulation",
+    "avg": 8.31
+  },
+  {
+    "year": 2026,
+    "slot": "J4",
+    "name": "Snail Path",
+    "topic": "geometry",
+    "avg": 4.19
+  },
+  {
+    "year": 2026,
+    "slot": "J5",
+    "name": "Beams of Light",
+    "topic": "prefix-sums",
+    "avg": 2.36
+  },
+  {
+    "year": 2012,
+    "slot": "S1",
+    "name": "Don't pass me the ball!",
+    "topic": "counting",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "S2",
+    "name": "Aromatic Numbers",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "S3",
+    "name": "Absolutely Acidic",
+    "topic": "greedy",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "S4",
+    "name": "A Coin Game",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2012,
+    "slot": "S5",
+    "name": "Mouse Journey",
+    "topic": "dynamic-programming",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "S1",
+    "name": "From 1987 to 2013",
+    "topic": "brute-force",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "S2",
+    "name": "Bridge transport",
+    "topic": "two-pointers",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "S3",
+    "name": "Chances of winning",
+    "topic": "brute-force",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "S4",
+    "name": "Who is taller?",
+    "topic": "graph-search",
+    "avg": null
+  },
+  {
+    "year": 2013,
+    "slot": "S5",
+    "name": "Factor Solitaire",
+    "topic": "number-theory",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "S1",
+    "name": "Party Invitation",
+    "topic": "simulation",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "S2",
+    "name": "Assigning Partners",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "S3",
+    "name": "The Geneva Confection",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "S4",
+    "name": "Tinted Glass Window",
+    "topic": "prefix-sums",
+    "avg": null
+  },
+  {
+    "year": 2014,
+    "slot": "S5",
+    "name": "Lazy Fox",
+    "topic": "dynamic-programming",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "S1",
+    "name": "Zero That Out",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "S2",
+    "name": "Jerseys",
+    "topic": "greedy",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "S3",
+    "name": "Gates",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "S4",
+    "name": "Convex Hull",
+    "topic": "geometry",
+    "avg": null
+  },
+  {
+    "year": 2015,
+    "slot": "S5",
+    "name": "Greedy For Pies",
+    "topic": "dynamic-programming",
+    "avg": null
+  },
+  {
+    "year": 2016,
+    "slot": "S1",
+    "name": "Ragaman",
+    "topic": "strings",
+    "avg": 11.03
+  },
+  {
+    "year": 2016,
+    "slot": "S2",
+    "name": "Tandem Bicycle",
+    "topic": "greedy",
+    "avg": 10.44
+  },
+  {
+    "year": 2016,
+    "slot": "S3",
+    "name": "Phonomenal Reviews",
+    "topic": "graph-search",
+    "avg": 1.39
+  },
+  {
+    "year": 2016,
+    "slot": "S4",
+    "name": "Combining Riceballs",
+    "topic": "dynamic-programming",
+    "avg": 0.83
+  },
+  {
+    "year": 2016,
+    "slot": "S5",
+    "name": "Circle of Life",
+    "topic": "simulation",
+    "avg": 0.94
+  },
+  {
+    "year": 2017,
+    "slot": "S1",
+    "name": "Sum Game",
+    "topic": "prefix-sums",
+    "avg": 14.12
+  },
+  {
+    "year": 2017,
+    "slot": "S2",
+    "name": "High Tide, Low Tide",
+    "topic": "greedy",
+    "avg": 13.24
+  },
+  {
+    "year": 2017,
+    "slot": "S3",
+    "name": "Nailed It!",
+    "topic": "counting",
+    "avg": 6.2
+  },
+  {
+    "year": 2017,
+    "slot": "S4",
+    "name": "Minimum Cost Flow",
+    "topic": "graph-algorithms",
+    "avg": 3.92
+  },
+  {
+    "year": 2017,
+    "slot": "S5",
+    "name": "RMT",
+    "topic": "graph-algorithms",
+    "avg": 0.17
+  },
+  {
+    "year": 2018,
+    "slot": "S1",
+    "name": "Voronoi Villages",
+    "topic": "geometry",
+    "avg": 9.7
+  },
+  {
+    "year": 2018,
+    "slot": "S2",
+    "name": "Sunflowers",
+    "topic": "greedy",
+    "avg": 8.09
+  },
+  {
+    "year": 2018,
+    "slot": "S3",
+    "name": "RoboThieves",
+    "topic": "graph-search",
+    "avg": 1.11
+  },
+  {
+    "year": 2018,
+    "slot": "S4",
+    "name": "Balanced Trees",
+    "topic": "trees",
+    "avg": 0.66
+  },
+  {
+    "year": 2018,
+    "slot": "S5",
+    "name": "Maximum Strategic Savings",
+    "topic": "graph-algorithms",
+    "avg": 0.1
+  },
+  {
+    "year": 2019,
+    "slot": "S1",
+    "name": "Flipper",
+    "topic": "simulation",
+    "avg": 13.47
+  },
+  {
+    "year": 2019,
+    "slot": "S2",
+    "name": "Pretty Average Primes",
+    "topic": "number-theory",
+    "avg": 6.71
+  },
+  {
+    "year": 2019,
+    "slot": "S3",
+    "name": "Arithmetic Square",
+    "topic": "brute-force",
+    "avg": 1.43
+  },
+  {
+    "year": 2019,
+    "slot": "S4",
+    "name": "Tourism",
+    "topic": "dynamic-programming",
+    "avg": 0.13
+  },
+  {
+    "year": 2019,
+    "slot": "S5",
+    "name": "Triangle: The Data Structure",
+    "topic": "dynamic-programming",
+    "avg": 0.06
+  },
+  {
+    "year": 2020,
+    "slot": "S1",
+    "name": "Surmising a Sprinter's Speed",
+    "topic": "geometry",
+    "avg": 8.79
+  },
+  {
+    "year": 2020,
+    "slot": "S2",
+    "name": "Escape Room",
+    "topic": "graph-search",
+    "avg": 4.16
+  },
+  {
+    "year": 2020,
+    "slot": "S3",
+    "name": "Searching for Strings",
+    "topic": "strings",
+    "avg": 1.83
+  },
+  {
+    "year": 2020,
+    "slot": "S4",
+    "name": "Swapping Seats",
+    "topic": "dynamic-programming",
+    "avg": 0.38
+  },
+  {
+    "year": 2020,
+    "slot": "S5",
+    "name": "Josh's Double Bacon Deluxe",
+    "topic": "dynamic-programming",
+    "avg": 0.08
+  },
+  {
+    "year": 2021,
+    "slot": "S1",
+    "name": "Crazy Fencing",
+    "topic": "geometry",
+    "avg": 13.38
+  },
+  {
+    "year": 2021,
+    "slot": "S2",
+    "name": "Modern Art",
+    "topic": "prefix-sums",
+    "avg": 9.5
+  },
+  {
+    "year": 2021,
+    "slot": "S3",
+    "name": "Lunch Concert",
+    "topic": "binary-search",
+    "avg": 2.47
+  },
+  {
+    "year": 2021,
+    "slot": "S4",
+    "name": "Daily Commute",
+    "topic": "graph-algorithms",
+    "avg": 0.72
+  },
+  {
+    "year": 2021,
+    "slot": "S5",
+    "name": "Math Homework",
+    "topic": "number-theory",
+    "avg": 0.46
+  },
+  {
+    "year": 2022,
+    "slot": "S1",
+    "name": "Good Fours and Good Fives",
+    "topic": "math",
+    "avg": 11.03
+  },
+  {
+    "year": 2022,
+    "slot": "S2",
+    "name": "Good Groups",
+    "topic": "data-structures",
+    "avg": 6.44
+  },
+  {
+    "year": 2022,
+    "slot": "S3",
+    "name": "Good Samples",
+    "topic": "counting",
+    "avg": 1.41
+  },
+  {
+    "year": 2022,
+    "slot": "S4",
+    "name": "Good Triplets",
+    "topic": "geometry",
+    "avg": 0.47
+  },
+  {
+    "year": 2022,
+    "slot": "S5",
+    "name": "Good Influencers",
+    "topic": "trees",
+    "avg": 0.12
+  },
+  {
+    "year": 2023,
+    "slot": "S1",
+    "name": "Trianglane",
+    "topic": "geometry",
+    "avg": 11.06
+  },
+  {
+    "year": 2023,
+    "slot": "S2",
+    "name": "Symmetric Mountains",
+    "topic": "two-pointers",
+    "avg": 4.26
+  },
+  {
+    "year": 2023,
+    "slot": "S3",
+    "name": "Palindromic Poster",
+    "topic": "brute-force",
+    "avg": 1.56
+  },
+  {
+    "year": 2023,
+    "slot": "S4",
+    "name": "Minimum Cost Roads",
+    "topic": "graph-algorithms",
+    "avg": 0.4
+  },
+  {
+    "year": 2023,
+    "slot": "S5",
+    "name": "The Filter",
+    "topic": "dynamic-programming",
+    "avg": 0.16
+  },
+  {
+    "year": 2024,
+    "slot": "S1",
+    "name": "Hat Circle",
+    "topic": "data-structures",
+    "avg": 13.73
+  },
+  {
+    "year": 2024,
+    "slot": "S2",
+    "name": "Heavy-Light Composition",
+    "topic": "strings",
+    "avg": 10.68
+  },
+  {
+    "year": 2024,
+    "slot": "S3",
+    "name": "Swipe",
+    "topic": "brute-force",
+    "avg": 1.65
+  },
+  {
+    "year": 2024,
+    "slot": "S4",
+    "name": "Painting Roads",
+    "topic": "graph-search",
+    "avg": 0.46
+  },
+  {
+    "year": 2024,
+    "slot": "S5",
+    "name": "Chocolate Bar Partition",
+    "topic": "dynamic-programming",
+    "avg": 0.26
+  },
+  {
+    "year": 2025,
+    "slot": "S1",
+    "name": "Positioning Peter's Paintings",
+    "topic": "geometry",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "S2",
+    "name": "Cryptogram Cracking Club",
+    "topic": "strings",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "S3",
+    "name": "Pretty Pens",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "S4",
+    "name": "Floor is Lava",
+    "topic": "graph-algorithms",
+    "avg": null
+  },
+  {
+    "year": 2025,
+    "slot": "S5",
+    "name": "To-Do List",
+    "topic": "data-structures",
+    "avg": null
+  },
+  {
+    "year": 2026,
+    "slot": "S1",
+    "name": "Baby Hop, Giant Hop",
+    "topic": "math",
+    "avg": 7.69
+  },
+  {
+    "year": 2026,
+    "slot": "S2",
+    "name": "Beams of Light",
+    "topic": "prefix-sums",
+    "avg": 6.01
+  },
+  {
+    "year": 2026,
+    "slot": "S3",
+    "name": "Common Card Choice",
+    "topic": "number-theory",
+    "avg": 1.39
+  },
+  {
+    "year": 2026,
+    "slot": "S4",
+    "name": "Minecarts",
+    "topic": "dynamic-programming",
+    "avg": 0.41
+  },
+  {
+    "year": 2026,
+    "slot": "S5",
+    "name": "On the Fence",
+    "topic": "geometry",
+    "avg": 0.05
+  }
+]

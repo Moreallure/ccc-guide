@@ -127,6 +127,14 @@ export function SiteHeader() {
                 </NavigationMenu.Content>
               </NavigationMenu.Item>
             ))}
+            <NavigationMenu.Item>
+              <NavigationMenu.Link
+                render={<Link href="/problems" />}
+                className="rounded-md px-3 py-2 text-sm font-medium text-fd-muted-foreground no-underline transition-colors hover:bg-fd-muted hover:text-fd-foreground focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-fd-ring"
+              >
+                Problems
+              </NavigationMenu.Link>
+            </NavigationMenu.Item>
           </NavigationMenu.List>
 
           <NavigationMenu.Portal>
