@@ -14,6 +14,16 @@ function textOf(node) {
   return '';
 }
 
+// Calls the MDX component and unwraps MDXContent wrappers to its flat child array.
+export function flattenMdx(Problem, components) {
+  let el = Problem({ components: components ?? defaultMdxComponents });
+  for (let i = 0; i < 5 && el && typeof el.type === 'function' && !Array.isArray(el.props?.children); i++) {
+    el = el.type(el.props);
+  }
+  const problemChildren = el?.props?.children;
+  return Array.isArray(problemChildren) ? problemChildren : problemChildren != null ? [problemChildren] : [];
+}
+
 /**
  * Renders an imported problem MDX component with each h3 section collapsed
  * into an accordion. The problem's h2 title is dropped as redundant. Pass the
@@ -34,13 +44,7 @@ export function ProblemSections({ component: Problem, meta, imageSize, children 
   // The anchored-heading component appends its anchor button after the title,
   // so only the first child is the actual heading text.
   const headingTitle = heading ? textOf(Array.isArray(rawTitle) ? rawTitle[0] : rawTitle) : undefined;
-  let el = Problem({ components });
-  // Unwrap component wrappers (e.g. MDXContent) until the flat child array shows up
-  for (let i = 0; i < 5 && el && typeof el.type === 'function' && !Array.isArray(el.props?.children); i++) {
-    el = el.type(el.props);
-  }
-  const problemChildren = el?.props?.children;
-  const nodes = Array.isArray(problemChildren) ? problemChildren : problemChildren != null ? [problemChildren] : [];
+  const nodes = flattenMdx(Problem, components);
 
   const out = []; // {node} renders as-is, {items} renders as an accordion group
   let group = null; // current [{title, nodes}]

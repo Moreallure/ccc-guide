@@ -1,4 +1,4 @@
-import { defineDocs } from 'fumadocs-mdx/macro';
+import { defineCollections, defineDocs } from 'fumadocs-mdx/macro';
 import { z } from 'zod';
 import { pageSchema } from 'fumadocs-core/source/schema';
 import { loader } from 'fumadocs-core/source';
@@ -17,4 +17,23 @@ const docs = defineDocs({
 export const source = loader({
   baseUrl: '/',
   source: docs.toFumadocsSource(),
+});
+
+// Problem pages (served standalone at /problem/[year]-[problem])
+const problems = defineCollections({
+  type: 'doc',
+  dir: 'content/problems',
+  files: ['**/*.mdx'],
+  schema: z.object({
+    title: z.string(),
+    problem: z.string(),
+    year: z.number().int(),
+    level: z.string(),
+    source: z.string().url(),
+  }),
+});
+
+export const problemsSource = loader({
+  baseUrl: '/problem',
+  source: problems.toFumadocsSource(),
 });
