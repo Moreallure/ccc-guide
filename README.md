@@ -20,4 +20,8 @@ CCC Guide is in its early stages, and your contribution is welcome! To get start
 - Tailwind CSS
 
 ## License
-CCC Guide is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+The CCC Guide source code is licensed under the [MIT License](LICENSE).
+
+Original educational content created for CCC Guide is licensed under [CC BY-NC-SA 4.0](LICENSE), except unless otherwise indicated.
+
+Third-party materials, including contest problems and illustrations from CEMC, remain subject to their respective copyrights and terms.
