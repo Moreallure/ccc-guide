@@ -219,10 +219,32 @@ function Footer() {
           </nav>
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-fd-border pt-5 font-mono text-[11px] text-fd-muted-foreground/70 md:flex-row md:justify-between">
-          <p>
-            Not affiliated with or endorsed by the CEMC or the University of
-            Waterloo.
-          </p>
+          <div>
+            <p>
+              Not affiliated with or endorsed by the CEMC or the University of
+              Waterloo.
+            </p>
+            <p className="mt-2">
+              Contest problems and illustrations are from the{" "}
+              <a
+                href="https://cemc.uwaterloo.ca/"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-fd-foreground"
+              >
+                CEMC, University of Waterloo
+              </a>
+              , used under{" "}
+              <a
+                href="https://creativecommons.org/licenses/by-nc/4.0/"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-fd-foreground"
+              >
+                CC BY-NC 4.0
+              </a>.
+            </p>
+          </div>
           <p>built by competitors, for competitors</p>
         </div>
       </div>
