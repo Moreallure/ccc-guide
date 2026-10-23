@@ -5,5 +5,419 @@ description: "Prefix sums and difference arrays — anchored on 2021 J5/S2 *Mode
 wip: true
 ---
 
+import BeamsOfLight, { frontmatter as beamsMeta } from '../../problems/2026/J5.mdx'
+import ModernArt, { frontmatter as artMeta } from '../../problems/2021/J5.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+
 # Prefix sums and difference arrays
 
+Prefix Sums and Difference Arrays
+
+## Before We Begin
+
+This article involves some basic math knowledge -- the Inclusion-Exclusion Principle
+
+Core formula: ∣A∪B∣=∣A∣+∣B∣−∣A ∩ B∣
+
+## What are prefix sums and difference arrays?
+
+Prefix sums and difference arrays both maintain an auxiliary array to describe the state of the current array. They are similar, but their purposes and implementation methods are different
+
+Prefix-sum : A prefix sum array uses the inclusion-exclusion principle to quickly calculate range sums. Generating a prefix sum array requires O(n) preprocessing.
+
+Difference arrays : A difference array can achieve uniform range updates in O(2) time complexity per operation. After the difference array is generated, the original array can be restored by performing a prefix sum operation on it
+
+## Prefix Sums 
+
+The state transition equation for prefix sums looks something like this:
+
+```cpp
+s[i]=s[i-1]+v[i];
+```
+
+where array s is the prefix sum array, and v refers to the original array
+
+So for an array of length n, we can generate the prefix sum array s with the following code:
+
+```cpp
+int v[1001];
+int s[1001];
+memset(v,0,sizeof(v));//initailize
+memset(s,0,sizeof(s));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    cin>>v[i];//input
+}
+for(int i=1;i<=n;i++){
+    s[i]=s[i-1]+v[i];//generate
+}
+```
+
+Just like that, we get the prefix sum array s
+
+As mentioned earlier, the prefix sum array can quickly find the range sum using the following method:
+
+```cpp
+sum=s[j]-s[i-1];
+```
+
+Here, sum is the range sum from i to j (as derived from the inclusion-exclusion principle)
+
+## Difference Arrays
+
+Difference arrays are similar to prefix sums; both process arrays
+
+As usual, let's jump straight to the state transition equation:
+
+```cpp
+d[i]=v[i]-v[i-1];
+```
+
+d is the difference array, and v is the original array
+
+Similarly:
+
+```cpp
+int v[1001];
+int d[1001];
+memset(v,0,sizeof(v));//initailize
+memset(d,0,sizeof(d));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    cin>>v[i];//input
+}
+for(int i=1;i<=n;i++){
+    d[i]=v[i]-v[i-1];//generate
+}
+```
+
+Now we have the difference array. And just like I described earlier, the whole point of creating a difference array is to uniformly update all numbers within a range
+
+Once we have the difference array, how do we restore it back to the original array? We can do this using the exact same generation method as the prefix sum array
+
+Here is how it works:
+
+```
+Original array:                         0, 1, 2, 3, 4, 5
+Difference array:                       0, 1, 1, 1, 1, 1
+Prefix sum op on the difference array:  0, 1, 2, 3, 4, 5
+```
+
+How do we implement updates?
+
+Now our goal is to add 1 to each element from the i-th to the j-th position in array v. Using a regular loop, the complexity is O(j-i)
+
+```cpp
+for(int t=i;<=j;t++){
+    v[t]++;
+}
+```
+
+But when the gap between i and j is large, you'll get a TLE
+
+However, if we modify the difference array directly, the story is completely different
+
+For example, adding 1 to each element from 1 to 3:
+
+```
+Orig: 0, 1, 2, 3, 4, 5
+Diff: 0, 1, 1, 1, 1, 1
+Mod:  0, 2, 1, 1, 0, 1
+Sum:  0, 2, 3, 4, 4, 5
+```
+
+As you can see, we only modified two values, yet we updated the entire range. The method is now crystal clear
+
+```cpp
+d[i]+=c;
+d[j+1]-=c;
+```
+
+This adds c to every value between i and j
+
+## More
+
+Sometimes, a 1D prefix sum just doesn't cut it, so we can introduce 2D prefix sums:
+
+```cpp
+s[1001][1001];//2D prefix sum array
+```
+
+The principle is similar. Here is the generation code:
+
+```cpp
+int v[1001][1001];
+int s[1001][1001];
+memset(v,0,sizeof(v));//initailize
+memset(s,0,sizeof(s));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+        cin>>v[i][j];
+    }
+}
+for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+        s[i][j]=s[i-1][j]+s[i][j-1]-s[i-1][j-1]+v[i][j];
+    }
+}
+```
+
+For the sum query, we also need the help of the inclusion-exclusion principle:
+
+```cpp
+sum=s[i][j]-s[i-a-1][j]-s[i][j-b-1]+s[i-a-1][j-b-1];
+```
+
+This gives us the range sum from v[i][j] to v[i-a][j-b]
+
+## Example Problem: CCC-2026-J5/S2  beams of light
+
+Theory without practice is all BS. Let's look at the problem first:
+
+<ProblemSections component={BeamsOfLight} meta={beamsMeta} />
+
+In other words:
+
+Each beam of light illuminates the parking spaces in the range l to r, and we need to answer Q queries on whether a specific parking space is illuminated
+
+If we use a loop to mark each beam of light, the complexity of each marking operation will be O(R-L+1).
+
+The maximum complexity for a single mark would be 500000, and we might have to mark 500000 times.
+
+In the worst-case scenario, we would need to execute 2.5*10^11 loop iterations -- 100% TLE
+
+But if we use a difference array, the complexity of each mark is O(2)
+
+In the worst case, the total operations are roughly 500000*2 (marking) + 500000 (generating the corresponding original array) + 500000 (queries)
+
+This way, it won't time out
+
+Here's the code:
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int mp[500001];
+int sub[500002];
+int main(){
+    int nos,nol,nt;
+    cin>>nos>>nol>>nt;//Input number of parking spaces, number of lights, and number of queries
+    for(int i=1;i<=nol;i++){
+        int sp,w;
+        cin>>sp>>w;
+        int s=sp-w;//Calculate start and end indices
+        int e=sp+w;
+        if(s<=1){//Special check to prevent out-of-bounds
+            sub[1]++;
+        }else{
+            sub[s]++;//Mark the start
+        }
+        if(e+1>=nos){//Special check to prevent out-of-bounds
+            sub[nos+1]--;
+        }else{
+            sub[e+1]--;//Mark the end
+        }
+    }
+    for(int i=1;i<=nos;i++){
+        mp[i]=mp[i-1]+sub[i];//Generate the corresponding array
+        //cout<<mp[i]<<" ";
+    }
+    for(int i=1;i<=nt;i++){
+        int p;//Query
+        cin>>p;
+        if(mp[p]==0){
+            cout<<"N"<<endl;
+        }else{
+            cout<<"Y"<<endl;
+        }
+    }
+}
+```
+
+## CCC-2021-J5/S2    Modern Art
+
+A similar problem, though not a textbook template problem like beams of light, it's actually simpler
+
+Again, let's look at the problem first
+
+<ProblemSections component={ModernArt} meta={artMeta} />
+
+In other words, at the very beginning, all cells are black (B), and we need to count the number of gold cells (G) after K instructions
+
+Every cell is initially marked with 0 paint operations
+
+From this, we get a traditional brute-force simulation idea:
+
+First, I define a grid
+
+```cpp
+char mp[1001][1001];
+```
+
+Then initialize it:
+
+```cpp
+for(int i=1;i<=1000;i++){
+    for(int j=1;j<=1000;j++){
+        mp[i][j]='B';
+    }
+}
+```
+
+Then read in the instructions:
+
+For example: R 1
+
+I just run a loop:
+
+```cpp
+for(int i=1;i<=y;i++){
+    if(mp[i][j]=='B'){
+        mp[i][j]='G';
+    }else{
+        mp[i][j]='B';
+    }
+}
+```
+
+Just like that, I've marked one instruction
+
+In the subsequent query phase, we traverse the entire grid to find all cells with the value G:
+
+```cpp
+for(int i=1;i<=1001;i++){
+    for(int j=1;j<=1001;j++){
+        if(mp[i][j]=='G'){
+            ans++;
+        }
+    }
+}
+```
+
+Finally:
+
+```cpp
+cout<<ans;
+```
+
+And that solves the problem... right?
+
+Nope
+
+According to the problem constraints, in the worst-case scenario, our grid (mp) might need to be defined as
+
+```cpp
+char mp[5000001][5000001];
+```
+
+Which will definitely RE
+
+Maybe some of you might think of optimizing it with dynamic arrays (vectors), but don't forget the time complexity of marking the instructions:
+
+Up to 1000000 instructions, multiplied by a maximum grid width of 5000000 -- in the worst case, the marking complexity is 5*10^12, a massive TLE
+
+So why not borrow the idea of difference arrays and count how many times each row and column is operated on
+
+Initially, the operation count is 0, and the cell is black
+
+```
+Count: 0 1 2 3 4 5
+Color: B G B G B G
+```
+
+Spot the pattern?
+
+That's right, if the total number of operations on a cell is odd, the cell will be gold
+
+So how do I calculate the number of operations on a single cell?
+
+Take a 2-row by 2-column grid for example
+
+```
+B B 
+B B
+```
+
+Now execute operation R1:
+
+```
+G G
+B B
+```
+
+All of row1 has been operated on once
+
+Now C1:
+
+```
+B G
+G B
+```
+
+(1,1) has been operated on twice in total, so my (1,1) is B
+
+In other words:
+
+Total operations on a cell = Total operations on its row + Total operations on its column
+
+Now the approach is crystal clear
+
+1. Count the number of operations for each row and each column
+
+2. Traverse the entire grid
+
+    If the total operations on the cell is odd, ans++
+
+    Otherwise, continue
+
+3. Output the answer
+
+So, here is the solution code:
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int r[5000001];
+int c[5000001];
+int main(){
+    int x,y;
+    cin>>x>>y;
+    int noa;
+    cin>>noa;
+    for(int i=1;i<=noa;i++){
+        char tp;
+        int idx;
+        cin>>tp>>idx;
+        if(tp=='R'){
+            r[idx]++;
+        }else{
+            c[idx]++;
+        }
+    }
+    int ans=0;
+//	for(int i=1;i<=x;i++){
+//		cout<<c[i]<<" ";
+//	}
+//	cout<<endl;
+//	for(int i=1;i<=y;i++){
+//		cout<<r[i]<<" ";
+//	}
+//	cout<<endl;
+    for(int i=1;i<=x;i++){
+        for(int j=1;j<=y;j++){
+            if((r[i]+c[j])%2==1){
+                //cout<<"G";
+                ans++;
+            }else{
+                //cout<<"B";
+            } 
+        }
+        //cout<<endl;
+    }
+    cout<<ans;
+}
+```
