@@ -1,0 +1,423 @@
+---
+title: "Prefix sums and difference arrays"
+freq: 3
+description: "Prefix sums and difference arrays — anchored on 2021 J5/S2 *Modern Art* and 2026 J5/S2 *Beams of Light*"
+wip: true
+---
+
+import BeamsOfLight, { frontmatter as beamsMeta } from '../../problems/2026/J5.mdx'
+import ModernArt, { frontmatter as artMeta } from '../../problems/2021/J5.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+
+# Prefix sums and difference arrays
+
+前缀和与差分数组
+
+## 写在本文之前
+
+本文涉及到一些基础数学知识--容斥定理
+
+核心公式：∣A∪B∣=∣A∣+∣B∣−∣A ∩ B∣
+
+## 什么是前缀和，差分数组？
+
+前缀和和差分数组是维护一个数组去描述当前数组的状态，两者相似但是目的和实现方法均不同
+
+前缀和 prefix-sum : 前缀和数组可以利用容斥定理快速求出区间和。前缀和数组的生成需要O(n)的预处理。
+
+差分数组 difference arrays : 差分数组可以通过单次O(2)的时间复杂度实现对一个区间的统一修改，在差分数组生成后，可以通过对其进行前缀和操作还原原数组
+
+## 前缀和 
+
+前缀和的状态转移方程类似下文：
+
+```cpp
+s[i]=s[i-1]+v[i];
+```
+
+其中s数组即是前缀和数组，v指的是原数组
+
+那么对于一个长度为n的数组，我们可以通过如下代码生成前缀和数组s:
+
+```cpp
+int v[1001];
+int s[1001];
+memset(v,0,sizeof(v));//initailize
+memset(s,0,sizeof(s));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    cin>>v[i];//input
+}
+for(int i=1;i<=n;i++){
+    s[i]=s[i-1]+v[i];//generate
+}
+```
+
+如此，我们便得到了前缀和数组s
+
+正如前文所说，前缀和数组可以快速求出区间和，用如下方法:
+
+```cpp
+sum=s[j]-s[i-1];
+```
+
+这里的sum就是从i到j的区间和（通过容斥定理可知）
+
+## 差分数组
+
+差分数组和前缀和类似，都是对数组进行处理
+
+老规矩直接上状态转移方程：
+
+```cpp
+d[i]=v[i]-v[i-1];
+```
+
+d是差分数组，v是原数组
+
+同样：
+
+```cpp
+int v[1001];
+int d[1001];
+memset(v,0,sizeof(v));//initailize
+memset(d,0,sizeof(d));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    cin>>v[i];//input
+}
+for(int i=1;i<=n;i++){
+    d[i]=v[i]-v[i-1];//generate
+}
+```
+
+这样子我们便有了差分数组，但同样如我前文所叙述，创建差分数组的目的便是对区间的所有数字进行统一修改
+
+有了差分数组怎么还原成原数组呢？使用前缀和数组的生成方法就可以实现
+
+原理如下：
+
+```
+原先的原数组：           0，1，2，3，4，5
+差分数组：               0，1，1，1，1，1
+对差分数组进行前缀和操作：0，1，2，3，4，5
+```
+
+修改怎么实现呢？
+
+现在我们的目标是对v数组中第i到j个元素每个加1，使用普通的循环，复杂度为O(j-i)
+
+```cpp
+for(int t=i;<=j;t++){
+    v[t]++;
+}
+```
+
+但当i和j相差较大时，就会TLE
+
+但如果直接对差分数组进行修改，结果就会不一样
+
+例如，从1-3每个加1：
+
+```
+原：0，1，2，3，4，5
+差：0，1，1，1，1，1
+改：0，2，1，1，0，1
+和：0，2，3，4，4，5
+```
+
+可以看出我们只修改了两个值，就修改了整个区间的值，方法也明晰了
+
+```cpp
+d[i]+=c;
+d[j+1]-=c;
+```
+
+就可以实现从i到j间的每个值加c
+
+## 更多
+
+有的时候，一维的前缀和往往不能满足需求，于是我们便可以引入二维前缀和：
+
+```cpp
+s[1001][1001];//二维前缀和数组
+```
+
+原理类似，下为生成代码：
+
+```cpp
+int v[1001][1001];
+int s[1001][1001];
+memset(v,0,sizeof(v));//initailize
+memset(s,0,sizeof(s));
+int n;
+cin>>n;
+for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+        cin>>v[i][j];
+    }
+}
+for(int i=1;i<=n;i++){
+    for(int j=1;j<=n;j++){
+        s[i][j]=s[i-1][j]+s[i][j-1]-s[i-1][j-1]+v[i][j];
+    }
+}
+```
+
+对于求和操作也同样需要容斥定理辅助：
+
+```cpp
+sum=s[i][j]-s[i-a-1][j]-s[i][j-b-1]+s[i-a-1][j-b-1];
+```
+
+这样就可以求出v[i][j]到v[i-a][j-b]的区间和
+
+## 例题：CCC-2026-J5/S2  beams of light
+
+没有实践都是扯淡，先看题：
+
+<ProblemSections component={BeamsOfLight} meta={beamsMeta} />
+
+也就是说：
+
+每一束光都会照耀l-r区间的停车位，我们将回答Q个问题该车位是否被光照到
+
+如果我们用循环去标记每一束光，每次标记的复杂度就会是O(R-L+1)。
+
+最大单次标记复杂度就会是500000，而我们可能要标记500000次。
+
+最坏情况下，我们需要执行2.5*10^11次循环，100%TLE
+
+但如果我们使用差分数组，每一次标记的复杂度就是O(2)
+
+最坏情况下，总数约莫是500000*2（标记）+500000（生成对应原数组）+500000（查询）
+
+这样子就不会超时
+
+附上代码：
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int mp[500001];
+int sub[500002];
+int main(){
+    int nos,nol,nt;
+    cin>>nos>>nol>>nt;//输入停车位数量、灯数量、查询轮数
+    for(int i=1;i<=nol;i++){
+        int sp,w;
+        cin>>sp>>w;
+        int s=sp-w;//计算头尾下标
+        int e=sp+w;
+        if(s<=1){//特判，防止越界
+            sub[1]++;
+        }else{
+            sub[s]++;//标记头
+        }
+        if(e+1>=nos){//特判，防止越界
+            sub[nos+1]--;
+        }else{
+            sub[e+1]--;//标记尾
+        }
+    }
+    for(int i=1;i<=nos;i++){
+        mp[i]=mp[i-1]+sub[i];//生成对应数组
+        //cout<<mp[i]<<" ";
+    }
+    for(int i=1;i<=nt;i++){
+        int p;//查询
+        cin>>p;
+        if(mp[p]==0){
+            cout<<"N"<<endl;
+        }else{
+            cout<<"Y"<<endl;
+        }
+    }
+}
+```
+
+## CCC-2021-J5/S2    Modern Art
+
+类似的题目，不过不是像beams of light一样的模板题，但更简单
+
+同样，先看题目
+
+<ProblemSections component={ModernArt} meta={artMeta} />
+
+也就是说，最开始时，所有格子都是黑色（B），而我们需要统计K次指令后金色格子（G）的个数
+
+每一个格子最开始时标记为涂色次数0
+
+由此，我们就有了一个传统的大模拟思路：
+
+我先定义一个地图
+
+```cpp
+char mp[1001][1001];
+```
+
+然后初始化：
+
+```cpp
+for(int i=1;i<=1000;i++){
+    for(int j=1;j<=1000;j++){
+        mp[i][j]='B';
+    }
+}
+```
+
+然后读入指令：
+
+例如：R 1
+
+我就执行一个循环：
+
+```cpp
+for(int i=1;i<=y;i++){
+    if(mp[i][j]=='B'){
+        mp[i][j]='G';
+    }else{
+        mp[i][j]='B';
+    }
+}
+```
+
+如此我就标记了一次指令
+
+随后的查询中，我们遍历整张地图，寻找所有值为G的格子：
+
+```cpp
+for(int i=1;i<=1001;i++){
+    for(int j=1;j<=1001;j++){
+        if(mp[i][j]=='G'){
+            ans++;
+        }
+    }
+}
+```
+
+最后：
+
+```cpp
+cout<<ans;
+```
+
+就可以解决本题……了吗？
+
+不
+
+根据题目要求，我们的地图（mp）最坏情况下可能需要定义为
+
+```cpp
+char mp[5000001][5000001];
+```
+
+肯定会RE
+
+也许有的同学可能会想用vector动态数组优化，但是不要忘记标记指令的复杂度：
+
+最大1000000次指令，乘以最大5000000的地图宽度，最坏情况下标记复杂度为5*10^12，严重的超时
+
+那我们不妨借用差分的思想，我们统计每一行列的被操作次数
+
+初始时被操作次数为0，格子是黑色
+
+```
+次数：0 1 2 3 4 5
+颜色：B G B G B G
+```
+
+发现什么规律了吗？
+
+没错，如果该单元的被操作次数总数为奇数，该单元就会是金色的
+
+那么我的单元被操作次数怎么计算？
+
+例如一个两行两列的表格
+
+```
+B B 
+B B
+```
+
+现在执行操作R1：
+
+```
+G G
+B B
+```
+
+row1全部都被操作了一次
+
+现在C1：
+
+```
+B G
+G B
+```
+
+(1,1)总共被操作了两次，所以我的(1,1)是B
+
+也就是说：
+
+单元被操作总数=所属行被操作总数+所属列被操作总数
+
+那么思路就明了了
+
+1.标记每一行每一列的被操作数
+
+2.遍历整张地图
+
+    如果该单元格被操作总数为奇数，ans++
+
+    否则，continue
+
+3.输出答案
+
+那么，附上题解：
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int r[5000001];
+int c[5000001];
+int main(){
+    int x,y;
+    cin>>x>>y;
+    int noa;
+    cin>>noa;
+    for(int i=1;i<=noa;i++){
+        char tp;
+        int idx;
+        cin>>tp>>idx;
+        if(tp=='R'){
+            r[idx]++;
+        }else{
+            c[idx]++;
+        }
+    }
+    int ans=0;
+//	for(int i=1;i<=x;i++){
+//		cout<<c[i]<<" ";
+//	}
+//	cout<<endl;
+//	for(int i=1;i<=y;i++){
+//		cout<<r[i]<<" ";
+//	}
+//	cout<<endl;
+    for(int i=1;i<=x;i++){
+        for(int j=1;j<=y;j++){
+            if((r[i]+c[j])%2==1){
+                //cout<<"G";
+                ans++;
+            }else{
+                //cout<<"B";
+            } 
+        }
+        //cout<<endl;
+    }
+    cout<<ans;
+}
+```
