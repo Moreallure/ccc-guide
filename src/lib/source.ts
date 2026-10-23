@@ -10,6 +10,7 @@ const docs = defineDocs({
     schema: pageSchema.extend({
       freq: z.number().int().min(0).max(4).optional(),
       wip: z.boolean().optional(),
+      contributors: z.array(z.string()).optional(),
     }),
   },
   meta: { files: ['**/*.{json,yaml}', '!problems/**'] },

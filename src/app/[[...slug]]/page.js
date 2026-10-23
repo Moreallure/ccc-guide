@@ -4,7 +4,9 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Users } from 'lucide-react';
 import { source } from '@/lib/source';
+import { CONTRIBUTOR_LINKS } from '@/lib/contributors';
 import { baseOptions, GITHUB_URL } from '@/lib/layout.shared';
 import { Landing } from '@/components/landing';
 import { WorkInProgress } from '@/components/work-in-progress';
@@ -101,6 +103,35 @@ export default async function Page({ params }) {
 
   const MDX = page.data.body;
 
+  // Same footer in the desktop TOC column and the mobile TOC popover.
+  const tocFooter =
+    page.data.contributors?.length > 0 && (
+      <div className="mt-auto border-t border-fd-border pt-4 pb-8 text-sm">
+        <p className="inline-flex items-center gap-1.5 text-fd-muted-foreground">
+          <Users className="size-4" />
+          Contributors
+        </p>
+        <ul className="mt-2 flex list-none flex-col gap-1 p-0">
+          {page.data.contributors.map((name) => {
+            const link = CONTRIBUTOR_LINKS[name];
+            const className =
+              'text-fd-muted-foreground no-underline transition-colors hover:text-fd-foreground';
+            return (
+              <li key={name}>
+                {link ? (
+                  <a href={link} target="_blank" rel="noreferrer" className={className}>
+                    {name}
+                  </a>
+                ) : (
+                  <span className={className}>{name}</span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+
   return (
     <DocsLayout
       {...baseOptions()}
@@ -110,6 +141,8 @@ export default async function Page({ params }) {
     >
       <DocsPage
         toc={page.data.toc}
+        tableOfContent={{ footer: tocFooter }}
+        tableOfContentPopover={{ footer: tocFooter }}
         footer={{ className: 'mt-8', ...(FOOTER_ITEMS[page.url] ? { items: FOOTER_ITEMS[page.url] } : {}) }}
       >
         <DocsBody>

@@ -152,6 +152,19 @@ wip: true
 ---
 ```
 
+### Contributors
+
+If you wrote an original, substantial portion of a module's content, you may add your name to the `contributors` frontmatter field. Names render under "Contributors" at the bottom of the page's "On this page" column.
+
+```mdx
+---
+title: "Module title"
+contributors: ["Moreallure"]
+---
+```
+
+You can also add yourself to `src/lib/contributors.js` to make your name link to your profile wherever it appears. This is optional, names without an entry will show as plain text.
+
 ### Math
 
 MDX processes backslashes before the math plugin does, so LaTeX needs **double backslashes** in the source. If you only use one, it may compile but show up as raw text on the page.
