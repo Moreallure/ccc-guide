@@ -1,0 +1,386 @@
+---
+title: "Strings: parsing, transforms, palindromes"
+freq: 3
+description: "Strings: parsing, transforms, and palindromes — anchored on 2021 J3 *Secret Instructions*, 2015 J3 *Rövarspråket*, and 2019 J3 *Cold Compress*"
+contributors: ["smartjiehan"]
+---
+
+import SecretInstructions, { frontmatter as secretMeta } from '../../problems/2021/J3.mdx'
+import Rovarspraket, { frontmatter as rovarMeta } from '../../problems/2015/J3.mdx'
+import ColdCompress, { frontmatter as coldMeta } from '../../problems/2019/J3.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+
+# Strings: parsing, transforms, palindromes
+
+## 从字符到字符串：
+
+学习字符串之前，我们需要知道字符是怎么被储存的
+
+现代计算机中（或者说我们的比赛中），我们使用ASCII码表来转换字符与二进制。不过对于比赛，需要掌握几个小技巧
+
+当我们对一个字符异或32时，我们就可以把它从大写转换成小写或把它从小写转换成大写。
+
+这是因为'A'代表的十进制值是65，而小写的则是97
+
+同样，对于一个数字字符，我们可以通过以下方式得到其对应值：
+
+```cpp
+int(c-'0');
+```
+
+同理，当我们有一个只包含数字字符的字符串时，我们也可以通过以下方法得到它对应的数字：
+
+```cpp
+string s;
+cin>>s;
+int v=0;
+for(int i=0;i<s.size();i++){
+    v=v*10+int(s[i]-'0');
+}
+cout<<v;
+```
+
+不止如此，我们还可以对字符进行移位，例如实现凯撒加密，注意要MOD26否则会变成其他字符
+
+```cpp
+char a;
+int shift;
+cin>>a>>shift;
+cout<<char((int(a-'a')+shift)%26+'a');
+```
+
+## 什么是字符串？
+
+字符串，现代编程语言中的基础数据结构之一（一种STL容器），非常重要，其本质是一个字符数组，意思就是一串连起来的字符。
+
+- 形如： "PY is the best language in the world.cpp"
+
+在之后的题目中我们要处理两个概念，子串与子序列
+
+- 子序列：每一个字符的相对位置不变，可以不连续
+  - 例如  "PY best" 就是 "PY is the best language in the world.cpp" 的一个子序列
+- 子串：从原字符串中截取的连续的子串
+  - 例如  “world.cpp” 就是 "PY is the best language in the world.cpp" 的一个子串
+
+我们可以通过
+
+```cpp
+string s;
+//类似于 char s[10001];
+```
+
+来定义一个字符串，并且通过下标访问。需要注意的是，字符串的下标从0开始
+
+于是我们就可以对字符串进行一些基础的操作，也就是，增、删、改、查和遍历。
+
+```cpp
+s+="str";//在末尾添加，最坏复杂度O(n)，添加内容长度固定
+s.insert(i,"str");//在下标为i的位置插入，最坏复杂度O(n)，插入内容长度固定
+s.erase(s,l);//删除自s起的l个字符，复杂度O(n)
+s[i]='a';//修改第i个字符，复杂度O(1)
+for(int i=0;i<s.size();i++){//遍历整个字符串并查询
+    if(s[i]=='t'){
+        cout<<i<<" ";
+    }
+}
+```
+
+除此之外，还有一些需要掌握的常用方法，例如：
+
+```cpp
+reverse(s.begin(),s.end());//翻转整个字符串，O(n)
+s.substr(s,l);//截出自s起l个字符的子串，O(l)，不超过剩余长度
+```
+
+那么，恭喜你已经学会了最基础的字符串的使用，接下来让我们学习一些进阶的算法
+
+## 回文串
+
+回文串指的是一种特殊的字符串，从前往后读和从后往前读是完全一样的
+
+- 例如： "ABCBA"就是一个回文串
+
+在某些题目里，我们会遇到让我们判断回文串的场景
+
+于是：
+
+- 我们可以先复制一遍原数组 `string co(s);`
+- 然后翻转 `reverse(co.begin(),co.end());`
+- 最后判断 `co` 和 `s` 是否相等即可
+
+又或者：
+
+- 我们从两个方向遍历该字符串，如果遇到不一样的字符便标记为 `false`，反之为 `true`
+
+```cpp
+bool mark=1;
+for(int i=1;i<=s.size()/2;i++){
+    if(s[i-1]!=s[s.size()-i+1-1]){
+        mark=0;
+        break;
+    }
+}
+```
+
+## 写在真题之前：
+
+对于C++的考生需要注意一下，带有空格的输入会被截断
+
+例如输入为"Hello world!"时，仅执行一次 `cin` 只能得到"Hello"
+
+所以我们要使用 `getline` 来读入一整行数据
+
+```cpp
+getline(cin,s);
+```
+
+这样我们的结果就会是"Hello world!"
+
+不过对于python嘛……我也不知道:)
+
+## Example Problem 1: J3 Secret Instructions
+
+老规矩，拿到题目先分析
+
+<ProblemSections component={SecretInstructions} meta={secretMeta} />
+
+也就是说：
+
+- 除了最后一行，每一行的前两个数都在告诉我们我们该转向哪里，而后三位数字则是告诉我们距离
+- 当我们读入"99999"时，程序终止
+
+非常简单的题目
+
+- 读入数据（`s`）后，先取出前两位，相加并判断奇偶和是否为零
+
+  ```cpp
+  int ch=int(s[0]-'0')+int(s[1]-'0');
+  if(ch==0){
+      cout<<dir;
+  }else if(ch%2==0){
+      cout<<"right ";
+      dir="right ";
+  }else{
+      cout<<"left ";
+      dir="left ";
+  }
+  ```
+
+- 随后取出后三位数：
+
+  ```cpp
+  int d=int(s[2]-'0')*100+int(s[3]-'0')*10+int(s[4]-'0');
+  cout<<d<<endl;
+  ```
+
+那么，就可以非常轻松的通过这道水题：
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    string s="";
+    string dir="";
+    while(1){
+        cin>>s;
+        if(s=="99999"){
+            return 0;
+        }
+        int ch=int(s[0]-'0')+int(s[1]-'0');
+        if(ch==0){
+            cout<<dir;
+        }else if(ch%2==0){
+            cout<<"right ";
+            dir="right ";
+        }else{
+            cout<<"left ";
+            dir="left ";
+        }
+        int d=int(s[2]-'0')*100+int(s[3]-'0')*10+int(s[4]-'0');
+        cout<<d<<endl;
+    }
+}
+```
+
+## Example Problem 2: J3 Rövarspråket
+
+看题：
+
+<ProblemSections component={Rovarspraket} meta={rovarMeta} />
+
+那么根据处理流程，我们的程序应该类似于
+
+1. 读入数据
+2. 遍历并处理字符串
+
+   - 如果当前字符属于 `aeiou` 之一，直接加入 `ans` 字符串
+   - 否则
+
+     - 先加入 `ans` 字符串
+     - 然后处理离该辅音最近的元音
+
+       - 先创建一个元音表
+
+         ```cpp
+         string vol="aeiou";
+         ```
+
+       - 一个小写字母在字母表中的位置可以用以下代码求出（下标从0开始）
+
+         ```cpp
+         int(s[i]-'a')
+         ```
+
+       - 那么在处理该字符时，我们先将其与所有元音字母做比较，找出比该字符更靠后的元音
+
+         - 如果没找到，证明该字母在 `u` 之后，直接加入 `u` 即可
+         - 反之，我们则需要求出其与前一个元音的距离与后一个元音的距离(接下来的代码 `vol[j]` 是指比当前字母更靠后的元音字母)
+
+           ```cpp
+           if(s[i]-vol[j-1]==vol[j]-s[i]){
+               ans+=vol[j-1];
+           }else{
+               if(s[i]-vol[j-1]>vol[j]-s[i]){
+                   ans+=vol[j];
+               }else{
+                   ans+=vol[j-1];
+               }
+           }
+           ```
+
+     - 然后处理下一个辅音
+
+       - 老规矩先安排辅音表
+
+         ```cpp
+         string con="bcdfghjklmnpqrstvwxyz";
+         ```
+
+       - 然后找到当前字母在辅音表中的位置，加1即可
+       - 不过要注意 `z`，需要加个特判
+
+         ```cpp
+         for(int j=0;j<con.size();j++){
+             if(s[i]=='z'){
+                 ans+="z";
+                 break;
+             }
+             if(s[i]==con[j]){
+                 ans+=con[j+1];
+                 break;
+             }
+         }
+         ```
+
+3. 最后输出答案 `ans`
+
+就可以解决此题了，题解：
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+string vol="aeiou";
+int pov[5]={0,4,8,14,20};
+string con="bcdfghjklmnpqrstvwxyz";
+int main(){
+    string s;
+    cin>>s;
+    string ans="";
+    for(int i=0;i<s.size();i++){
+        bool flg=0;
+        for(int j=0;j<=4;j++){
+            if(s[i]==vol[j]){
+                ans+=s[i];
+                flg=1;
+                break;
+            }
+        }
+        if(flg){
+            continue;
+        }
+        ans+=s[i];
+        flg=0;
+        for(int j=0;j<=4;j++){
+            if(vol[j]>s[i]){
+                flg=1;
+                if(s[i]-vol[j-1]==vol[j]-s[i]){
+                    ans+=vol[j-1];
+                }else{
+                    if(s[i]-vol[j-1]>vol[j]-s[i]){
+                        ans+=vol[j];
+                    }else{
+                        ans+=vol[j-1];
+                    }
+                }
+                break;
+            }
+        }
+        if(!flg){
+            ans+='u';
+        }
+        for(int j=0;j<con.size();j++){
+            if(s[i]=='z'){
+                ans+="z";
+                break;
+            }
+            if(s[i]==con[j]){
+                ans+=con[j+1];
+                break;
+            }
+        }
+    }
+    cout<<ans;
+}
+```
+
+## Example Problem 3: J3 Cold Compress
+
+这还不如刚刚那题呢，我奶来了都能AC
+
+<ProblemSections component={ColdCompress} meta={coldMeta} />
+
+我们需要实现RLE(run-length-encoding)，那么思路如下：
+
+- 遍历整个字符串，顺便写个初始值，我们直接从第二个字符开始处理，会方便很多
+
+  ```cpp
+  int cnt=1;
+  char c=s[0];
+  ```
+
+- `cnt` 是出现次数，`c` 是当前字符
+- 遍历字符串时
+  - 如果这个字符和 `c` 一样，`cnt++`
+  - 否则，输出 `cnt` 和 `c`，并且把 `cnt` 和 `c` 修改成现状
+- 最后再多输出一遍 `cnt` 和 `c` 防止漏掉最后一段
+
+那么恭喜你，在CCC-J上又捡了15分
+
+AC代码：
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int nt;
+    cin>>nt;
+    for(int t=1;t<=nt;t++){
+        string s;
+        cin>>s;
+        int cnt=1;
+        char c=s[0];
+        for(int i=1;i<s.size();i++){
+            if(s[i]!=c){
+                cout<<cnt<<" "<<c<<" ";
+                cnt=1;
+                c=s[i];
+            }else{
+                cnt++;
+            }
+        }
+        cout<<cnt<<" "<<c<<endl;
+    }
+}
+```
+
+*Translated by Gemini-4-Argon, original language is Chinese.*
