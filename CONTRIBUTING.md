@@ -110,6 +110,26 @@ B = int(input())
 </LangTabs>
 ````
 
+### Language-specific content
+
+```mdx
+import { Python, Cpp } from '@/components/lang-content'
+
+<Cpp>
+Use `long long` for large counts, since `int` can overflow around 2 × 10⁹.
+</Cpp>
+
+<Python>
+Python integers have arbitrary precision, so no special handling is needed.
+</Python>
+```
+
+Content inside these blocks only shows when the corresponding language is selected. `Python`, `Cpp`, and `Java` are built-in blocks. For other languages, use `<LangContent value="Java">`.
+
+If a page uses two or more languages, a `Language:` selector appears under the page title. It shares the selected language with `LangTabs` and remembers the choice across pages.
+
+**Don't use `LangTabs` and language-specific content on the same page.** If you're using `<Python>` or `<Cpp>`, put the implementations directly inside those blocks, so that the page-level selector will handle the language switch.
+
 ### Prerequisites card
 
 ```mdx

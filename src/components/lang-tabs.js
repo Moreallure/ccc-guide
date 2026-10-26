@@ -2,26 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { getLang, normalize, setLang, subscribeLang } from '@/lib/lang-store';
 
 // All LangTabs instances share one selection: switching Python/C++ in one
 // implementation switches every other one, and the choice persists across
-// pages via localStorage. Fumadocs Tabs is uncontrolled, so switching remounts
-// each instance with the new defaultValue.
-const KEY = 'code-lang';
-const listeners = new Set();
-const escape = (v) => v.toLowerCase().replace(/\s/, '-'); // same as fumadocs' internal escapeValue
-
+// pages via localStorage (shared with LangContent / LangSelect). Fumadocs
+// Tabs is uncontrolled, so switching remounts each instance with the new
+// defaultValue.
 export function LangTabs({ items, children }) {
-  const [lang, setLang] = useState(undefined); // undefined -> first item
+  const [lang, setLangState] = useState(undefined); // undefined -> first item
 
   useEffect(() => {
-    const onUpdate = (v) => setLang(v);
-    listeners.add(onUpdate);
-    const stored = localStorage.getItem(KEY);
-    if (stored && items.some((item) => escape(item) === stored)) setLang(stored);
-    return () => {
-      listeners.delete(onUpdate);
-    };
+    const unsub = subscribeLang(setLangState);
+    const stored = getLang();
+    if (stored && items.some((item) => normalize(item) === stored)) setLangState(stored);
+    return unsub;
     // eslint-disable-next-line react-hooks/exhaustive-deps -- subscribe once; items are static
   }, []);
 
@@ -30,12 +25,7 @@ export function LangTabs({ items, children }) {
       key={lang ?? 'initial'}
       items={items}
       defaultValue={lang}
-      onValueChange={(v) => {
-        try {
-          localStorage.setItem(KEY, v);
-        } catch {}
-        listeners.forEach((fn) => fn(v));
-      }}
+      onValueChange={(v) => setLang(v)}
     >
       {children}
     </Tabs>
