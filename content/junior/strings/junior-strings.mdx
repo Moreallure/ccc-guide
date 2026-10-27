@@ -1,46 +1,47 @@
 ---
 title: "Strings: parsing, transforms, palindromes"
 freq: 3
-description: "Strings: parsing, transforms, and palindromes — anchored on 2021 J3 *Secret Instructions*, 2015 J3 *Rövarspråket*, and 2019 J3 *Cold Compress*"
-contributors: ["smartjiehan"]
+description: "Strings: parsing, transforms, and palindromes, anchored on 2021 J3 *Secret Instructions*, 2015 J3 *Rövarspråket*, and 2019 J3 *Cold Compress*"
+contributors: ["smartjiehan", "Moreallure"]
 ---
 
 import SecretInstructions, { frontmatter as secretMeta } from '../../problems/2021/J3.mdx'
 import Rovarspraket, { frontmatter as rovarMeta } from '../../problems/2015/J3.mdx'
 import ColdCompress, { frontmatter as coldMeta } from '../../problems/2019/J3.mdx'
 import { ProblemSections } from '@/components/problem-sections'
+import { Python, Cpp } from '@/components/lang-content'
 
 # Strings: parsing, transforms, palindromes
 
-## From Characters to Strings:
+## From Characters to Strings
 
-Before learning about strings, we need to know how characters are stored
+Before learning about strings, we need to know how characters are stored.
 
-In modern computers (or rather, in our contests), we use the ASCII table to convert between characters and binary. For contests, though, you just need to master a few neat tricks
+In modern computers (or rather, in our contests), we use the ASCII table to convert between characters and binary. For contests, though, you just need to master a few neat tricks.
 
-When we XOR a character with 32, we can convert it from uppercase to lowercase, or from lowercase to uppercase.
+For a digit character, we can get its corresponding integer value like this:
 
-This is because `'A'` has a decimal value of 65, while the lowercase `'a'` is 97
-
-Similarly, for a digit character, we can get its corresponding integer value like this:
+<Cpp>
 
 ```cpp
 int(c-'0');
 ```
 
-By the same logic, when we have a string made up exclusively of digit characters, we can also get its corresponding number using the following method:
+</Cpp>
 
-```cpp
-string s;
-cin>>s;
-int v=0;
-for(int i=0;i<s.size();i++){
-    v=v*10+int(s[i]-'0');
-}
-cout<<v;
+<Python>
+
+```python
+int(c)
 ```
 
-Not only that, we can also shift characters—for example, to implement a Caesar cipher. Just remember to `MOD 26`, otherwise it'll turn into random other characters
+</Python>
+
+We can also shift characters, for example to implement a Caesar cipher. In ASCII, `'A'` is 65 and `'a'` is 97, and that gap of 32 is the same for every letter pair. Wrap around the alphabet with `MOD 26`, otherwise the result turns into random other characters.
+
+<Cpp>
+
+`int(a-'a')` gives a letter's position in the alphabet (0-indexed), and adding `'a'` converts back.
 
 ```cpp
 char a;
@@ -49,131 +50,290 @@ cin>>a>>shift;
 cout<<char((int(a-'a')+shift)%26+'a');
 ```
 
+For a negative `shift`, C++'s `%` can return a negative number, so use `((int(a-'a')+shift)%26+26)%26+'a'` instead.
+
+</Cpp>
+
+<Python>
+
+`ord(c)` gives a character's ASCII value, and `chr(n)` converts back.
+
+```python
+chr((ord(a) - ord('a') + shift) % 26 + ord('a'))
+```
+
+Python's `%` returns a non-negative result when the divisor is positive, so negative shifts work with no extra handling.
+
+</Python>
+
 ## What is a String?
 
-A string is one of the fundamental data structures in modern programming languages (an STL container). It's super important, and under the hood, it's essentially a character array—which literally just means a bunch of characters strung together.
+A string is one of the fundamental data structures in modern programming languages. It's super important, and under the hood, it's essentially a character array, which literally just means a bunch of characters strung together.
 
-- Something like: `"PY is the best language in the world.cpp"`
+<Cpp>
 
-In upcoming problems, we'll be dealing with two concepts: substrings and subsequences
+In C++, `string` is an STL container.
 
-- Subsequence: the relative order of each character stays the same, and they don't have to be contiguous
-  - For example, `"PY best"` is a subsequence of `"PY is the best language in the world.cpp"`
-- Substring: a contiguous slice of characters taken from the original string
-  - For example, `"world.cpp"` is a substring of `"PY is the best language in the world.cpp"`
+- Something like: `"C++ is the best language in the world.cpp"`
 
-We can use
+</Cpp>
+
+<Python>
+
+- Something like: `"Python is the best language in the world.py"`
+
+</Python>
+
+In upcoming problems, we'll be dealing with two concepts, substrings and subsequences.
+
+<Cpp>
+
+- Subsequence: the relative order of each character stays the same, and they don't have to be contiguous.
+  - For example, `"C++ best"` is a subsequence of `"C++ is the best language in the world.cpp"`.
+- Substring: a contiguous slice of characters taken from the original string.
+  - For example, `"world.cpp"` is a substring of `"C++ is the best language in the world.cpp"`.
+
+</Cpp>
+
+<Python>
+
+- Subsequence: the relative order of each character stays the same, and they don't have to be contiguous.
+  - For example, `"Python best"` is a subsequence of `"Python is the best language in the world.py"`.
+- Substring: a contiguous slice of characters taken from the original string.
+  - For example, `"world.py"` is a substring of `"Python is the best language in the world.py"`.
+
+</Python>
+
+We can define a string and access it via indices. Note that string indexing starts at 0.
+
+<Cpp>
 
 ```cpp
 string s;
 // Similar to char s[10001];
 ```
 
-to define a string and access it via indices. Note that string indexing starts at 0
+</Cpp>
 
-With that, we can perform basic operations on strings—namely: append/insert, delete, modify, search, and traverse.
+<Python>
+
+```python
+s = "Python is the best language in the world.py"
+```
+
+</Python>
+
+With that, we can perform basic operations on strings: append/insert, delete, modify, search, and traverse.
+
+In the comments below, `n` is the length of the string and `k` is the number of characters being added or removed.
+
+<Cpp>
 
 ```cpp
-s+="str";// Append to the end, worst-case complexity O(n), fixed length of added content
-s.insert(i,"str");// Insert at index i, worst-case complexity O(n), fixed length of inserted content
-s.erase(s,l);// Erase l characters starting from index s, complexity O(n)
-s[i]='a';// Modify the i-th character, complexity O(1)
-for(int i=0;i<s.size();i++){// Traverse the entire string and search
+s+="str";            // Append to the end, amortized O(k)
+s.insert(pos,"str"); // Insert at index pos, O(n) because the tail has to shift
+s.erase(pos,len);    // Erase len characters starting from index pos, O(n)
+s[i]='a';            // Modify the i-th character, O(1)
+for(int i=0;i<s.size();i++){ // Traverse the entire string and search, O(n)
     if(s[i]=='t'){
         cout<<i<<" ";
     }
 }
 ```
 
-Beyond these, there are a few other commonly used methods you need to know, such as:
+</Cpp>
 
-```cpp
-reverse(s.begin(),s.end());// Reverse the entire string, O(n)
-s.substr(s,l);// Extract a substring of l characters starting from s, O(l), not exceeding the remaining length
+<Python>
+
+```python
+s += "str"                         # append to the end
+s = s[:pos] + "str" + s[pos:]      # insert at index pos
+s = s[:pos] + s[pos+length:]       # erase length characters starting from index pos
+s = s[:i] + "a" + s[i+1:]          # modify the i-th character (strings are immutable, so we rebuild)
+for i, ch in enumerate(s):         # traverse the entire string and search
+    if ch == 't':
+        print(i, end=" ")
 ```
 
-Well then, congrats! You've learned the most basic string operations. Next, let's dive into some more advanced algorithms
+</Python>
+
+Beyond these, there are a few other commonly used methods you need to know, such as:
+
+<Cpp>
+
+```cpp
+reverse(s.begin(),s.end()); // Reverse the entire string, O(n)
+s.substr(pos,len);          // Extract a substring of len characters starting from pos, O(len), clipped at the end of the string
+```
+
+</Cpp>
+
+<Python>
+
+```python
+s[::-1]              # reverse the entire string
+s[pos:pos+length]    # extract a substring of length characters starting at pos (slicing clips at the end automatically)
+```
+
+</Python>
+
+Well then, congrats! You've learned the most basic string operations. Next, let's dive into some more advanced algorithms.
 
 ## Palindromes
 
-A palindrome is a special kind of string that reads the exact same forwards and backwards
+A palindrome is a special kind of string that reads the exact same forwards and backwards.
 
-- For example: `"ABCBA"` is a palindrome
+- For example: `"ABCBA"` is a palindrome.
 
-In some problems, we'll run into scenarios where we need to check if a string is a palindrome
+In some problems, we'll run into scenarios where we need to check if a string is a palindrome.
 
 So:
 
-- We can first make a copy of the original string `string co(s);`
-- Then reverse it `reverse(co.begin(),co.end());`
-- And finally just check if `co` and `s` are equal
+- Method 1: make a copy of the original string, reverse it, and check whether the copy and `s` are equal.
+- Method 2: traverse the string from both ends at the same time, moving inward. If we run into mismatching characters, we mark it as `false`, and `true` otherwise.
 
-Alternatively:
+Method 1:
 
-- We can traverse the string from both ends at the same time; if we run into mismatching characters, we mark it as `false`, and `true` otherwise
+<Cpp>
+
+```cpp
+string t=s;
+reverse(t.begin(),t.end());
+bool mark=(t==s);
+```
+
+</Cpp>
+
+<Python>
+
+Slicing can reverse a string directly, so this collapses into a one-liner:
+
+```python
+mark = (s == s[::-1])
+```
+
+</Python>
+
+Method 2:
+
+<Cpp>
 
 ```cpp
 bool mark=1;
-for(int i=1;i<=s.size()/2;i++){
-    if(s[i-1]!=s[s.size()-i+1-1]){
+int n=s.size();
+for(int i=0;i<n/2;i++){
+    if(s[i]!=s[n-1-i]){
         mark=0;
         break;
     }
 }
 ```
 
-## Before Diving into Real Problems:
+</Cpp>
 
-A quick heads-up for C++ contestants: input containing spaces will get cut off
+<Python>
 
-For example, if the input is `"Hello world!"`, running `cin` just once will only give you `"Hello"`
-
-So we need to use `getline` to read in a whole line of data
-
-```cpp
-getline(cin,s);
+```python
+mark = True
+n = len(s)
+for i in range(n // 2):
+    if s[i] != s[n - 1 - i]:
+        mark = False
+        break
 ```
 
-This way, our result will be `"Hello world!"`
+</Python>
 
-As for Python, well... I have no idea :)
+## Before Diving into Real Problems
 
-## Example Problem 1: J3 Secret Instructions
+<Cpp>
 
-Same old rule: analyze the problem first as soon as we get it
+Input containing spaces will get cut off. For example, if the input is `"Hello world!"`, running `cin` just once will only give you `"Hello"`.
+
+So we need to use `getline` to read in a whole line of data:
+
+```cpp
+getline(cin, s);
+```
+
+This way, our result will be `"Hello world!"`.
+
+**Pitfall:** after something like `cin>>n`, the newline is still sitting in the input buffer, so a following `getline` returns an empty string. Call `cin.ignore();` in between.
+
+The three problems below only read words without spaces, so plain `cin>>s` is enough for them.
+
+</Cpp>
+
+<Python>
+
+Some programming languages may require special handling to read a line containing spaces. However, in Python, `input()` reads an entire line as-is, including spaces, so no special handling is needed.
+
+</Python>
+
+## J3 Walkthrough: Secret Instructions
 
 <ProblemSections component={SecretInstructions} meta={secretMeta} />
 
 In other words:
 
-- Except for the last line, the first two digits of each line tell us which way to turn, while the last three digits tell us the distance
-- When we read in `"99999"`, the program terminates
+- Except for the last line, the first two digits of each line tell us which way to turn, while the last three digits tell us the distance.
+- When we read in `"99999"`, the program terminates.
 
-A super simple problem
+This is a simple problem.
 
-- After reading in the data (`s`), grab the first two digits, add them up, and check whether the sum is odd, even, or zero
+- After reading in the data (`s`), grab the first two digits, add them up, and check whether the sum is zero, even, or odd.
 
-  ```cpp
-  int ch=int(s[0]-'0')+int(s[1]-'0');
-  if(ch==0){
-      cout<<dir;
-  }else if(ch%2==0){
-      cout<<"right ";
-      dir="right ";
-  }else{
-      cout<<"left ";
-      dir="left ";
-  }
-  ```
+<Cpp>
 
-- Then grab the last three digits:
+```cpp
+int ch=int(s[0]-'0')+int(s[1]-'0');
+if(ch==0){
+    cout<<dir;
+}else if(ch%2==0){
+    cout<<"right ";
+    dir="right ";
+}else{
+    cout<<"left ";
+    dir="left ";
+}
+```
 
-  ```cpp
-  int d=int(s[2]-'0')*100+int(s[3]-'0')*10+int(s[4]-'0');
-  cout<<d<<endl;
-  ```
+</Cpp>
 
-And just like that, we can breeze through this cakewalk of a problem:
+<Python>
+
+```python
+ch = int(s[0]) + int(s[1])
+if ch != 0:
+    direction = "right " if ch % 2 == 0 else "left "
+```
+
+</Python>
+
+- Then grab the last three digits and convert them to an integer, so that `"012"` prints as `12`, not `012`.
+
+<Cpp>
+
+```cpp
+int d=int(s[2]-'0')*100+int(s[3]-'0')*10+int(s[4]-'0');
+cout<<d<<endl;
+```
+
+</Cpp>
+
+<Python>
+
+```python
+d = int(s[2:])   # a slice plus int() also drops the leading zeros
+```
+
+</Python>
+
+And just like that, we can breeze through this problem:
+
+<Cpp>
+
+`<bits/stdc++.h>` works with GCC. On MSVC or Apple clang, include `<iostream>`, `<string>`, and `<algorithm>` instead.
 
 ```cpp
 #include<bits/stdc++.h>
@@ -202,85 +362,110 @@ int main(){
 }
 ```
 
-## Example Problem 2: J3 Rövarspråket
+</Cpp>
 
-Let's look at the problem:
+<Python>
+
+```python
+s = input()
+direction = ""
+while s != "99999":
+    ch = int(s[0]) + int(s[1])
+    if ch != 0:
+        direction = "right " if ch % 2 == 0 else "left "
+    print(direction + str(int(s[2:])))
+    s = input()
+```
+
+</Python>
+
+## J3 Walkthrough: Rövarspråket
 
 <ProblemSections component={Rovarspraket} meta={rovarMeta} />
 
-Following the processing logic, our program should look something like this
+Following the processing logic, our program should look something like this:
 
-1. Read in the data
-2. Traverse and process the string
+1. Read in the data.
+2. Traverse and process the string.
 
-   - If the current character is one of `aeiou`, append it directly to the `ans` string
-   - Otherwise
+If the current character is a vowel (`aeiou`), append it directly to the `ans` string.
 
-     - First append it to the `ans` string
-     - Then handle the vowel closest to this consonant
+Otherwise:
 
-       - First, create a vowel table
+First, append the consonant itself to the `ans` string. Then append the vowel closest to this consonant, with ties going to the earlier vowel. Finally, append the next consonant in the alphabet (skipping over vowels), where `z` is a special case that stays `z`.
 
-         ```cpp
-         string vol="aeiou";
-         ```
+<Cpp>
 
-       - The position of a lowercase letter in the alphabet can be found with the following code (0-indexed)
+First, create the two tables:
 
-         ```cpp
-         int(s[i]-'a')
-         ```
+```cpp
+string vol="aeiou";
+string con="bcdfghjklmnpqrstvwxyz";
+```
 
-       - When processing this character, we first compare it against all vowels to find the vowel that comes after this character
+To find the closest vowel, look for the first vowel that comes after this character (in the code below, `vol[j]` is that vowel).
 
-         - If we don't find one, it means the letter comes after `u`, so we just append `u` directly
-         - Otherwise, we need to find its distance to the previous vowel and its distance to the next vowel (in the code below, `vol[j]` refers to the vowel that comes after the current letter)
+- If we don't find one, it means the letter comes after `u`, so we just append `u` directly.
+- Otherwise, compare the distance to the previous vowel `vol[j-1]` with the distance to the next vowel `vol[j]`. The previous vowel wins when it is closer or tied.
 
-           ```cpp
-           if(s[i]-vol[j-1]==vol[j]-s[i]){
-               ans+=vol[j-1];
-           }else{
-               if(s[i]-vol[j-1]>vol[j]-s[i]){
-                   ans+=vol[j];
-               }else{
-                   ans+=vol[j-1];
-               }
-           }
-           ```
+```cpp
+if(s[i]-vol[j-1]>vol[j]-s[i]){
+    ans+=vol[j];
+}else{
+    ans+=vol[j-1]; // closer, or tied: take the earlier vowel
+}
+```
 
-     - Next, handle the following consonant
+Next, handle the following consonant. Find the current letter's position in the consonant table and add 1 to the index. Watch out for `z` though: it needs a special case, which we check once, outside the search loop.
 
-       - Same old routine: set up a consonant table first
+```cpp
+if(s[i]=='z'){
+    ans+='z';
+}else{
+    for(int j=0;j<con.size();j++){
+        if(s[i]==con[j]){
+            ans+=con[j+1];
+            break;
+        }
+    }
+}
+```
 
-         ```cpp
-         string con="bcdfghjklmnpqrstvwxyz";
-         ```
+</Cpp>
 
-       - Then find the current letter's position in the consonant table and just add 1 to the index
-       - Watch out for `z` though—it needs a special case check
+<Python>
 
-         ```cpp
-         for(int j=0;j<con.size();j++){
-             if(s[i]=='z'){
-                 ans+="z";
-                 break;
-             }
-             if(s[i]==con[j]){
-                 ans+=con[j+1];
-                 break;
-             }
-         }
-         ```
+First, create the two tables:
 
-3. Finally, output the answer `ans`
+```python
+vol = "aeiou"
+con = "bcdfghjklmnpqrstvwxyz"
+```
+
+Python's `min` with a key does the whole closest-vowel search. The key `(distance, vowel)` sorts ties toward the earlier vowel, and letters after `u` automatically pick `u`:
+
+```python
+closest = min(vol, key=lambda v: (abs(ord(v) - ord(ch)), v))
+```
+
+For the following consonant, add 1 to its index in the consonant table. `z` is the only special case:
+
+```python
+nxt = "z" if ch == "z" else con[con.index(ch) + 1]
+```
+
+</Python>
+
+3. Finally, output the answer `ans`.
 
 And that solves the problem! Solution:
+
+<Cpp>
 
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
 string vol="aeiou";
-int pov[5]={0,4,8,14,20};
 string con="bcdfghjklmnpqrstvwxyz";
 int main(){
     string s;
@@ -303,14 +488,10 @@ int main(){
         for(int j=0;j<=4;j++){
             if(vol[j]>s[i]){
                 flg=1;
-                if(s[i]-vol[j-1]==vol[j]-s[i]){
-                    ans+=vol[j-1];
+                if(s[i]-vol[j-1]>vol[j]-s[i]){
+                    ans+=vol[j];
                 }else{
-                    if(s[i]-vol[j-1]>vol[j]-s[i]){
-                        ans+=vol[j];
-                    }else{
-                        ans+=vol[j-1];
-                    }
+                    ans+=vol[j-1];
                 }
                 break;
             }
@@ -318,14 +499,14 @@ int main(){
         if(!flg){
             ans+='u';
         }
-        for(int j=0;j<con.size();j++){
-            if(s[i]=='z'){
-                ans+="z";
-                break;
-            }
-            if(s[i]==con[j]){
-                ans+=con[j+1];
-                break;
+        if(s[i]=='z'){
+            ans+='z';
+        }else{
+            for(int j=0;j<con.size();j++){
+                if(s[i]==con[j]){
+                    ans+=con[j+1];
+                    break;
+                }
             }
         }
     }
@@ -333,30 +514,67 @@ int main(){
 }
 ```
 
-## Example Problem 3: J3 Cold Compress
+</Cpp>
 
-This one's even easier than the last—even my grandma could AC it
+<Python>
+
+```python
+vol = "aeiou"
+con = "bcdfghjklmnpqrstvwxyz"
+
+s = input()
+ans = ""
+for ch in s:
+    ans += ch
+    if ch in vol:
+        continue
+    ans += min(vol, key=lambda v: (abs(ord(v) - ord(ch)), v))
+    ans += "z" if ch == "z" else con[con.index(ch) + 1]
+
+print(ans)
+```
+
+</Python>
+
+## J3 Walkthrough: Cold Compress
+
+This is a good warm-up, and it introduces a pattern you'll reuse often: scan a string while tracking the current run.
 
 <ProblemSections component={ColdCompress} meta={coldMeta} />
 
-We need to implement RLE (run-length-encoding), so the idea goes like this:
+We need to implement RLE (run-length encoding), so the idea goes like this:
 
-- Traverse the entire string, and while we're at it, set up some initial values; starting directly from the second character makes things much more convenient
+- Traverse the entire string, and while we're at it, set up some initial values. Starting directly from the second character makes things much more convenient.
 
-  ```cpp
-  int cnt=1;
-  char c=s[0];
-  ```
+<Cpp>
 
-- `cnt` is the count of occurrences, and `c` is the current character
+```cpp
+int cnt=1;
+char c=s[0];
+```
+
+</Cpp>
+
+<Python>
+
+```python
+cnt = 1
+c = s[0]
+```
+
+</Python>
+
+- `cnt` is the count of occurrences, and `c` is the current character.
 - While traversing the string:
-  - If this character is the same as `c`, do `cnt++`
-  - Otherwise, output `cnt` and `c`, and update `cnt` and `c` to the current state
-- At the very end, output `cnt` and `c` one more time so we don't miss the last segment
+  - If this character is the same as `c`, do `cnt++`.
+  - Otherwise, output `cnt` and `c`, and update `cnt` and `c` to the current state.
+- At the very end, output `cnt` and `c` one more time so we don't miss the last segment.
 
-Well then, congrats—you just pocketed another 15 free points on the CCC-J
+Well done! That's another J3 down.
 
-AC Code:
+Solution:
+
+<Cpp>
 
 ```cpp
 #include<bits/stdc++.h>
@@ -383,4 +601,25 @@ int main(){
 }
 ```
 
-*Translated by Gemini-4-Argon, original language is Chinese.*
+</Cpp>
+
+<Python>
+
+```python
+for _ in range(int(input())):
+    s = input()
+    cnt = 1
+    c = s[0]
+    for i in range(1, len(s)):
+        if s[i] != c:
+            print(cnt, c, end=' ')
+            cnt = 1
+            c = s[i]
+        else:
+            cnt += 1
+    print(cnt, c)
+```
+
+</Python>
+
+*Partial content translated by Gemini-4-Argon from Chinese.*
