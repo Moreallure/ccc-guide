@@ -1,9 +1,362 @@
 ---
 title: "Coordinate geometry, rectangles, polygons"
 freq: 4
-description: "Coordinate geometry, rectangles, and polygons — anchored on 2021 S1 *Crazy Fencing*, 2020 S1 *Surmising a Sprinter’s Speed*, 2018 S1 *Voronoi Villages*, and 2023 S1 *Trianglane*"
-wip: true
+description: "Coordinate geometry, rectangles, and polygons, anchored on 2021 S1 *Crazy Fencing*, 2020 S1 *Surmising a Sprinter’s Speed*, and 2023 S1 *Trianglane*"
 ---
+
+import CrazyFencing, { frontmatter as fenceMeta } from '../../problems/2021/S1.mdx'
+import Sprinter, { frontmatter as sprinterMeta } from '../../problems/2020/S1.mdx'
+import Trianglane, { frontmatter as trianglaneMeta } from '../../problems/2023/S1.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # Coordinate geometry, rectangles, polygons
 
+Geometry problems in the CCC are rarely about heavy math. Most of them come down to a few formulas, a decision about integers versus decimals, and careful counting. This module builds that toolkit, and then uses it on three Senior S1 problems.
+
+## Points, distances, and slopes
+
+A point is a pair `(x, y)`. For two points `(x1, y1)` and `(x2, y2)`, the horizontal and vertical differences are `dx = x2 - x1` and `dy = y2 - y1`.
+
+- The distance between the points is the square root of `dx*dx + dy*dy` (the Pythagorean theorem).
+- The slope of the line through them is `dy / dx`: how much `y` changes for each 1 step in `x`.
+
+When you only need to compare distances, compare the squared distances instead. There is no square root, so everything stays an exact integer.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+long long dx=x2-x1;
+long long dy=y2-y1;
+
+long long dist2=dx*dx+dy*dy;      // squared distance, exact
+double dist=sqrt((double)dist2);  // only if you need the real distance
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+dx = x2 - x1
+dy = y2 - y1
+
+dist2 = dx * dx + dy * dy   # squared distance, exact
+dist = dist2 ** 0.5         # only if you need the real distance
+```
+
+</Tab>
+
+</LangTabs>
+
+Slopes are not only about geometry. If `x` is time and `y` is position, then the slope of a segment is a speed. Problem 2 below uses exactly that idea.
+
+## Areas of simple shapes
+
+Almost every polygon area in a contest can be cut into three basic shapes:
+
+- Rectangle: `width * height`.
+- Triangle: `base * height / 2`.
+- Trapezoid (two parallel sides `a` and `b`, with distance `h` between them): `h * (a + b) / 2`.
+
+So the strategy is to cut a complicated shape into these pieces, find each area, and add them up.
+
+Those formulas contain a `/ 2`, which tempts us into decimals. But the total is always a whole number or a whole number plus one half. So instead of computing the area directly, compute **twice the area**, which is always an integer, and only divide by 2 at the very end. Integer arithmetic is exact, so there are no rounding surprises.
+
+## S1 Walkthrough: Crazy Fencing
+
+<ProblemSections component={CrazyFencing} meta={fenceMeta} />
+
+In other words:
+
+- The fence is `N` boards standing side by side. Board `i` has left height `h[i]`, right height `h[i+1]`, and width `w[i]`.
+- Each board is a trapezoid. Its two parallel sides are the left and right edges (the heights), and the distance between them is the width of the board.
+- The answer is the sum of the areas of all the trapezoids.
+
+Be careful with the word "height" here. In the trapezoid formula, `h` is the distance between the parallel sides, which for this fence is the board's **width**. So the area of board `i` is `w[i] * (h[i] + h[i+1]) / 2`.
+
+Check it on Sample 1: the first board is `4 * (2 + 3) / 2 = 10`, the second is `1 * (3 + 6) / 2 = 4.5`, and the third is `1 * (6 + 2) / 2 = 4`, for a total of `18.5`.
+
+Add up `w[i] * (h[i] + h[i+1])` without the division. That gives twice the area, which is an integer. If it is even, print half of it. If it is odd, print half of it (rounded down) followed by `.5`.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+
+    vector<int> h(n+1), w(n);
+    for(int i=0;i<=n;i++){
+        cin>>h[i];
+    }
+    for(int i=0;i<n;i++){
+        cin>>w[i];
+    }
+
+    long long twice=0; // twice the total area, always an integer
+    for(int i=0;i<n;i++){
+        twice+=(long long)w[i]*(h[i]+h[i+1]);
+    }
+
+    if(twice%2==0){
+        cout<<twice/2;
+    }else{
+        cout<<twice/2<<".5";
+    }
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+n = int(input())
+h = list(map(int, input().split()))
+w = list(map(int, input().split()))
+
+twice = 0  # twice the total area, always an integer
+for i in range(n):
+    twice += w[i] * (h[i] + h[i + 1])
+
+if twice % 2 == 0:
+    print(twice // 2)
+else:
+    print(str(twice // 2) + ".5")
+```
+
+</Tab>
+
+</LangTabs>
+
+A `double` would also work here, but integer arithmetic prints exactly `18.5` and `75` with no rounding worries.
+
+## S1 Walkthrough: Surmising a Sprinter’s Speed
+
+<ProblemSections component={Sprinter} meta={sprinterMeta} />
+
+In other words:
+
+- We have `N` observations `(T, X)`: at time `T`, the sprinter was at position `X`. They are **not** given in time order.
+- Between two observations, the sprinter covered `|X2 - X1|` metres in `|T2 - T1|` seconds. Their average speed over that stretch was `|X2 - X1| / |T2 - T1|`.
+- If the average over a stretch was that much, the sprinter must have reached at least that speed at some moment. We want the largest such value.
+
+Think of each observation as a point `(T, X)` on a graph. The speed between two observations is the absolute value of the slope of the line between the two points.
+
+The direct idea is to try every pair of observations and take the best speed. That takes \\(O(N^2)\\) time. It is fine for the 7 marks with `N` up to 1000, but with `N` up to 100000 there are about 5 billion pairs, which is far too slow.
+
+The key observation is that **only neighbouring observations matter**. Sort the observations by time. Take three observations `a`, `b`, `c` in time order. The distance from `a` to `c` is at most the distance from `a` to `b` plus the distance from `b` to `c`, so the speed over the long stretch `a` to `c` is a weighted average of the speeds over `a` to `b` and `b` to `c`. A weighted average can never beat the larger of the two. So a longer stretch never gives a bigger answer than the stretches inside it, and it is enough to check neighbouring pairs after sorting. That takes \\(O(N \\log N)\\).
+
+Check it on Sample 2. Sorted by time, the observations are `(0,-17)`, `(5,-3)`, `(10,31)`, `(20,-5)`, `(30,11)`. The speeds between neighbours are `14/5 = 2.8`, `34/5 = 6.8`, `36/10 = 3.6`, and `16/10 = 1.6`, so the answer is `6.8`.
+
+Two details to watch:
+
+- The differences between positions can reach 2 000 000 000, which is close to the limit of a 32-bit `int` (about 2.1 billion). Use `long long` in C++ to be safe. Python integers have no such limit.
+- The answer is checked with a relative error of \\(10^{-5}\\), so we need enough digits. The smallest possible nonzero answer is 1 metre in 1 000 000 000 seconds, which is 0.000000001. Printing only 6 decimals would turn that into `0.000000`. Print 12 decimals to be safe. In Python, `print(best)` would show tiny values like `1e-09`, so use a format string instead.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+
+    vector<pair<long long,long long>> p(n); // (time, position)
+    for(int i=0;i<n;i++){
+        cin>>p[i].first>>p[i].second;
+    }
+
+    sort(p.begin(),p.end()); // sort by time
+
+    double best=0;
+    for(int i=1;i<n;i++){
+        long long dx=llabs(p[i].second-p[i-1].second);
+        long long dt=p[i].first-p[i-1].first;
+        best=max(best,(double)dx/dt);
+    }
+
+    cout<<fixed<<setprecision(12)<<best;
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+import sys
+
+data = sys.stdin.read().split()
+n = int(data[0])
+obs = sorted((int(data[1 + 2 * i]), int(data[2 + 2 * i])) for i in range(n))  # (time, position), sorted by time
+
+best = 0
+for i in range(1, n):
+    t0, x0 = obs[i - 1]
+    t1, x1 = obs[i]
+    best = max(best, abs(x1 - x0) / (t1 - t0))
+
+print(f"{best:.12f}")
+```
+
+</Tab>
+
+</LangTabs>
+
+## Counting perimeters
+
+A counting trick works for any shape made of tiles. Suppose every tile has the same perimeter `p`. If we glue tiles together, the perimeter of the combined shape is:
+
+`(number of tiles) * p - 2 * (number of shared sides)`
+
+Why? Every tile counts all of its own sides. A side shared by two tiles is counted once by each of them, but it is inside the shape, so it is not part of the outer boundary. Removing it takes away 2.
+
+For example, on a grid of squares each tile has 4 sides, so the perimeter of a group of squares is `4 * (tiles) - 2 * (shared sides)`.
+
+This turns a geometry problem into counting: count the tiles, and count the pairs of neighbours.
+
+## J4/S1 Walkthrough: Trianglane
+
+<ProblemSections component={Trianglane} meta={trianglaneMeta} />
+
+In other words:
+
+- The laneway is two rows of `C` triangular tiles. Black tiles are wet, and we need the total length of tape around all the wet areas.
+- Each triangle has 3 sides of length 1, so the formula is `3 * (black tiles) - 2 * (shared sides between two black tiles)`.
+
+So we only need to know which pairs of tiles share a side. The tiles alternate between pointing up and pointing down, so:
+
+1. Two tiles next to each other in the **same row** always share a side.
+2. A tile in the top row that points **up** shares its bottom side with the tile directly below it in the second row, which points down. The top row starts with an up-pointing tile, so in code (counting from 0) these are the **even** columns `0, 2, 4, ...`.
+3. No other pairs share a side. A down-pointing tile in the top row has its flat side on the outside, and so does an up-pointing tile in the bottom row.
+
+Check it on Sample 2. There are 5 black tiles, so `3 * 5 = 15`. The shared sides are the two neighbouring black tiles in the top row (columns 2 and 3), and the pair in column 2 between the rows (an even column, black in both rows). That is 2 shared sides, so the tape needed is `15 - 2 * 2 = 11`, which matches the expected output.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int c;
+    cin>>c;
+
+    vector<int> a(c), b(c); // a = top row, b = bottom row
+    for(int i=0;i<c;i++){
+        cin>>a[i];
+    }
+    for(int i=0;i<c;i++){
+        cin>>b[i];
+    }
+
+    long long ans=0;
+    for(int i=0;i<c;i++){
+        ans+=3*(a[i]+b[i]); // every black tile has 3 sides
+    }
+
+    for(int i=0;i+1<c;i++){
+        ans-=2*(a[i]&a[i+1]); // shared side in the top row
+        ans-=2*(b[i]&b[i+1]); // shared side in the bottom row
+    }
+
+    for(int i=0;i<c;i+=2){
+        ans-=2*(a[i]&b[i]); // shared side between the rows
+    }
+
+    cout<<ans;
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+c = int(input())
+a = list(map(int, input().split()))  # top row
+b = list(map(int, input().split()))  # bottom row
+
+ans = 0
+for i in range(c):
+    ans += 3 * (a[i] + b[i])         # every black tile has 3 sides
+
+for i in range(c - 1):
+    ans -= 2 * (a[i] & a[i + 1])     # shared side in the top row
+    ans -= 2 * (b[i] & b[i + 1])     # shared side in the bottom row
+
+for i in range(0, c, 2):
+    ans -= 2 * (a[i] & b[i])         # shared side between the rows
+
+print(ans)
+```
+
+</Tab>
+
+</LangTabs>
+
+Here `a[i] & a[i+1]` is 1 only when both tiles are black, and 0 otherwise, so each shared side is subtracted exactly when both of its tiles are wet. The whole solution is one pass, \\(O(C)\\), so even `C` up to 200000 is easy.
+
+## More: polygons and the shoelace formula
+
+Not every polygon cuts neatly into rectangles and trapezoids. For a polygon with vertices `(x[0], y[0])`, `(x[1], y[1])`, ... listed in order around the boundary (clockwise or counterclockwise), the shoelace formula gives its area:
+
+`twice area = | sum over i of ( x[i] * y[i+1] - x[i+1] * y[i] ) |`
+
+where the vertex after the last one is the first one again. It is written as twice the area on purpose: with integer corners, the sum is an exact integer, and we apply the same halving habit as before.
+
+For example, the triangle `(0,0)`, `(4,0)`, `(0,3)` gives `0 + 12 + 0 = 12`, so its area is 6.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+long long twice=0;
+for(int i=0;i<n;i++){
+    int j=(i+1)%n; // next vertex, wrapping around
+    twice+=x[i]*y[j]-x[j]*y[i];
+}
+
+twice=llabs(twice); // twice the area
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+twice = 0
+for i in range(n):
+    j = (i + 1) % n   # next vertex, wrapping around
+    twice += x[i] * y[j] - x[j] * y[i]
+
+twice = abs(twice)    # twice the area
+```
+
+</Tab>
+
+</LangTabs>
+
+## Quick tips
+
+- Prefer integers. Doubling an area, comparing squared distances, and counting sides all stay exact.
+- When you do need decimals, read the checker rules. If the problem allows a relative error, print enough decimal places, and remember that very small answers need more of them.
+- Watch the sizes of your numbers. Differences and products of values around \\(10^9\\) can leave the range of a 32-bit `int`, so use `long long` in C++.
+- For tile problems, count tiles and shared sides instead of tracing the outline.
+- Check your formula against every sample by hand before writing code.

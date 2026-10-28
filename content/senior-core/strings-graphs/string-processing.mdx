@@ -1,9 +1,343 @@
 ---
 title: "String processing patterns"
 freq: 2
-description: "String processing patterns — anchored on 2024 S2 *Heavy-Light Composition* and 2025 S2 *Cryptogram Cracking Club*"
-wip: true
+description: "String processing patterns, anchored on 2024 S2 *Heavy-Light Composition* and 2025 S2 *Cryptogram Cracking Club*"
 ---
+
+import HeavyLight, { frontmatter as hlMeta } from '../../problems/2024/S2.mdx'
+import Cryptogram, { frontmatter as cryptoMeta } from '../../problems/2025/S2.mdx'
+import { ProblemSections } from '@/components/problem-sections'
+import { LangTabs, Tab } from '@/components/lang-tabs'
 
 # String processing patterns
 
+The two Senior S2 problems below need no string algorithm. They need three small patterns, applied cleanly: a frequency table over the letters, a parser for a compact encoding, and modular arithmetic to index into a pattern that repeats forever. This module builds each pattern on its own, then applies them to the two problems.
+
+## Counting letter frequencies
+
+Many string problems ask a question about letters: which letters repeat, how often each appears, whether two neighbours share a property. Answering any of these starts with a frequency table: one counter per letter, filled in a single pass.
+
+For lowercase strings, a length-26 array indexed by `letter - 'a'` is enough.
+
+**`freq[c]` is the number of occurrences of letter `c` in the string.**
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+int freq[26]={};
+for(char ch:s){
+    freq[ch-'a']++;
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+freq = [0] * 26
+for ch in s:
+    freq[ord(ch) - ord('a')] += 1
+```
+
+</Tab>
+
+</LangTabs>
+
+Building the table costs one pass over the string. Every question afterwards reads the table instead of rescanning the string, so a problem about a string of length `N` becomes a problem about 26 numbers.
+
+The property being tracked is whatever the problem defines. In Heavy-Light Composition below, a letter is *heavy* when its count is greater than 1 and *light* otherwise, which takes two extra lines on top of the table.
+
+## Parsing compact encodings
+
+Problems frequently hand you a string in a compressed form and expect you to reconstruct or reason about the original. The common encoding is Run-Length Encoding (RLE): a character followed by the number of times it repeats, as in `a4b1c2d10` for `aaaabccdddddddddd`. The Strings module covers the encoding side with Cold Compress. Here we go the other way.
+
+Parsing is a two-level scan: read one letter, then read the digit run that follows it. The digit run matters: counts can be multi-digit, so accumulate digits rather than taking a single character.
+
+\\(\\text\{num\} \\gets 10 \\cdot \\text\{num\} + \\text\{digit\}\\)
+
+The parsed result is a list of `(character, count)` runs. Everything a problem asks about the decoded pattern, such as its total length, which character sits at a position, or how runs merge, can be answered from this list without ever materializing the full string.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+vector<pair<char,long long>> runs; // (character, count)
+int i=0;
+while(i<(int)s.size()){
+    char ch=s[i];
+    i++;
+
+    long long num=0;
+    while(i<(int)s.size() && isdigit(s[i])){
+        num=num*10+(s[i]-'0');
+        i++;
+    }
+    runs.push_back({ch,num});
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+runs = []  # (character, count)
+i = 0
+while i < len(s):
+    ch = s[i]
+    i += 1
+
+    num = 0
+    while i < len(s) and s[i].isdigit():
+        num = num * 10 + int(s[i])
+        i += 1
+    runs.append((ch, num))
+```
+
+</Tab>
+
+</LangTabs>
+
+The counts can reach \\(10^\{12\}\\), and that has a language-specific consequence. In C++, store every count and any running total over them as `long long`: an `int` overflows near \\(2 \\times 10^9\\), and the overflow is silent, so the program keeps running with garbage counts. Python integers have no size limit, so nothing special is needed.
+
+## Indexing into repeated patterns
+
+When a pattern of length `L` repeats forever, position `c` of the infinite string lives inside a single copy:
+
+\\(c \\bmod L\\)
+
+**The character at position `c` of the infinite repetition is the character at position \\(c \\bmod L\\) of one copy.**
+
+Positions count from 0 here. For positions counted from 1, use \\((c - 1) \\bmod L\\).
+
+This one line turns an unbounded index into a bounded one. To find which run covers that position, sweep the runs in order and subtract each count. The run where the counter first goes negative is the answer. The sweep visits every run at most once, so the whole query is linear in the length of the encoding.
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+long long length=0;
+for(auto& run:runs){
+    length+=run.second;
+}
+c%=length; // reduce the index to one copy
+
+for(auto& run:runs){
+    if(c<run.second){
+        cout<<run.first<<"\n";
+        break;
+    }
+    c-=run.second;
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+length = sum(count for _, count in runs)
+c %= length  # reduce the index to one copy
+
+for ch, count in runs:
+    if c < count:
+        print(ch)
+        break
+    c -= count
+```
+
+</Tab>
+
+</LangTabs>
+
+## S2 Walkthrough: Heavy-Light Composition
+
+<ProblemSections component={HeavyLight} meta={hlMeta} />
+
+### Solution
+
+Each string is independent, so we solve one string and repeat for all `T` of them.
+
+First, build the frequency table for the string. A letter is heavy exactly when its count exceeds 1:
+
+\\(\\text\{heavy\}(c) \\iff \\text\{freq\}[c] > 1\\)
+
+The alternation condition then says every adjacent pair must differ in this property: a light letter next to a heavy letter, then light again, and so on. Scanning the string once and comparing neighbouring letters against the table decides it:
+
+\\(\\forall i: \\; \\text\{heavy\}(s_i) \\neq \\text\{heavy\}(s_\{i+1\})\\)
+
+If every pair satisfies this, print `T`. Otherwise print `F`. Building the table is \\(O(N)\\) per string and the scan is \\(O(N)\\), so the total is \\(O(TN)\\).
+
+### Implementation
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t,n;
+    cin>>t>>n;
+
+    while(t--){
+        string s;
+        cin>>s;
+
+        int freq[26]={};
+        for(char ch:s){
+            freq[ch-'a']++;
+        }
+
+        bool ok=true;
+        for(int i=0;i+1<(int)s.size();i++){
+            bool heavy1=freq[s[i]-'a']>1;
+            bool heavy2=freq[s[i+1]-'a']>1;
+            if(heavy1==heavy2){
+                ok=false;
+            }
+        }
+
+        cout<<(ok?"T":"F")<<"\n";
+    }
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+t, n = map(int, input().split())
+
+for _ in range(t):
+    s = input()
+
+    freq = [0] * 26
+    for ch in s:
+        freq[ord(ch) - ord('a')] += 1
+
+    heavy = [freq[ord(ch) - ord('a')] > 1 for ch in s]
+    alternating = all(heavy[i] != heavy[i + 1] for i in range(len(s) - 1))
+
+    print("T" if alternating else "F")
+```
+
+</Tab>
+
+</LangTabs>
+
+## S2 Walkthrough: Cryptogram Cracking Club
+
+<ProblemSections component={Cryptogram} meta={cryptoMeta} />
+
+### Solution
+
+The cipher repeats one RLE-encoded pattern forever, and we need a single character of it, possibly at an index past \\(10^\{12\}\\), so expanding the pattern is impossible.
+
+Three steps, each a pattern from this module:
+
+1. **Parse** the RLE string into `(character, count)` runs, accumulating multi-digit counts.
+2. **Reduce the index**: with `L` the total length of one copy, only `c mod L` matters.
+3. **Locate the run**: sweep the runs, subtracting each count from the reduced index. The run where the counter first drops below zero contains the answer.
+
+The last step in symbols: after subtracting counts \\(k_1, \\dots, k_m\\), the answer is the first run \\(j\\) with
+
+\\(c - (k_1 + \\dots + k_j) \\lt 0\\)
+
+Parsing is \\(O(|S|)\\), summing the lengths is \\(O(|S|)\\), and the sweep is \\(O(|S|)\\). The total is linear in the encoding, independent of how large `c` is.
+
+In C++, every count and the running index `c` must be `long long`, because both can reach \\(10^\{12\}\\), far past the range of `int`.
+
+### Implementation
+
+<LangTabs>
+
+<Tab value="C++">
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    string s;
+    long long c;
+    cin>>s>>c;
+
+    vector<pair<char,long long>> runs; // (character, count)
+    int i=0;
+    while(i<(int)s.size()){
+        char ch=s[i];
+        i++;
+
+        long long num=0;
+        while(i<(int)s.size() && isdigit(s[i])){
+            num=num*10+(s[i]-'0');
+            i++;
+        }
+        runs.push_back({ch,num});
+    }
+
+    long long length=0;
+    for(auto& run:runs){
+        length+=run.second;
+    }
+    c%=length;
+
+    for(auto& run:runs){
+        if(c<run.second){
+            cout<<run.first<<"\n";
+            break;
+        }
+        c-=run.second;
+    }
+}
+```
+
+</Tab>
+
+<Tab value="Python">
+
+```python
+s = input()
+c = int(input())
+
+runs = []
+i = 0
+while i < len(s):
+    ch = s[i]
+    i += 1
+
+    num = 0
+    while i < len(s) and s[i].isdigit():
+        num = num * 10 + int(s[i])
+        i += 1
+    runs.append((ch, num))
+
+length = sum(count for _, count in runs)
+c %= length
+
+for ch, count in runs:
+    if c < count:
+        print(ch)
+        break
+    c -= count
+```
+
+</Tab>
+
+</LangTabs>
+
+## Takeaways
+
+- **Frequency tables turn string questions into array questions.** One pass to build, then answer from 26 counters instead of rescanning the string.
+- **Parse encodings into structured runs, not strings.** A list of `(character, count)` pairs answers length, position, and lookup questions without ever expanding the compressed form.
+- **Modulo tames infinite repetition.** For a pattern of length `L` repeating forever, position `c` is position `c mod L` of one copy.
+- **Respect the bounds.** Counts and indices up to \\(10^\{12\}\\) mean 64-bit arithmetic in C++. A silent `int` overflow is a wrong answer, not a crash.
