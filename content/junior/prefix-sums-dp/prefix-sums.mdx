@@ -34,7 +34,7 @@ Prefix sums and difference arrays both maintain an auxiliary array to describe t
 
 The recurrence for prefix sums looks something like this:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -58,7 +58,7 @@ Here array `s` is the prefix sum array, and `v` is the original array.
 
 So for an array of length `n`, we can generate the prefix sum array `s` with the following code (arrays are 1-indexed, and `n` is at most 1000):
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -97,7 +97,7 @@ Just like that, we get the prefix sum array `s`.
 
 As mentioned earlier, the prefix sum array can quickly find a range sum using the following method:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -125,7 +125,7 @@ Difference arrays are similar to prefix sums; both process arrays.
 
 As usual, let's jump straight to the recurrence:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -149,7 +149,7 @@ d[i] = v[i] - v[i - 1]
 
 Similarly:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -188,7 +188,7 @@ Now we have the difference array. And just like I described earlier, the whole p
 
 Once we have the difference array, how do we restore the original array? We use the exact same method as the prefix sum array generation:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -224,7 +224,7 @@ How do we implement updates?
 
 Now our goal is to add 1 to each element from the `i`-th to the `j`-th position in array `v`. Using a regular loop, the complexity is \\(O(j-i)\\).
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -261,7 +261,7 @@ Sum:   0, 2, 3, 4, 4, 5
 
 As you can see, we only modified two values, yet we updated the entire range. The method is now crystal clear:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -293,7 +293,7 @@ Sometimes, a 1D prefix sum just doesn't cut it, so we can introduce 2D prefix su
 
 The principle is similar. Here is the generation code. A 1001 by 1001 `int` array takes about 4 MB, so declare these arrays globally. Local arrays of this size can overflow the stack, and global arrays start out filled with 0 anyway.
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -340,7 +340,7 @@ for i in range(1, n + 1):
 
 For the sum query, we also need the help of the inclusion-exclusion principle. To sum the rectangle with top-left corner `(x1,y1)` and bottom-right corner `(x2,y2)`, subtract the part above it and the part to its left, then add back the corner that was subtracted twice:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -387,7 +387,7 @@ Two details to watch:
 
 Here's the code:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -475,7 +475,7 @@ From this, we get a traditional brute-force simulation idea.
 
 First, I define a grid and initialize every cell to black (for now, a small grid of at most 1000 by 1000):
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -506,7 +506,7 @@ For example: `R 1`.
 
 I just run a loop over that row:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -542,7 +542,7 @@ Just like that, I've marked one instruction.
 
 In the subsequent query phase, we traverse the entire grid to find all cells with the value `G`:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -639,7 +639,7 @@ Now the approach is clear.
 
 1. Count the number of operations for each row and each column.
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -685,7 +685,7 @@ for k in range(noa):
 
     Otherwise, continue.
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 
@@ -726,7 +726,7 @@ But only the parity of each row and column matters. Let `ro` be the number of ro
 
 Now no grid traversal is needed at all. So, here is the final solution code, which runs in \\(O(x + y + K)\\) time, where \\(K\\) is the number of instructions:
 
-<LangTabs items={['C++', 'Python']}>
+<LangTabs>
 
 <Tab value="C++">
 

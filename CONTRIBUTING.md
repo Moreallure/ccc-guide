@@ -89,7 +89,7 @@ Pass `imageSize="6rem"` (any CSS length) to cap the problem's images; the defaul
 ````mdx
 import { LangTabs, Tab } from '@/components/lang-tabs'
 
-<LangTabs items={['Python', 'C++']}>
+<LangTabs>
 
   <Tab value="Python">
 

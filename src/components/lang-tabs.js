@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { getLang, normalize, setLang, subscribeLang } from '@/lib/lang-store';
 
@@ -10,20 +10,26 @@ import { getLang, normalize, setLang, subscribeLang } from '@/lib/lang-store';
 // Tabs is uncontrolled, so switching remounts each instance with the new
 // defaultValue.
 export function LangTabs({ items, children }) {
+  // Tab labels come from the <Tab value> children unless items is passed.
+  const tabs =
+    items ??
+    Children.toArray(children)
+      .map((child) => child?.props?.value)
+      .filter(Boolean);
   const [lang, setLangState] = useState(undefined); // undefined -> first item
 
   useEffect(() => {
     const unsub = subscribeLang(setLangState);
     const stored = getLang();
-    if (stored && items.some((item) => normalize(item) === stored)) setLangState(stored);
+    if (stored && tabs.some((item) => normalize(item) === stored)) setLangState(stored);
     return unsub;
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- subscribe once; items are static
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- subscribe once; tabs are static
   }, []);
 
   return (
     <Tabs
       key={lang ?? 'initial'}
-      items={items}
+      items={tabs}
       defaultValue={lang}
       onValueChange={(v) => setLang(v)}
     >
