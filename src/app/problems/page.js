@@ -5,6 +5,7 @@ import { getSortedProblems, TOPICS } from '@/lib/problems-data';
 export const metadata = {
   title: 'Problems',
   description: 'Browse every CCC problem from 2012 to 2026.',
+  alternates: { canonical: '/problems' },
 };
 
 export default function ProblemsPage() {

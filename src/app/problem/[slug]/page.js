@@ -28,9 +28,11 @@ export async function generateMetadata({ params }) {
   const page = problemsSource.getPages().find((p) => problemSlug(p.data) === slug);
   if (!page) notFound();
   const { title, year, problem, level } = page.data;
+  const description = `Problem ${problem} from the ${year} CCC (${LEVEL_LABELS[level] ?? level}).`;
   return {
     title: `Problem ${problem}: ${title}`,
-    description: `Problem ${problem} from the ${year} CCC (${LEVEL_LABELS[level] ?? level}).`,
+    description,
+    alternates: { canonical: `/problem/${slug}` },
   };
 }
 

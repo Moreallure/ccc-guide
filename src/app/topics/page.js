@@ -2,7 +2,12 @@ import Link from 'next/link';
 import { SiteHeader } from '@/components/site-header';
 import { getTopicMatrix } from '@/lib/problems-data';
 
-export const metadata = { title: 'Topics' };
+export const metadata = {
+  title: 'Topics',
+  description:
+    'Every CCC topic mapped across the Junior J1–J5 and Senior S1–S5 slots, with links into the guide.',
+  alternates: { canonical: '/topics' },
+};
 
 // Topic → the curriculum module that teaches it, per level. Same-level match
 // wins; falls back to the other level's page when the topic has none here,

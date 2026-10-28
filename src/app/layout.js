@@ -7,9 +7,19 @@ const sans = Geist({ variable: "--font-sans", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://cccguide.net"),
   title: {
     default: "CCC Guide",
     template: "%s - CCC Guide",
+  },
+  description:
+    "An open-source guide for the Canadian Computing Competition: lessons, worked CCC solutions, and a full problem archive from 2012 to 2026.",
+  openGraph: {
+    type: "website",
+    siteName: "CCC Guide",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
   icons: {
     icon: [

@@ -89,10 +89,14 @@ function pageTreeWithWip() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  if (!slug?.length) return {};
+  if (!slug?.length) return { alternates: { canonical: '/' } };
   const page = source.getPage(slug);
   if (!page) notFound();
-  return { title: page.data.title, description: page.data.description };
+  return {
+    title: page.data.title,
+    description: page.data.description,
+    alternates: { canonical: page.url },
+  };
 }
 
 export default async function Page({ params }) {
