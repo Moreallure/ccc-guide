@@ -126,7 +126,7 @@ const divisions = [
     topics: ["Basics & I/O", "Loops & Conditionals", "Strings", "Simple Math"],
     icon: Terminal,
     inverted: false,
-    href: "/junior",
+    href: "/junior/warm-ups/first-30-marks",
   },
   {
     id: "02",
@@ -136,7 +136,7 @@ const divisions = [
     topics: ["Data Structures", "Algorithms", "Dynamic Programming", "Graph Theory"],
     icon: Trophy,
     inverted: true,
-    href: "/senior-core",
+    href: "/senior-core/math-geometry/geometry",
   },
 ];
 

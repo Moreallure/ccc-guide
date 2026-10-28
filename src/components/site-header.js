@@ -27,7 +27,7 @@ const menus = [
       title: "New to competitive programming? Start here.",
       cta: "Getting Started",
       ctaDesc: "Build your first CCC solution",
-      href: "/junior",
+      href: "/junior/warm-ups/first-30-marks",
       variant: "blue",
     },
     links: [
@@ -44,7 +44,7 @@ const menus = [
       title: "Ready to compete at the Senior level?",
       cta: "Explore Senior Topics",
       ctaDesc: "From data structures to graph theory",
-      href: "/senior-core",
+      href: "/senior-core/math-geometry/geometry",
       variant: "pink",
     },
     links: [
