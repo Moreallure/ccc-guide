@@ -83,6 +83,7 @@ for(int i=1;i<=n;i++){
 
 ```python
 n = int(input())
+# assumes all n numbers are on one line
 v = [0] + list(map(int, input().split()))   # v[0] = 0, so v is 1-indexed
 s = [0] * (n + 1)                            # initialize
 for i in range(1, n + 1):
@@ -102,7 +103,7 @@ As mentioned earlier, the prefix sum array can quickly find a range sum using th
 <Tab value="C++">
 
 ```cpp
-int sum=s[j]-s[i-1];
+int total=s[j]-s[i-1];
 ```
 
 </Tab>
@@ -117,7 +118,7 @@ total = s[j] - s[i - 1]
 
 </LangTabs>
 
-Here, `sum` is the range sum from `v[i]` to `v[j]`. `s[j]` covers everything up to `j`, and `s[i-1]` is the part before `i`, so subtracting leaves exactly the range. Each query takes \\(O(1)\\).
+Here, `total` is the range sum from `v[i]` to `v[j]`. `s[j]` covers everything up to `j`, and `s[i-1]` is the part before `i`, so subtracting leaves exactly the range. Each query takes \\(O(1)\\).
 
 ## Difference Arrays
 
@@ -174,6 +175,7 @@ for(int i=1;i<=n;i++){
 
 ```python
 n = int(input())
+# assumes all n numbers are on one line
 v = [0] + list(map(int, input().split()))   # v[0] = 0, so v is 1-indexed
 d = [0] * (n + 2)                            # size n+2, because an update below touches d[j+1]
 for i in range(1, n + 1):
@@ -184,7 +186,7 @@ for i in range(1, n + 1):
 
 </LangTabs>
 
-Now we have the difference array. And just like I described earlier, the whole point of creating a difference array is to uniformly update all numbers within a range.
+Now we have the difference array. And just like we described earlier, the whole point of creating a difference array is to uniformly update all numbers within a range.
 
 Once we have the difference array, how do we restore the original array? We use the exact same method as the prefix sum array generation:
 
@@ -247,7 +249,7 @@ for t in range(i, j + 1):
 
 </LangTabs>
 
-But when the gap between `i` and `j` is large, you'll get a TLE.
+But when the gap between `i` and `j` is large, you'll get a TLE (Time Limit Exceeded).
 
 However, if we modify the difference array directly, the story is completely different. For example, adding 1 to each element from position 1 to position 3:
 
@@ -291,7 +293,7 @@ Note that difference arrays work best when all the updates come first and the ar
 
 Sometimes, a 1D prefix sum just doesn't cut it, so we can introduce 2D prefix sums.
 
-The principle is similar. Here is the generation code. A 1001 by 1001 `int` array takes about 4 MB, so declare these arrays globally. Local arrays of this size can overflow the stack, and global arrays start out filled with 0 anyway.
+The principle is similar. Here is the generation code. In C++, declare these arrays globally: a 1001 by 1001 `int` array takes about 4 MB, and local arrays of this size can overflow the stack. Global arrays also start out filled with 0.
 
 <LangTabs>
 
@@ -326,7 +328,7 @@ n = int(input())
 v = [[0] * (n + 1) for _ in range(n + 1)]
 s = [[0] * (n + 1) for _ in range(n + 1)]   # 2D prefix sum array
 for i in range(1, n + 1):
-    row = list(map(int, input().split()))
+    row = list(map(int, input().split()))   # each of the next n lines holds one row
     for j in range(1, n + 1):
         v[i][j] = row[j - 1]
 for i in range(1, n + 1):
@@ -345,7 +347,7 @@ For the sum query, we also need the help of the inclusion-exclusion principle. T
 <Tab value="C++">
 
 ```cpp
-int sum=s[x2][y2]-s[x1-1][y2]-s[x2][y1-1]+s[x1-1][y1-1];
+int total=s[x2][y2]-s[x1-1][y2]-s[x2][y1-1]+s[x1-1][y1-1];
 ```
 
 </Tab>
@@ -461,7 +463,7 @@ print("\n".join(out))
 
 ## Example Problem 2: J5/S2 Modern Art
 
-A similar problem, though not a textbook template problem like Beams of Light, it's actually simpler.
+This one is similar, but it isn't a textbook template problem like Beams of Light, and it's actually simpler.
 
 Again, let's look at the problem first.
 
@@ -473,7 +475,7 @@ Every cell is initially marked with 0 paint operations.
 
 From this, we get a traditional brute-force simulation idea.
 
-First, I define a grid and initialize every cell to black (for now, a small grid of at most 1000 by 1000):
+First, we define a grid and initialize every cell to black (for now, a small grid of at most 1000 by 1000):
 
 <LangTabs>
 
@@ -502,9 +504,9 @@ mp = [['B'] * 1001 for _ in range(1001)]
 
 Then read in the instructions.
 
-For example: `R 1`.
+For example: `R 1` flips row 1, so `idx = 1`.
 
-I just run a loop over that row:
+We just run a loop over that row:
 
 <LangTabs>
 
@@ -538,7 +540,7 @@ for j in range(1, y + 1):
 
 A `C idx` instruction works the same way, looping `i` from 1 to `x` over `mp[i][idx]`.
 
-Just like that, I've marked one instruction.
+Just like that, we've marked one instruction.
 
 In the subsequent query phase, we traverse the entire grid to find all cells with the value `G`:
 
@@ -575,21 +577,33 @@ print(ans)
 
 </LangTabs>
 
-And that solves the problem... right?
+This works for small canvases, but it doesn't scale.
 
-Nope.
+According to the problem constraints, the canvas can have up to 5000000 rows and 5000000 columns, so in the worst case our grid (`mp`) would have to be defined as:
 
-According to the problem constraints, in the worst-case scenario, our grid (`mp`) might need to be defined as
+<LangTabs>
+
+<Tab value="C++">
 
 ```cpp
 char mp[5000001][5000001];
 ```
 
-That is far too much memory, so it will definitely MLE (and it won't even compile as a global array).
+</Tab>
 
-Maybe some of you might think of optimizing it with dynamic arrays (vectors), but don't forget the time complexity of marking the instructions:
+<Tab value="Python">
 
-Up to 1000000 instructions, multiplied by a maximum grid width of 5000000: in the worst case, the marking complexity is \\(5 \\times 10^{12}\\), a massive TLE.
+```python
+mp = [['B'] * 5000001 for _ in range(5000001)]
+```
+
+</Tab>
+
+</LangTabs>
+
+That is about 25 TB even at one byte per cell, far beyond any memory limit (MLE, Memory Limit Exceeded), in any language.
+
+Dynamic arrays (vectors in C++, lists in Python) don't solve this. Even if the memory fit, marking the instructions would still be too slow: up to 1000000 instructions, each flipping up to 5000000 cells, is roughly \\(5 \\times 10^{12}\\) operations in the worst case. That is far beyond the time limit, so it would get a TLE.
 
 So why not borrow the idea behind difference arrays: instead of updating cells one by one, record how many times each row and column is operated on, and work out the cells afterwards.
 
@@ -604,7 +618,7 @@ Spot the pattern?
 
 That's right, if the total number of operations on a cell is odd, the cell will be gold.
 
-So how do I calculate the number of operations on a single cell?
+So how do we calculate the number of operations on a single cell?
 
 Take a 2-row by 2-column grid for example.
 
@@ -629,7 +643,7 @@ B G
 G B
 ```
 
-Cell (1,1) has been operated on twice in total, so my (1,1) is `B`.
+Cell (1,1) has been operated on twice in total, so cell (1,1) is `B`.
 
 In other words:
 
@@ -647,6 +661,8 @@ Now the approach is clear.
 int r[5000001];
 int c[5000001];
 // ... inside main:
+int x,y,noa;
+cin>>x>>y>>noa;
 for(int i=1;i<=noa;i++){
     char tp;
     int idx;
@@ -664,6 +680,10 @@ for(int i=1;i<=noa;i++){
 <Tab value="Python">
 
 ```python
+import sys
+
+data = sys.stdin.read().split()
+x, y, noa = int(data[0]), int(data[1]), int(data[2])
 r = [0] * (x + 1)
 c = [0] * (y + 1)
 for k in range(noa):
@@ -718,7 +738,7 @@ for i in range(1, x + 1):
 
 3. Output the answer.
 
-This traversal costs \\(O(x \\times y)\\), which is fine for small canvases. If your version of the problem allows `x` and `y` up to 5000000, that is far too slow (and the answer can exceed the range of `int`, so use `long long`).
+This traversal costs \\(O(x \\times y)\\), which is fine for small canvases. If your version of the problem allows `x` and `y` up to 5000000, that is far too slow (and the answer can exceed the range of `int`, so use `long long`). Python loops are much slower than C++ loops, so in Python this traversal runs out of time on even moderately large canvases.
 
 But only the parity of each row and column matters. Let `ro` be the number of rows with an odd count, and `co` the number of columns with an odd count. A cell is gold when its row is odd and its column is even, or the other way around:
 
