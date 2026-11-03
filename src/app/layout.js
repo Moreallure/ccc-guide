@@ -7,7 +7,7 @@ const sans = Geist({ variable: "--font-sans", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL("https://cccguide.net"),
+  metadataBase: new URL("https://www.cccguide.net"),
   title: {
     default: "CCC Guide",
     template: "%s - CCC Guide",
