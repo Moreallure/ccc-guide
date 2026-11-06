@@ -1,7 +1,7 @@
 import { source } from '@/lib/source';
 import { getProblems } from '@/lib/problems-data';
 
-const BASE = 'https://cccguide.net';
+const BASE = 'https://www.cccguide.net';
 
 export default function sitemap() {
   return [
