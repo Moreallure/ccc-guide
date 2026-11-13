@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import "katex/dist/katex.min.css";
 import "./globals.css";
@@ -70,6 +71,10 @@ export default function RootLayout({ children }) {
           }}
         />
         <RootProvider>{children}</RootProvider>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="e87ac52f-9095-4bd0-8430-bbf29f15cf1a"
+        />
       </body>
     </html>
   );
