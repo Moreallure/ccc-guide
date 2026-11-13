@@ -39,6 +39,15 @@ const topicLabel = (topic) =>
     .map((w) => w[0].toUpperCase() + w.slice(1))
     .join(' ');
 
+export { topicLabel };
+
+export const DIFFICULTY_LABELS = {
+  easy: 'Easy',
+  moderate: 'Moderate',
+  difficult: 'Difficult',
+  'very-difficult': 'Very Difficult',
+};
+
 export const TOPICS = [...new Set(problems.map((p) => p.topic))].map((topic) => ({
   value: topic,
   label: topicLabel(topic),

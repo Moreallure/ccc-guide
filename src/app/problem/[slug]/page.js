@@ -5,6 +5,7 @@ import { DocsBody } from 'fumadocs-ui/layouts/docs/page';
 import { SiteHeader } from '@/components/site-header';
 import { flattenMdx } from '@/components/problem-sections';
 import { problemsSource } from '@/lib/source';
+import { getProblems, topicLabel, DIFFICULTY_LABELS } from '@/lib/problems-data';
 
 const LEVEL_LABELS = { jr: 'Junior', sr: 'Senior' };
 
@@ -14,6 +15,20 @@ function problemSlug(data) {
 
 function dmojUrl(data) {
   return `https://dmoj.ca/problem/ccc${data.year % 100}${data.problem.toLowerCase()}`;
+}
+
+// Unique per-problem description from the editorial metadata in problems.json
+// (topic, official average mark) instead of a generic one-line template.
+function problemDescription(data, meta) {
+  const level = LEVEL_LABELS[data.level] ?? data.level;
+  const num = data.problem.replace(/\D/g, '');
+  const parts = [`${data.year} Canadian Computing Competition ${level} Problem ${num}, "${data.title}".`];
+  if (meta?.topic) parts.push(`${topicLabel(meta.topic)} problem.`);
+  if (meta?.difficulty && meta.difficulty !== 'na') {
+    const avg = meta.avg != null ? ` (official average ${Number(meta.avg.toFixed(1))}/15)` : '';
+    parts.push(`Difficulty: ${DIFFICULTY_LABELS[meta.difficulty]}${avg}.`);
+  }
+  return parts.join(' ');
 }
 
 const metaLinkClasses =
@@ -27,11 +42,13 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const page = problemsSource.getPages().find((p) => problemSlug(p.data) === slug);
   if (!page) notFound();
-  const { title, year, problem, level } = page.data;
-  const description = `Problem ${problem} from the ${year} CCC (${LEVEL_LABELS[level] ?? level}).`;
+  const { title, problem, level } = page.data;
+  const meta = getProblems().find((p) => p.href === `/problem/${slug}`);
   return {
-    title: `Problem ${problem}: ${title}`,
-    description,
+    title: {
+      absolute: `CCC ${LEVEL_LABELS[level] ?? level} ${problem}: ${title}`,
+    },
+    description: problemDescription(page.data, meta),
     alternates: { canonical: `/problem/${slug}` },
   };
 }

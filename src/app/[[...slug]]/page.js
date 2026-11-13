@@ -49,6 +49,25 @@ function firstPage(node) {
   }
 }
 
+// Ancestor folder trail for BreadcrumbList structured data.
+function breadcrumbTrail(tree, url) {
+  const trail = [];
+  (function walk(nodes, path) {
+    for (const node of nodes) {
+      if (node.type === 'folder') {
+        if (walk(node.children, [...path, node])) return true;
+      } else if (node.type === 'page' && node.url === url) {
+        trail.push(...path);
+        return true;
+      }
+    }
+    return false;
+  })(tree.children, []);
+  return trail;
+}
+
+const BASE_URL = 'https://www.cccguide.net';
+
 // The default tab walker skips root folders whose direct children are all
 // folders, so build the section tabs manually.
 function sectionTabs() {
@@ -96,6 +115,9 @@ export async function generateMetadata({ params }) {
     title: page.data.title,
     description: page.data.description,
     alternates: { canonical: page.url },
+    // WIP pages are content stubs (2-8 words) — keep them out of the index
+    // until real content ships.
+    ...(page.data.wip && { robots: { index: false, follow: true } }),
   };
 }
 
@@ -107,6 +129,47 @@ export default async function Page({ params }) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+
+  // Structured data: TechArticle + BreadcrumbList (search engines & AI crawlers).
+  const breadcrumb = breadcrumbTrail(source.getPageTree(), page.url);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        headline: page.data.title,
+        ...(page.data.description && { description: page.data.description }),
+        url: `${BASE_URL}${page.url}`,
+        inLanguage: 'en',
+        ...(page.data.contributors?.length > 0 && {
+          author: page.data.contributors.map((name) => ({
+            '@type': 'Person',
+            name,
+            ...(CONTRIBUTOR_LINKS[name] && { url: CONTRIBUTOR_LINKS[name] }),
+          })),
+        }),
+        publisher: { '@type': 'Organization', name: 'CCC Guide', url: BASE_URL },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+          ...breadcrumb.map((node, i) => ({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: String(node.name),
+            item: `${BASE_URL}${firstPage(node)?.url ?? ''}`,
+          })),
+          {
+            '@type': 'ListItem',
+            position: breadcrumb.length + 2,
+            name: page.data.title,
+            item: `${BASE_URL}${page.url}`,
+          },
+        ],
+      },
+    ],
+  };
 
   // Same footer in the desktop TOC column and the mobile TOC popover.
   const tocFooter =
@@ -151,6 +214,12 @@ export default async function Page({ params }) {
         footer={{ className: 'mt-8', ...(FOOTER_ITEMS[page.url] ? { items: FOOTER_ITEMS[page.url] } : {}) }}
       >
         <DocsBody>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+            }}
+          />
           <MDX
           components={{
             ...defaultMdxComponents,

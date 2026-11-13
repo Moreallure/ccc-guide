@@ -1,0 +1,38 @@
+# CCC Guide
+
+> An open-source guide for learning and preparing for the Canadian Computing Competition (CCC) — an annual programming contest for secondary school students run by the University of Waterloo's CEMC. Free lessons with worked editorials, the full problem archive from 2012 to 2026, and a topic-frequency dataset computed from every paper. Maintained at https://github.com/Moreallure/ccc-guide.
+
+## Start here
+
+- [What is the CCC?](https://www.cccguide.net/essentials/introduction/intro-ccc): Contest format, judging, languages, scoring, and recent statistics
+- [Choosing a language](https://www.cccguide.net/essentials/introduction/choosing-a-language): Comparing C, C++, Python, and Java for the CCC
+- [Using this guide](https://www.cccguide.net/essentials/introduction/using-this-guide): How the guide is organized and where to start
+
+## Junior curriculum
+
+- [The first 30 marks](https://www.cccguide.net/junior/warm-ups/first-30-marks): Read input, write output, and secure the first 30 marks of the contest
+- [Practice problems](https://www.cccguide.net/junior/warm-ups/practice-problems): Curated past CCC problems with difficulty ratings and full walkthroughs
+- [Simulation](https://www.cccguide.net/junior/simulation-adhoc/simulation): Translating problem statements into step-by-step simulation code
+- [Ad-hoc problems](https://www.cccguide.net/junior/simulation-adhoc/ad-hoc): Insight-driven problems anchored on real CCC questions
+- [Intro to data structures](https://www.cccguide.net/junior/simulation-adhoc/intro-data-structures): Arrays, lists, and maps with worked Junior examples
+- [Intro to geometry](https://www.cccguide.net/junior/simulation-adhoc/intro-geometry): Bounding boxes and counting shared sides
+- [Junior strings](https://www.cccguide.net/junior/strings/junior-strings): Parsing, transforms, and palindromes
+- [Prefix sums](https://www.cccguide.net/junior/prefix-sums-dp/prefix-sums): Prefix sums and difference arrays
+
+## Senior curriculum
+
+- [Geometry](https://www.cccguide.net/senior-core/math-geometry/geometry): Coordinate geometry, rectangles, and polygons
+- [String processing](https://www.cccguide.net/senior-core/strings-graphs/string-processing): String processing patterns from recent papers
+
+The remaining Junior and Senior modules (sorting, greedy, graphs, dynamic programming, data structures) are work in progress — those pages exist but are not yet written.
+
+## Problem archive and data
+
+- [Problems](https://www.cccguide.net/problems): All 150 CCC problems from 2012 to 2026, filterable by year, slot, topic, and difficulty
+- [Topics](https://www.cccguide.net/topics): Topic-frequency matrix across J1–J5 and S1–S5, computed from every paper since 2012
+- [Example problem page](https://www.cccguide.net/problem/2024-j1): Each problem page carries the statement, a link to the original paper, and a DMOJ mirror
+
+## Optional
+
+- [GitHub repository](https://github.com/Moreallure/ccc-guide): Source code, contributing guide, and issue tracker
+- [CCCSolutions](https://cccsolutions.ca/): Companion open-source archive with solutions spanning 20+ years of CCC problems
