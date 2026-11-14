@@ -1,4 +1,4 @@
-# CCC Guide
+﻿# CCC Guide
 
 <p align="center">
   <img
@@ -6,6 +6,7 @@
     alt="CCC Guide · Past Problems / Self-Paced / Open Source"
     width="100%"
   />
+  <a href="https://cccguide.net">cccguide.net</a>
 </p>
 
 We aim to build an open, comprehensive guide for learning and preparing for the Canadian Computing Competition (CCC) and make an impact in the competitive programming and open-source communities.

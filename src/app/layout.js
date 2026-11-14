@@ -7,7 +7,7 @@ import "./globals.css";
 const sans = Geist({ variable: "--font-sans", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
-const BASE_URL = "https://www.cccguide.net";
+const BASE_URL = "https://cccguide.net";
 
 // Site-wide entity markup so search and AI engines can anchor the brand.
 const jsonLd = {
@@ -31,7 +31,7 @@ const jsonLd = {
 };
 
 export const metadata = {
-  metadataBase: new URL("https://www.cccguide.net"),
+  metadataBase: new URL("https://cccguide.net"),
   title: {
     default:
       "CCC Guide - Canadian Computing Competition Tutorials & Solutions",

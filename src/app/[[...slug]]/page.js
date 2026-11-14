@@ -66,7 +66,7 @@ function breadcrumbTrail(tree, url) {
   return trail;
 }
 
-const BASE_URL = 'https://www.cccguide.net';
+const BASE_URL = 'https://cccguide.net';
 
 // The default tab walker skips root folders whose direct children are all
 // folders, so build the section tabs manually.
