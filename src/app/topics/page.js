@@ -3,9 +3,9 @@ import { SiteHeader } from '@/components/site-header';
 import { getTopicMatrix } from '@/lib/problems-data';
 
 export const metadata = {
-  title: 'Topics',
+  title: 'CCC Topics by Junior and Senior Problem Slot',
   description:
-    'Every CCC topic mapped across the Junior J1–J5 and Senior S1–S5 slots, with links into the guide.',
+    'Explore how topics appear across Junior J1–J5 and Senior S1–S5, with links to relevant CCC learning materials.',
   alternates: { canonical: '/topics' },
 };
 

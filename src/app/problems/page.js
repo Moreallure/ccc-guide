@@ -3,8 +3,9 @@ import { ProblemsExplorer } from '@/components/problems-explorer';
 import { getSortedProblems, TOPICS } from '@/lib/problems-data';
 
 export const metadata = {
-  title: 'Problems',
-  description: 'Browse every CCC problem from 2012 to 2026.',
+  title: 'CCC Past Problems (2012–2026)',
+  description:
+    'Browse 150 Canadian Computing Competition problems from 2012–2026. Search by year, problem number or title; filter by level, topic or difficulty.',
   alternates: { canonical: '/problems' },
 };
 
