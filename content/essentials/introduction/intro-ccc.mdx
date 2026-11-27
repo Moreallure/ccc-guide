@@ -1,47 +1,44 @@
 ---
 title: What is the Canadian Computing Competition (CCC)?
-description: "Learn how the Canadian Computing Competition works: Junior vs Senior, problem format, scoring, subtasks, languages, and eligibility."
+description: "Writing the CCC for the first time? See the 2027 contest dates, choose between Junior and Senior, and try a past problem."
 contributors: ["Moreallure"]
 ---
 
-# What is the CCC?
+# What is the Canadian Computing Competition (CCC)?
 
-The [Canadian Computing Competition](https://cemc.uwaterloo.ca/contests/ccc) (CCC) is an annual programming competition organized by the **Centre for Education in Mathematics and Computing (CEMC) at the University of Waterloo**. It is designed for secondary school students with a range of programming experience, from beginners to advanced competitive programmers.
+The Canadian Computing Competition (CCC) is a programming contest for high school students run by the University of Waterloo’s Centre for Education in Mathematics and Computing (CEMC). You get three hours to work through five problems on your own. Each problem is worth 15 marks, for a total of 75.
 
-Entry requires no competition background. A student who can read input, write loops and conditions, and print an answer can earn marks on the early problems, while the final problems are hard enough that very few participants solve them in full.
+## 2027 CCC dates and registration
 
-## Format
+- **February 17, 2027**: North and South America
+- **February 18, 2027**: Other regions
 
-Each participant writes one of two levels, **Junior** or **Senior**. The CEMC recommends Junior for beginner to intermediate programmers and Senior for intermediate to advanced ones, and the choice depends on skill rather than grade — a Grade 9 student may write Senior, and a Grade 12 student may write Junior.
+Ask a teacher at your school if you’d like to participate. Your school orders the contest by **February 11, 2027**, and a teacher approves your grader account and supervises you on contest day. The CEMC keeps the dates, rules, and fees on the [official CCC page](https://cemc.uwaterloo.ca/contests/ccc).
 
-Both levels share the same structure: **five problems**, **15 marks each**, **75 marks in total**, written individually over **three hours**. Difficulty generally increases with the question number:
+## CCC Junior vs Senior
 
-| Question | Junior | Senior |
-| -------- | ------ | ------ |
-| 1–2 | Basic loops and conditions | Basic algorithms, such as sorting and searching |
-| 3–4 | Combinations of loops, conditions and counting | Careful counting; more advanced mathematical reasoning |
-| 5 | Recursion, 2D arrays, efficient algorithms | Olympiad-level (IOI-level) |
+Junior is a good place to start if most of your programs use loops, conditions, and lists. The first two problems usually draw on those basics. By J4 or J5, you might have to work with a grid or find a faster way to handle a large input.
 
-This guide refers to problems by level and number: **J1–J5** for the five Junior questions and **S1–S5** for the five Senior questions. Where the year matters, it comes first, so *2024 J4* is the fourth Junior question from 2024. Since difficulty tracks question number, the label also indicates what to expect.
+Senior is worth trying if you’re comfortable with the later Junior problems and have worked with algorithms for tasks like sorting and searching. Your grade doesn’t decide which level you write. If you’re unsure, try J3 and S1 from a past contest and see how far you get on each.
 
-Many problems are divided into **subtasks**, each worth part of the 15 marks. A subtask is typically a restricted version of the full problem, such as one with small inputs that a slow solution can still handle. Later subtasks may require an efficient algorithm to finish within the time limit. A correct but slow solution therefore still earns marks, and a partial attempt is worth submitting even when the full solution is out of reach.
+We use **J1–J5** for Junior and **S1–S5** for Senior. When you see **2024 J4**, that means the fourth Junior problem from 2024.
 
 ## Judging and languages
 
-Submissions are judged automatically by the [CCC Online Grader](https://cccgrader.com/), which runs each program against hidden test data and awards marks for the tests passed within the time limit. Because the judge compares output exactly, correct input handling and output formatting matter as much as the algorithm itself.
+During the contest, you submit your code to the [CCC Online Grader](https://cccgrader.com/). It runs your program on hidden inputs and checks the output. The grader expects exactly what the problem asks for, so prompts like `Enter a number:` are not needed.
 
-Solutions can be written in **C**, **C++**, **Python 2**, **Python 3**, or **Java**. The CEMC notes that Python and Java cannot always reach a perfect score because of time limits, although at least one permitted language always can for a correct algorithm. The next page covers how to weigh this trade-off.
+Some problems have **subtasks**. A solution that’s too slow for the full problem can still earn marks if it handles the smaller cases in a subtask. In 2026, the average Senior score was 15.56 out of 75. One full solution and a few partial marks would have put you above that year’s average.
 
-Scores are also lower than most newcomers expect. In 2026, the Junior contest had 3,421 participants, a mean of 42.65 out of 75, and a Certificate of Distinction cutoff of 58. The Senior contest had 2,439 participants, a mean of only 15.56, and a cutoff of 26. On Senior, one or two fully solved problems plus partial marks is already well above average.
+The grader accepts C, C++, Python 2, Python 3, and Java. Start with the language you know best. [Choosing a Language](/essentials/introduction/choosing-a-language) explains when the time limits might affect that choice.
 
 ## Beyond the contest
 
-Every participant in the top 25% receives a Certificate of Distinction, and the top-scoring official Senior participants are listed on an honour roll in the published results.
+The top quarter of contestants earn a Certificate of Distinction. Some of the top official Senior contestants appear on the honour roll or are invited to the Canadian Computing Olympiad (CCO) or the Canadian Informatics Workshop (CIW). Any full-time student can write the CCC. Check the [CEMC’s eligibility rules](https://cemc.uwaterloo.ca/contests/ccc) if you’re aiming for the honour roll or an invitation.
 
-The CCC is also the entry point to Canada's olympiad pathway. Each spring, about 20 of the top official Senior participants are invited to the **Canadian Computing Olympiad (CCO)** — a week at the University of Waterloo with workshops and a contest. The CCO is the selection event for Canada's team at the **International Olympiad in Informatics (IOI)**, and participants must use C++. The **Canadian Informatics Workshop (CIW)** is a parallel week for top female-identifying and non-binary official Senior participants; it is the selection event for Canada's team at the European Girls' Olympiad in Informatics (EGOI). In both cases, invitations and team selection are at the CEMC's discretion.
+## How to prepare for the CCC
 
-Any full-time student may write the CCC and receive a certificate, but only **official** participants are eligible for the honour roll, the CCO and the CIW. To be official, a participant must have been born on or after July 1, 2007 and, if writing at a school in Canada, live in Canada. The cutoff date changes over time, so check the CEMC page for the current rule.
+- **Worked examples.** [The First 30 Marks](/junior/warm-ups/first-30-marks) explains the first two questions from the 2026 Junior contest and shows how to solve each one. If you’re preparing for Senior or want to study a particular technique, [browse topics](/topics) to see where it comes up in past contests and find related lessons.
+- **Past problems.** Search the [CCC Guide problem archive](/problems) by year or problem name, or filter by level and topic. For a full contest paper or an official solution, see the [CEMC past contests archive](https://cemc.uwaterloo.ca/resources/past-contests).
+- **Practice submissions.** Open a question in the archive and follow its [DMOJ](https://dmoj.ca/) link to submit your code. DMOJ runs your solution against its test cases and reports the result.
 
-The contest is written at school under teacher supervision, so students cannot register on their own: a teacher orders the contest from the CEMC and approves each student's Online Grader account. It takes place once a year in February, and the 2027 date for North and South America is February 17. Dates, deadlines and fees change every year, so confirm them on the [official CCC page](https://cemc.uwaterloo.ca/contests/ccc).
-
-Before contest day, create a free Online Grader account and work through the Practice Contest and some past problems. Once the interface and input/output conventions are familiar, all three hours can go to the problems themselves. The next step is to pick a language: continue to [Choosing a Language](/essentials/introduction/choosing-a-language).
+If you’re wondering which lessons to start with or where to learn the programming basics, see [Using This Guide](/essentials/introduction/using-this-guide). The [official CCC page](https://cemc.uwaterloo.ca/contests/ccc) also lists recommended books and workshops for schools.

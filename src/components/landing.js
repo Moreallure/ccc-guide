@@ -273,7 +273,14 @@ export function Landing() {
             </h1>
             <p className="reveal mt-5 max-w-xl text-lg leading-relaxed text-fd-foreground/80 [animation-delay:200ms]">
               An open-source guide for learning and preparing for the Canadian
-              Computing Competition. Built to grow with the community.
+              Computing Competition. See the{" "}
+              <Link
+                href="/essentials/introduction/intro-ccc"
+                className="underline underline-offset-4 hover:text-fd-foreground"
+              >
+                2027 CCC dates and preparation guide
+              </Link>
+              .
             </p>
             <div className="reveal mt-8 flex flex-wrap items-center gap-3 [animation-delay:300ms]">
               <Link

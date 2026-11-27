@@ -42,11 +42,11 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const page = problemsSource.getPages().find((p) => problemSlug(p.data) === slug);
   if (!page) notFound();
-  const { title, problem, level } = page.data;
+  const { title, year, problem, level } = page.data;
   const meta = getProblems().find((p) => p.href === `/problem/${slug}`);
   return {
     title: {
-      absolute: `CCC ${LEVEL_LABELS[level] ?? level} ${problem}: ${title}`,
+      absolute: `${year} CCC ${LEVEL_LABELS[level] ?? level} ${problem}: ${title}`,
     },
     description: problemDescription(page.data, meta),
     alternates: { canonical: `/problem/${slug}` },
@@ -57,7 +57,7 @@ export default async function ProblemPage({ params }) {
   const { slug } = await params;
   const page = problemsSource.getPages().find((p) => problemSlug(p.data) === slug);
   if (!page) notFound();
-  const { title, year, problem, level, source } = page.data;
+  const { title, year, problem, source } = page.data;
   // The problem's own "Problem JN: Title" h2 duplicates the page title — drop it.
   // h2 is forced native (as in ProblemSections) so the node is detectable by type.
   const flatComponents = { ...defaultMdxComponents, h2: 'h2' };
@@ -69,10 +69,9 @@ export default async function ProblemPage({ params }) {
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 pt-8 pb-24">
         <div className="mb-6 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-fd-border pb-4">
           <h1 className="text-2xl font-bold tracking-tight">
-            Problem {problem}: {title}
+            {year} CCC {problem}: {title}
           </h1>
           <span className="ml-auto text-xs font-normal uppercase tracking-widest text-fd-muted-foreground">
-            {year} · {problem} ·{' '}
             <a href={source} target="_blank" rel="noreferrer" className={metaLinkClasses}>
               Original problem
             </a>{' '}

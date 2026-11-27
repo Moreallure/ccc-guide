@@ -2,7 +2,7 @@
 
 <p align="center">
   <img
-    src=".github/cover.png"
+    src="public/cover.png"
     alt="CCC Guide · Past Problems / Self-Paced / Open Source"
     width="100%"
   />
